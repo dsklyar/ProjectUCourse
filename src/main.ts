@@ -7,6 +7,6 @@ import { environment } from './environments/environment';
 if (environment.production) {
   enableProdMode();
 }
-
+// boostraoppimg the application, starting angular app
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
