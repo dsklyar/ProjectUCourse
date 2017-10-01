@@ -19,14 +19,22 @@ import { SigninComponent } from './auth/signin.component';
 import { SignupComponent } from './auth/signup.component';
 
 import { HeaderComponent } from './shared/header.component';
+<<<<<<< CrimsonMonk
 import { SidebarComponent } from './sidebar/sidebar.component';
+=======
+import { SideBarComponent } from './sidebar/sidebar.component';
+>>>>>>> Basic Front end
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthenticationComponent,
     HeaderComponent,
+<<<<<<< CrimsonMonk
     SidebarComponent,
+=======
+    SideBarComponent,
+>>>>>>> Basic Front end
     LogoutComponent,
     SigninComponent,
     SignupComponent
