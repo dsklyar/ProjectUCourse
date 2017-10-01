@@ -1,0 +1,10 @@
+<md-toolbar class="menu-toolbar">
+    <!--button md-icon-button (click)="sidenav.toggle()"-->
+    <button md-icon-button (click)="navToggle()">
+        <md-icon>account_box</md-icon>
+    </button>
+    <span class="fill-space"></span>
+    <a routerLink="/signin">Login</a>
+    <a routerLink="/signup">Sign Up</a>
+    <a routerLink="/logout">Logout</a>
+</md-toolbar>
