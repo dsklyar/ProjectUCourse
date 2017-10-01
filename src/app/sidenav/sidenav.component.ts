@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild, OnInit} from '@angular/core';
+import {MdSidenav} from '@angular/material';
+import {SidenavService} from '.././sidenav/sidenav.service';
 
 @Component ({
     selector : 'app-sidebar',
@@ -37,5 +39,10 @@ import {Component} from '@angular/core';
           }`
     ]
 })
-export class SidebarComponent {
+export class SidenavComponent implements OnInit {
+    @ViewChild('sidenav') public sidenav: MdSidenav;
+    public constructor( private sidenavService: SidenavService) {}
+    public ngOnInit() {
+        this.sidenavService.setSidenav(this.sidenav);
+    }
 }
