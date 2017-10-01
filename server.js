@@ -4,7 +4,8 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://i3leedavidcs:dclucourses@ds155424.mlab.com:55424/ucourse_dev', function(err) {
+// goddamn database connection
+mongoose.connect('mongodb://daniel:ucourse@ds044709.mlab.com:44709/ucourse', function(err) {
   if(err) {
     console.log(err);
   } else console.log('Successful connection to db.');
