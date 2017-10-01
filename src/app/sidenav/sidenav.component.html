@@ -1,8 +1,4 @@
-import {Component} from '@angular/core';
 
-@Component ({
-    selector : 'app-sidebar',
-    template : `
     <md-sidenav-container fullscreen class="example-container">
         <md-sidenav #sidenav class="example-sidenav">
             <md-toolbar>
@@ -21,21 +17,4 @@ import {Component} from '@angular/core';
         <div class="example-sidenav-content">
             
         </div>
-    </md-sidenav-container>`,
-    styles: [
-        `.example-container {
-            top: 64px !important;
-          }
-          .example-sidenav-content {
-            display: flex;
-            height: 100%;
-            align-items: center;
-            justify-content: center;
-          }
-          .example-sidenav {
-            padding: 20px;
-          }`
-    ]
-})
-export class SidebarComponent {
-}
+    </md-sidenav-container>
