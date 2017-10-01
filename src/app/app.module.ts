@@ -19,14 +19,14 @@ import { SigninComponent } from './auth/signin.component';
 import { SignupComponent } from './auth/signup.component';
 
 import { HeaderComponent } from './shared/header.component';
-import { SideBarComponent } from './sidebar/sidebar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthenticationComponent,
     HeaderComponent,
-    SideBarComponent,
+    SidebarComponent,
     LogoutComponent,
     SigninComponent,
     SignupComponent
