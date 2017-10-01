@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTabsModule } from '@angular/material';
+import { MatTabsModule, 
+         MatSidenavModule, 
+         MatToolbarModule,
+         MatButtonModule,
+         MatIconModule } from '@angular/material';
 import { routing } from './app.routing';
 
 import { NgModule } from '@angular/core';
@@ -9,15 +13,24 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
+import { AuthenticationComponent } from './auth/authentication.component';
+import { HeaderComponent } from './header.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    // AuthenticationComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    routing
+    routing,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
