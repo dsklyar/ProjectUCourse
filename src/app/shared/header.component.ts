@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 
+import {SidenavService} from '.././sidenav/sidenav.service';
+
 @Component ({
     selector : 'app-header',
     templateUrl: './header.component.html',
@@ -16,7 +18,8 @@ import {Component} from '@angular/core';
     ]
 })
 export class HeaderComponent {
+    constructor(private sidenavService: SidenavService) {}
     navToggle(){
-
+        this.sidenavService.toggle();
     }
 }
