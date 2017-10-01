@@ -14,13 +14,22 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { AuthenticationComponent } from './auth/authentication.component';
-import { HeaderComponent } from './header.component';
+import { LogoutComponent } from './auth/logout.component';
+import { SigninComponent } from './auth/signin.component';
+import { SignupComponent } from './auth/signup.component';
+
+import { HeaderComponent } from './shared/header.component';
+import { SideBarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // AuthenticationComponent,
-    HeaderComponent
+    AuthenticationComponent,
+    HeaderComponent,
+    SideBarComponent,
+    LogoutComponent,
+    SigninComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
