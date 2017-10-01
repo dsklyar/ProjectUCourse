@@ -37,5 +37,5 @@ import {Component} from '@angular/core';
           }`
     ]
 })
-export class SideBarComponent {
+export class SidebarComponent {
 }
