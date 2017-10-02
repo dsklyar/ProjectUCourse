@@ -3,9 +3,7 @@ import {Component} from '@angular/core';
 @Component ({
     selector : 'app-signin',
     templateUrl: './signin.component.html',
-    styles : [
-        ``
-    ]
+    styleUrls : ['./cardcss/card.css']
 })
 export class SigninComponent {
     onLogout(){

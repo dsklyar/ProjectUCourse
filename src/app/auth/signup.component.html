@@ -1,1 +1,37 @@
-<h1>Signup</h1>
+<md-card class="example-card">
+    <form class="example-form">
+            <!--md-form-field class="example-full-width"-->
+                <!--input mdInput placeholder="Company (disabled)" disabled value="Google"-->
+            <!--md-form-field-->
+            
+            <table class="example-full-width" cellspacing="0"><tr>
+                <td><md-form-field class="example-full-width">
+                    <input mdInput placeholder="First name">
+                </md-form-field></td>
+                <td><md-form-field class="example-full-width">
+                    <input mdInput placeholder="Last Name">
+                </md-form-field></td>
+            </tr></table>
+            
+            <p>
+                <md-form-field class="example-full-width">
+                        <!--This shud probably be a drop down menu for school names-->
+                    <textarea mdInput placeholder="School"></textarea>
+                </md-form-field>
+            </p>
+            <p>
+                <md-form-field class="example-full-width">
+                    <textarea mdInput placeholder="Email"></textarea>
+                </md-form-field>
+            </p>
+            <table class="example-full-width" cellspacing="0"><tr>
+                <td><md-form-field class="example-full-width">
+                <input mdInput placeholder="Password">
+                </md-form-field></td>
+                <td><md-form-field class="example-full-width">
+                <input mdInput placeholder="Repeat Password">
+                </md-form-field></td>
+            </tr></table>
+            <button md-raised-button type="submit">Sign Up</button>
+        </form>
+</md-card>

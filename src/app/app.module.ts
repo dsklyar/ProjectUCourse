@@ -4,7 +4,9 @@ import { MatTabsModule,
          MatSidenavModule, 
          MatToolbarModule,
          MatButtonModule,
-         MatIconModule } from '@angular/material';
+         MatIconModule,
+         MatInputModule,
+         MatCardModule } from '@angular/material';
 import { routing } from './app.routing';
 
 import { NgModule } from '@angular/core';
@@ -39,7 +41,9 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

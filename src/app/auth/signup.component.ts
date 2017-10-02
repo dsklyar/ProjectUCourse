@@ -1,11 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component ({
     selector : 'app-signup',
     templateUrl: './signup.component.html',
-    styles : [
-        ``
-    ]
+    styleUrls : ['./cardcss/card.css']
 })
 export class SignupComponent {
     onLogout(){
