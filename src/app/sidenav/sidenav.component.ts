@@ -7,7 +7,7 @@ import {SidenavService} from '.././sidenav/sidenav.service';
     templateUrl : './sidenav.component.html',
     styles: [
         `.example-container {
-            top: 71px !important;
+            top: 64px !important;
           }
           .example-sidenav-content {
             display: flex;
@@ -18,9 +18,8 @@ import {SidenavService} from '.././sidenav/sidenav.service';
           .example-sidenav {
             padding: 20px;
           }
-          .example-container.mat-drawer-container.mat-sidenav-container {
+          .example-container.mat-drawer-container.mat-sidenav-container{
             visibility: hidden;
-           
           }`
     ]
 })
