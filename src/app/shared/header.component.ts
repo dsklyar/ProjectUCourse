@@ -14,7 +14,11 @@ import {SidenavService} from '.././sidenav/sidenav.service';
             display: inline-block;
             text-decoration: none;
             color: #282828;
-          }`
+          }
+          .material-icons{
+              font-size: 48px;
+          }
+          `
     ]
 })
 export class HeaderComponent {
