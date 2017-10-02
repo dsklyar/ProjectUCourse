@@ -7,7 +7,7 @@ import {SidenavService} from '.././sidenav/sidenav.service';
     templateUrl : './sidenav.component.html',
     styles: [
         `.example-container {
-            top: 64px !important;
+            top: 72px !important;
           }
           .example-sidenav-content {
             display: flex;

@@ -17,6 +17,10 @@ import {SidenavService} from '.././sidenav/sidenav.service';
           }
           .material-icons{
               font-size: 48px;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              vertical-align: middle;
           }
           `
     ]
