@@ -1,18 +1,17 @@
 <div class="card-container">
         <md-card class="example-card">
-                <form class="example-form">
+                <form class="example-form" [formGroup] = "signinForm">
                         <!--md-form-field class="example-full-width"-->
                             <!--input mdInput placeholder="Company (disabled)" disabled value="Google"-->
                         <!--md-form-field-->
                         <p>
                             <md-form-field class="example-full-width">
-                                    <!--This shud probably be a drop down menu for school names-->
-                                <textarea mdInput placeholder="Email"></textarea>
+                                <textarea mdInput placeholder="Email" formControlName="email"></textarea>
                             </md-form-field>
                         </p>
                         <p>
                             <md-form-field class="example-full-width">
-                                <textarea mdInput placeholder="Password"></textarea>
+                                <textarea mdInput placeholder="Password" formControlName="password"></textarea>
                             </md-form-field>
                         </p>
                         <button md-raised-button type="Login">Sign Up</button>
