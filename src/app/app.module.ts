@@ -1,3 +1,4 @@
+import { DashboardCourseInputComponent } from './dashboard/dashboardCourse-input.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,7 +37,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LogoutComponent,
     SigninComponent,
     SignupComponent,
-    DashboardComponent
+    DashboardComponent,
+    DashboardCourseInputComponent
   ],
   imports: [
     BrowserModule,

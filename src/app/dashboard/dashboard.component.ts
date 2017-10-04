@@ -28,4 +28,12 @@ export class DashboardComponent implements OnInit {
     ngOnInit(){
         this.courses = this.dashboardService.getMessages();
     }
+
 }
+
+// .icon{
+//     position:absolute;
+//     top:35%;
+//     left:45%;
+//     font-size: 48px;
+// }
