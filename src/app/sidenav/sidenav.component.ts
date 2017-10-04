@@ -8,6 +8,7 @@ import {SidenavService} from '.././sidenav/sidenav.service';
     styles: [
         `.example-container {
             top: 72px !important;
+            z-index: 10; 
           }
           .example-sidenav-content {
             display: flex;
