@@ -5,10 +5,14 @@
                             <!--input mdInput placeholder="Company (disabled)" disabled value="Google"-->
                         <!--md-form-field-->
                         <p>
-                                <input name = "Email" type = "text" placeholder = "Email" required >
+                            <md-form-field class="example-full-width">
+                                <input mdInput placeholder = "Email"  formControlName="email" value = "">
+                            </md-form-field>
                         </p>
                         <p>
-                                <input name = "Password" type = "text" placeholder = "Password" required >
+                            <md-form-field class="example-full-width">
+                                <input mdInput placeholder="Password" formControlName="password" value = "" >
+                            </md-form-field>
                         </p>
                         <button md-raised-button type="Login">Sign In</button>
                     </form>
