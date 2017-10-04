@@ -1,41 +1,38 @@
 <md-card class="example-card">
-    <form class="example-form" [formGroup] = "signupForm" (ngSubmit) = "onSubmit()">
-            <!--md-form-field class="example-full-width"-->
-                <!--input mdInput placeholder="Company (disabled)" disabled value="Google"-->
-            <!--md-form-field-->
-            
-            <table class="example-full-width" cellspacing="0"><tr>
-                <td><md-form-field class="example-full-width">
-                        <input name = "firstName" type = "text" placeholder = "First Name" required >
-                </md-form-field></td>
-                <td><md-form-field class="example-full-width">
-                        <input name = "lastName" type = "text" placeholder = "Last Name" required >
-                </md-form-field></td>
-            </tr></table>
-            
-            <p>
-                <md-form-field class="example-full-width">
-                        <!--This shud probably be a drop down menu for school names-->
-                        <input name = "school" type = "text" placeholder = "School Name" required >
-                </md-form-field>
-            </p>
-            <p>
-                <md-form-field class="example-full-width">
-                    <input name = "Email" type = "text" placeholder = "Email" required >
-                </md-form-field>
-            </p>
-            <table class="example-full-width" cellspacing="0"><tr>
-                <td><md-form-field class="example-full-width">
-                    <input name = "password" type = "text" placeholder = "Password" required >
-                </md-form-field></td>
+    <form class="example-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <!--md-form-field class="example-full-width"-->
+        <!--input mdInput placeholder="Company (disabled)" disabled value="Google"-->
+        <!--md-form-field-->
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <input name="firstName" type="text" placeholder="First Name" required>
+                </td>
+                <td>
+                    <input name="lastName" type="text" placeholder="Last Name" required>
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            <!--This shud probably be a drop down menu for school names-->
+            <input name="School" type="text" placeholder="School" required>
+        </p>
+        <p>
+            <input name="Email" type="text" placeholder="Email" required>
+        </p>
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <input name="Password" type="text" placeholder="Password" required>
+                </td>
                 <!--td><md-form-field class="example-full-width"-->
                 <!--input mdInput placeholder="Repeat Password"-->
                 <!--/md-form-field></td-->
-            </tr></table>
-            <button md-raised-button 
-            type="submit"
-            [disabled]="!signupForm.valid"
-            >
+            </tr>
+        </table>
+        <button md-raised-button type="submit" [disabled]="!signupForm.valid">
             Sign Up</button>
-        </form>
+    </form>
 </md-card>
