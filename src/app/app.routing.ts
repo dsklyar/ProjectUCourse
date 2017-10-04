@@ -1,3 +1,4 @@
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthenticationComponent } from './auth/authentication.component';
@@ -11,7 +12,8 @@ const APP_ROUTES: Routes = [
     { path: 'auth', component: AuthenticationComponent},
     { path: 'signin', component: SigninComponent},
     { path: 'signup', component: SignupComponent},
-    { path: 'logout', component: LogoutComponent}
+    { path: 'logout', component: LogoutComponent},
+    { path: 'dashboard', component: DashboardComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule, 
@@ -6,7 +7,8 @@ import { MatTabsModule,
          MatButtonModule,
          MatIconModule,
          MatInputModule,
-         MatCardModule } from '@angular/material';
+         MatCardModule,
+         MatGridListModule } from '@angular/material';
 import { routing } from './app.routing';
 
 import { NgModule } from '@angular/core';
@@ -23,6 +25,8 @@ import { SignupComponent } from './auth/signup.component';
 import { HeaderComponent } from './shared/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +35,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     SidenavComponent,
     LogoutComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

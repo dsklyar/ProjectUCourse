@@ -1,0 +1,20 @@
+<div class="example-grid">
+  <md-card class="example-card" 
+  flex="40" flex-sm="80" 
+  *ngFor="let course of courses">
+      <md-card-header>
+      <!--div md-card-avatar class="example-header-image"></di-->
+      <md-card-title>{{course.title}}</md-card-title>
+        <md-card-subtitle>{{course.description}}</md-card-subtitle>
+      </md-card-header>
+      <md-card-content>
+        <p>
+          {{course.announcment}}
+        </p>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button>OPEN</button>
+        <button md-button>EDIT</button>
+      </md-card-actions>
+    </md-card>
+  </div>
