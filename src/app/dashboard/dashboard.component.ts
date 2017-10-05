@@ -2,10 +2,10 @@ import { Course } from '../models/course.model';
 import { DashboardService } from './dashboard.service';
 import { Component, OnInit } from '@angular/core';
 
-@Component ({
-    selector : 'app-dashboard',
+@Component({
+    selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
-    styles : [`
+    styles: [`
     .example-grid {
         display: -webkit-flex;
         display: flex;
@@ -23,17 +23,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
     courses: Course[];
-    constructor(private dashboardService: DashboardService){}
+    constructor(private dashboardService: DashboardService) { }
 
-    ngOnInit(){
-        this.courses = this.dashboardService.getMessages();
+    ngOnInit() {
+        this.dashboardService.getMessages()
+            .subscribe(
+            (courses: Course[]) => {
+                this.courses = courses;
+            });
     }
-
 }
-
-// .icon{
-//     position:absolute;
-//     top:35%;
-//     left:45%;
-//     font-size: 48px;
-// }

@@ -1,18 +1,32 @@
-import { Component } from '@angular/core';
+import { DashboardService } from './dashboard.service';
+import { Course } from '../models/course.model';
+import { Component, Input, OnInit } from '@angular/core';
 
-@Component ({
-    selector : 'app-dashboard',
-    templateUrl: './dashboardCourse.component.html',
-    styles : [`.example-card {
-        width: 400px;
-      }
-      
-      .example-header-image {
-        background-image: url('../../../assets/img/examples/shiba1.jpg');
-        background-size: cover;
-      }
+@Component({
+  selector: 'app-dashboard-course',
+  templateUrl: './dashboardCourse.component.html',
+  styles: [`
+    .example-card {
+      width: 300px;
+      padding: 25px;
+      margin: 10px;
+    }
+    md-card-header button {
+        align-content: right;
+    }
     `]
 })
-export class DashboardCourseComponent {
+export class DashboardCourseComponent implements OnInit {
+  @Input() course: Course;
 
+  constructor(private dashboardService: DashboardService) { }
+
+  ngOnInit() { }
+
+  onDelete(){
+    this.dashboardService.removeCourse(this.course)
+    .subscribe(
+      result => console.log(result)
+    );
+  }
 }

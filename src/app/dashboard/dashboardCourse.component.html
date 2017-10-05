@@ -1,19 +1,29 @@
-<md-card class="example-card">
-    <md-card-header>
-      <div md-card-avatar class="example-header-image"></div>
-      <md-card-title>Shiba Inu</md-card-title>
-      <md-card-subtitle>Dog Breed</md-card-subtitle>
-    </md-card-header>
-    <img md-card-image src="assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <md-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
-      </p>
-    </md-card-content>
-    <md-card-actions>
-      <button md-button>LIKE</button>
-      <button md-button>SHARE</button>
-    </md-card-actions>
-  </md-card>
+<md-card class="example-card" flex="40" flex-sm="80" >
+  <md-card-header>
+    <button md-icon-button [mdMenuTriggerFor]="menu">
+                  <md-icon>more_vert</md-icon>
+                </button>
+    <md-menu #menu="mdMenu">
+      <button md-menu-item>
+                    <md-icon>mode_edit</md-icon>
+                    <span>Edit</span>
+                  </button>
+      <button md-menu-item (click)="onDelete()">
+                    <md-icon>delete_forever</md-icon>
+                    <span>Delete</span>
+                  </button>
+    </md-menu>
+    <!--div md-card-avatar class="example-header-image"></di-->
+    <md-card-title>{{course.title}}</md-card-title>
+    <md-card-subtitle>{{course.schoolName}}</md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <p>
+      {{course.description}}
+    </p>
+  </md-card-content>
+  <!-- <md-card-actions>
+            <button md-button>OPEN</button>
+            <button md-button>EDIT</button>
+          </md-card-actions> -->
+</md-card>

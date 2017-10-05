@@ -7,17 +7,14 @@ var Course = require('../../models/course');
 // You only reach this route when you hav course route before hand
 // Such as course/
 router.post('/', function (req, res, next) {
-  consol.log(
-    'i got to the routes'
-  );
   var course = new Course({
-    registrationNumber: req.body.registrationNumber,
     title: req.body.title,
+    registrationNumber: req.body.regNum,
     dateCreated: req.body.dateCreated,
     dateUpdated: req.body.dateUpdated,
+    description: req.body.description,
     schoolName: req.body.schoolName
   });
-  consol.log(course);
   course.save(function (err, result) {
     if (err) {
       return res.status(500).json({
@@ -31,5 +28,56 @@ router.post('/', function (req, res, next) {
     });
   });
 });
+
+router.get('/',function(req, res, next){
+  Course.find()
+    .populate('announcements')
+    .exec(function(err,courses){
+      if(err){
+        console.log(err);
+        return res.status(500).json({
+          title: 'An error occurred!',
+          error: err
+        });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: courses
+      });
+    });
+});
+
+// TODO:
+// delete all assignments and announcments and other inhereted ids
+// when course is deleted
+router.delete('/:id',function(req,res,next){
+  Course.findById(req.params.id, function(err,course){
+    console.log(req.params.id);
+    if(err){
+      return res.status(500).json({
+        title: 'An error occured!',
+        error: err
+      });
+    }
+    if(!course){
+      return res.status(500).json({
+        title: 'No course was found!',
+        error: {message: 'Course was not found!'}
+      });
+    }
+    course.remove(function(err,result){
+      if(err){
+        return res.status(500).json({
+          title: 'An error occured!',
+          error: err
+        });
+      }
+      res.status(200).json({
+        message: 'Deleted course',
+        obj: result
+      });
+    });
+  });
+})
 
 module.exports = router;

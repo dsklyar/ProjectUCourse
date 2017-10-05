@@ -1,3 +1,4 @@
+import { DashboardCourseComponent } from './dashboard/dashboardCourse.component';
 import {  HttpModule } from '@angular/http';
 import { DashboardCourseInputComponent } from './dashboard/dashboardCourse-input.component';
 
@@ -10,7 +11,7 @@ import { MatTabsModule,
          MatIconModule,
          MatInputModule,
          MatCardModule,
-         MatGridListModule } from '@angular/material';
+         MatMenuModule } from '@angular/material';
 import { routing } from './app.routing';
 
 import { NgModule } from '@angular/core';
@@ -39,7 +40,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SigninComponent,
     SignupComponent,
     DashboardComponent,
-    DashboardCourseInputComponent
+    DashboardCourseInputComponent,
+    DashboardCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatIconModule,
     MatInputModule,
     MatCardModule,
-    MatGridListModule
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
