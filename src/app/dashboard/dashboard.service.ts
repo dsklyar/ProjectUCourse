@@ -24,7 +24,7 @@ export class DashboardService {
                 const result = response.json();
                 const course = new Course(
                     result.obj.title,
-                    result.obj.regNum,
+                    result.obj.registrationNumber,
                     result.obj.dateCreated,
                     result.obj.dateUpdated,
                     result.obj.description,
