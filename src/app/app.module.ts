@@ -1,3 +1,4 @@
+import {  HttpModule } from '@angular/http';
 import { DashboardCourseInputComponent } from './dashboard/dashboardCourse-input.component';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -46,6 +47,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     routing,
+    // http module unlock routing server
+    HttpModule,
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,

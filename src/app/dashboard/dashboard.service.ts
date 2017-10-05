@@ -1,5 +1,10 @@
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers } from '@angular/http';
+import 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { Course } from '.././models/course.model';
 
+@Injectable()
 export class DashboardService {
     private courses: Course[] = [
         new Course('Intro to Angular 2', '2', new Date(), new Date(),
@@ -21,10 +26,20 @@ export class DashboardService {
         new Course('Creative writting', '2',new Date(),new Date(),
         'A road to unemployment','Should of been in engineering major.')
     ];
+    // forthis u need at injectable so it will have 
+    // a meta data for angular to recognise
+    constructor(private http:Http){}
 
     addCourse(course: Course){
         this.courses.push(course);
-        console.log(this.courses);
+        // Stringify our course object
+        const body = JSON.stringify(course);
+        // Specify that the object is type of Json
+        const headers = new Headers({'Content-Type':'application/json'});
+        console.log(body);
+        return this.http.post('http://localhost:4200/course',body,{headers: headers})
+            .map((response: Response) => response.json())
+            .catch((error:Response) => Observable.throw(error.json()));
     }
     getMessages(){
         return this.courses;

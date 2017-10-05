@@ -11,8 +11,10 @@ mongoose.connect('mongodb://daniel:ucourse@ds044709.mlab.com:44709/ucourse', fun
   } else console.log('Successful connection to db.');
 });
 
-// Get our API routes
-const apiRoutes = require('./server/routes/api');
+// Routes fro Courses
+const courseRoutes = require('./server/routes/course');
+
+
 const app = express();
 
 // Parsers for POST data
@@ -23,8 +25,10 @@ app.set('view-engine', 'ejs');
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Set our api routes
-app.use('/api', apiRoutes);
+
+// Routes for Courses
+app.use('/course',courseRoutes);
+
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

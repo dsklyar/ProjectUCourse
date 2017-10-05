@@ -29,7 +29,12 @@ export class DashboardCourseInputComponent implements OnInit{
                         new Date(),
                         new Date(),
                         this.newCourse.controls['announcment'].value,
-                        this.newCourse.controls['description'].value));
+                        this.newCourse.controls['description'].value))
+            .subscribe(
+                next => console.log(next),
+                error => console.log(error)
+            );
+            this.newCourse.reset();
         this.router.navigateByUrl('dashboard');
     }
 }
