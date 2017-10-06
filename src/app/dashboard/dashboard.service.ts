@@ -18,7 +18,6 @@ export class DashboardService {
         const body = JSON.stringify(course);
         // Specify that the object is type of Json
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        console.log(body);
         return this.http.post('http://localhost:3000/course', body, { headers: headers })
             .map((response: Response) => {
                 const result = response.json();
@@ -72,6 +71,25 @@ export class DashboardService {
                 return transformedCourses;
             })
             .catch((error: Response) => Observable.throw('Error in Dashboard Service'));
+    }
+    updateCourse(course: Course){
+        const body = JSON.stringify(course);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.patch('http://localhost:3000/course/' + course.courseID, body, { headers: headers })
+            .map((response: Response) => {
+                const result = response.json();
+                const course = new Course(
+                    result.obj.title,
+                    result.obj.registrationNumber,
+                    result.obj.dateCreated,
+                    result.obj.dateUpdated,
+                    result.obj.description,
+                    result.obj.schoolName
+                );
+                this.courses.push(course);
+                return course;
+            })
+            .catch((error: Response) => Observable.throw(error.json()));
     }
     removeCourse(course: Course) {
         // remove from the array on the front end

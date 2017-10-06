@@ -46,13 +46,44 @@ router.get('/',function(req, res, next){
       });
     });
 });
-
+router.patch('/:id',function(req,res,next){
+  Course.findById(req.params.id,function(err, course){
+    if(err){
+      return res.status(500).json({
+        title: 'An error occured!',
+        error: err
+      });
+    }
+    if(!course){
+      return res.status(500).json({
+        title: 'No course was found!',
+        error: {message: 'Course was not found!'}
+      });
+    }
+    course.title = req.body.title;
+    course.registrationNumber = req.body.regNum;
+    course.dateUpdated = new Date();
+    course.description = req.body.description;
+    course.schoolName = req.body.schoolName;
+    course.save(function(err,result){
+      if(err){
+        return res.status(500).json({
+          title: 'An error occured!',
+          error: err
+        });
+      }
+      res.status(200).json({
+        message: 'Updated course',
+        obj: result
+      });
+    });
+  });
+})
 // TODO:
 // delete all assignments and announcments and other inhereted ids
 // when course is deleted
 router.delete('/:id',function(req,res,next){
   Course.findById(req.params.id, function(err,course){
-    console.log(req.params.id);
     if(err){
       return res.status(500).json({
         title: 'An error occured!',
