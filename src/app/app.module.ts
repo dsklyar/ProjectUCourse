@@ -11,7 +11,8 @@ import { MatTabsModule,
          MatIconModule,
          MatInputModule,
          MatCardModule,
-         MatMenuModule } from '@angular/material';
+         MatMenuModule,
+         MatSelectModule } from '@angular/material';
 import { routing } from './app.routing';
 
 import { NgModule } from '@angular/core';
@@ -57,7 +58,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatIconModule,
     MatInputModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

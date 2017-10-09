@@ -41,9 +41,16 @@
         <!--input mdInput placeholder="Repeat Password"-->
         <!--/md-form-field></td-->
       </tr>
+      <p>
+        <md-select placeholder="User Type" formControlName="userType">
+          <md-option *ngFor="let type of types" [value]="type.value">
+            {{type.viewValue}}
+          </md-option>
+        </md-select>
+      </p>
     </table>
     <span class="fill-space"></span>
     <button md-raised-button type="submit" [disabled]="!signupForm.valid">
-            Sign Up</button>
+      Sign Up</button>
   </form>
 </md-card>

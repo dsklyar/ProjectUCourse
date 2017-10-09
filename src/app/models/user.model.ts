@@ -3,5 +3,6 @@ export class User {
                 public password: string,
                 public firstName?: string,
                 public lastName?: string,
-                public schoolName?: string) {}
+                public schoolName?: string,
+                public type?: string) {}
 }

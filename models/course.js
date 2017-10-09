@@ -1,8 +1,7 @@
 var mongoose = require('mongoose'),
 Schema = mongoose.Schema,
     Announcement = require('./announcement.js'),
-    AnnouncementSchema = mongoose.model('Announcement').schema
-;
+    AnnouncementSchema = mongoose.model('Announcement').schema;
 var mongooseUniqueValidator =  require('mongoose-unique-validator');
 
 
