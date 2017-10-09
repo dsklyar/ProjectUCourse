@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { AuthenticationService } from './authService/authentication.service';
+import { User } from '../models/user.model';
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl,Validators } from '@angular/forms';
 
@@ -8,7 +11,8 @@ import {FormGroup, FormControl,Validators } from '@angular/forms';
 })
 export class SigninComponent implements OnInit {
     signinForm: FormGroup;
-    
+     constructor(private authService : AuthenticationService,
+                 private router : Router) {}
         ngOnInit() {
             this.signinForm = new FormGroup({
                 email: new FormControl(null,[
@@ -19,4 +23,19 @@ export class SigninComponent implements OnInit {
                 password: new FormControl(null,Validators.required)
             });
         }
+    onSubmit(){
+        const user = new User(
+            this.signinForm.value.email,
+            this.signinForm.value.password);
+        this.authService.singIn(user)
+            .subscribe(
+                data => {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('userId', data.userId);
+                    this.router.navigateByUrl('/dashboard');
+                },
+                error => console.log(error)
+            );
+        this.signinForm.reset();
+    }
 }

@@ -2,9 +2,24 @@ var express = require('express');
 //look this shit up
 //var HttpStatus = require('http-status-codes');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 
 var Course = require('../../models/course');
 
+router.use('/',function(req,res,next){
+  jwt.verify(req.query.token,
+    'In Kor lies Morz, the frozen throne' +
+    'Where lord’s of lakes, have made their home'
+    , function(err, decoded){
+    if(err){
+      return res.status(401).json({
+        title : 'Not Authenticated!',
+        error: err
+      });
+    }
+    next();
+  })
+});
 // Store in the back end
 // You only reach this route when you hav course route before hand
 // Such as course/

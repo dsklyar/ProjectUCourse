@@ -27,19 +27,21 @@
     </p>
     <p>
       <md-form-field class="example-full-width">
-        <input mdInput placeholder="Email" formControlName="email">
+        <input mdInput placeholder="Email" formControlName="email" required email>
       </md-form-field>
     </p>
     <table class="example-full-width" cellspacing="0">
       <tr>
         <td>
           <md-form-field class="example-full-width">
-            <input mdInput placeholder="Password" formControlName="password">
+            <input mdInput placeholder="Password" formControlName="password" type="password">
           </md-form-field>
         </td>
-        <!--td><md-form-field class="example-full-width"-->
-        <!--input mdInput placeholder="Repeat Password"-->
-        <!--/md-form-field></td-->
+        <!-- <td>
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="Repeat Password" formControlName="rpassword" type="password">
+          </md-form-field>
+      </td> -->
       </tr>
       <p>
         <md-select placeholder="User Type" formControlName="userType">

@@ -18,7 +18,7 @@ export class DashboardService {
         const body = JSON.stringify(course);
         // Specify that the object is type of Json
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('http://localhost:3000/course', body, { headers: headers })
+        return this.http.post('http://localhost:3000/course' + this.getToken(), body, { headers: headers })
             .map((response: Response) => {
                 const result = response.json();
                 const course = new Course(
@@ -37,7 +37,7 @@ export class DashboardService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
     getMessages() {
-        return this.http.get('http://localhost:3000/course')
+        return this.http.get('http://localhost:3000/course' + this.getToken())
             .map((response: Response) => {
                 const courses = response.json().obj;    // obj is where courses stored in /courses routes
                 let transformedCourses: Course[] = [];
@@ -92,11 +92,18 @@ export class DashboardService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
     removeCourse(course: Course) {
-        // remove from the array on the front end
-        this.courses.splice(this.courses.indexOf(course), 1);
-        // remove it from the database, note acces it like a get route no headers needed
-        return this.http.delete('http://localhost:3000/course/' + course.courseID)
-            .map((response: Response) => response.json())
+        return this.http.delete('http://localhost:3000/course/' + course.courseID + this.getToken())
+            .map((response: Response) => {
+                response.json();
+                this.courses.splice(this.courses.indexOf(course), 1);
+            })
             .catch((error: Response) => Observable.throw(error.json()));
+    }
+
+    getToken(){
+        const token = (localStorage.getItem('token'))
+        ? '?token=' + localStorage.getItem('token')
+        : '';
+        return token;
     }
 } 

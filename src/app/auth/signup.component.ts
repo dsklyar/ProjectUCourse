@@ -10,7 +10,11 @@ import {FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
     signupForm: FormGroup;
-
+    // TODO:
+    // Somehow unite the valueof the types[] with
+    // the backend user.js mongoose model's enum called userType
+    // value here must match the enum in the mongoose model
+    // andor be validated
     types = [
         {value: 'student', viewValue: 'Student'},
         {value: 'teacher', viewValue: 'Teacher'}

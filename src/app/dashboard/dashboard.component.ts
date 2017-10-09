@@ -28,8 +28,10 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this.dashboardService.getMessages()
             .subscribe(
-            (courses: Course[]) => {
-                this.courses = courses;
-            });
+                (courses: Course[]) => {
+                    this.courses = courses;
+                },
+                error => console.log(error)
+            );
     }
 }

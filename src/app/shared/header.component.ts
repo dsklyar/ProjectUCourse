@@ -1,3 +1,4 @@
+import { AuthenticationService } from '../auth/authService/authentication.service';
 import {Component} from '@angular/core';
 
 import {SidenavService} from '.././sidenav/sidenav.service';
@@ -26,8 +27,15 @@ import {SidenavService} from '.././sidenav/sidenav.service';
     ]
 })
 export class HeaderComponent {
-    constructor(private sidenavService: SidenavService) {}
+    constructor(private sidenavService: SidenavService,
+                private authService : AuthenticationService) {}
     navToggle(){
-        this.sidenavService.toggle();
+        //uncomment this
+        if(this.isLoggedIn()){
+            this.sidenavService.toggle();
+        }
+    }
+    isLoggedIn(){
+        return this.authService.isLoggedIn();
     }
 }

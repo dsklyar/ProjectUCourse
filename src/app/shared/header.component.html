@@ -4,7 +4,7 @@
         <md-icon class="material-icons">account_circle</md-icon>
     </button>
     <span class="fill-space"></span>
-    <a routerLink="/signin">Login</a>
-    <a routerLink="/signup">Sign Up</a>
-    <a routerLink="/logout">Logout</a>
+    <a routerLink="/signin" *ngIf="!isLoggedIn()">Login</a>
+    <a routerLink="/signup" *ngIf="!isLoggedIn()">Sign Up</a>
+    <a routerLink="/logout" *ngIf="isLoggedIn()">Logout</a>
 </md-toolbar>
