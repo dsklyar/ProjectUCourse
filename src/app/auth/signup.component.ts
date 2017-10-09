@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
             ),
             school: new FormControl(null,Validators.required),
             password: new FormControl(null,Validators.required),
-            userType: new FormGroup(null,Validators.required)
+            userType: new FormControl(null,Validators.required)
         });
     }
     onSubmit(){

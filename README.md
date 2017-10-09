@@ -2,6 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.3.
 
+## Dev Help
+
+Install latest Node.js
+Run `npm install` to populate node-modules folder
+Run `npm run doit` to build fromt & back-end
+Go to `localhost:3000` 
+Setting up local db:
+    install mongodb
+    Run `sudo service mongod start` to create local mongo service
+    Run `sudo mongo` to connect to that service
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

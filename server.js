@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // goddamn database connection
-mongoose.connect('mongodb://daniel:ucourse@ds044709.mlab.com:44709/ucourse', function(err) {
+// local: mongoose.connect('mongodb://localhost/ucourse');
+// remote mongodb://daniel:ucourse@ds044709.mlab.com:44709/ucourse
+mongoose.connect('mongodb://localhost/ucourse', function(err) {
   if(err) {
     console.log(err);
   } else console.log('Successful connection to db.');
