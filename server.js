@@ -4,26 +4,34 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://i3leedavidcs:dclucourses@ds155424.mlab.com:55424/ucourse_dev', function(err) {
+// goddamn database connection
+// local: mongoose.connect('mongodb://localhost/ucourse');
+// remote mongodb://daniel:ucourse@ds044709.mlab.com:44709/ucourse
+mongoose.connect('mongodb://localhost/ucourse', function(err) {
   if(err) {
     console.log(err);
   } else console.log('Successful connection to db.');
 });
 
-// Get our API routes
-const apiRoutes = require('./server/routes/api');
+// Routes fro Courses
+const courseRoutes = require('./server/routes/course');
+const userRoutes = require('./server/routes/user');
+
 const app = express();
 
 // Parsers for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.set('view-engine', 'ejs');
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Set our api routes
-app.use('/api', apiRoutes);
+
+// Routes for Courses
+// These mustn interfere with the names of Angular routes
+app.use('/course',courseRoutes);
+app.use('/user',userRoutes);
+
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

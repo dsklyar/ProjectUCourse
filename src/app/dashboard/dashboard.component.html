@@ -1,0 +1,8 @@
+<div class="example-grid">
+  <md-card class="example-card" flex="40" flex-sm="80" routerLink="/newcourse">
+    <md-card-content>
+      <md-icon class="icon">add_circle_outline</md-icon>
+    </md-card-content>
+  </md-card>
+  <app-dashboard-course *ngFor="let course of courses" [course]="course"></app-dashboard-course>
+</div>

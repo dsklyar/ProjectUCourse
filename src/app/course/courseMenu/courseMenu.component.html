@@ -1,0 +1,8 @@
+<div class="course-menu-container">
+  <md-card class="new-announcement-card" flex="40" flex-sm="80" routerLink="/newannouncement">
+    <md-card-content>
+      <md-icon class="icon">add_circle_outline</md-icon>
+    </md-card-content>
+  </md-card>
+  <app-course-announcement *ngFor="let announcement of announcements" [announcement]="announcement"></app-course-announcement>
+</div>

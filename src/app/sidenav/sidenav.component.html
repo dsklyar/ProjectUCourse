@@ -1,0 +1,21 @@
+<md-sidenav-container fullscreen class="example-container">
+  <md-sidenav #sidenav class="example-sidenav">
+    <div>
+      <tr>
+        <td><button md-button (click)="sidenav.close()">Profile</button></td>
+      </tr>
+      <tr>
+        <td><button md-button routerLink="/dashboard" (click)="sidenav.close()">Dashboard</button></td>
+      </tr>
+      <tr>
+        <td><button md-button (click)="sidenav.close()">Feature A</button></td>
+      </tr>
+      <tr>
+        <td><button md-button (click)="sidenav.close()">Close</button></td>
+      </tr>
+    </div>
+  </md-sidenav>
+  <div class="example-sidenav-content">
+
+  </div>
+</md-sidenav-container>

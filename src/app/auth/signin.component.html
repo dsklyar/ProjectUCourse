@@ -1,0 +1,23 @@
+<div class="card-container">
+  <md-card class="example-card">
+    <form class="example-form" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+      <!--md-form-field class="example-full-width"-->
+      <!--input mdInput placeholder="Company (disabled)" disabled value="Google"-->
+      <!--md-form-field-->
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Email" formControlName="email" required email value="">
+        </md-form-field>
+      </p>
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Password" formControlName="password" value="" type="password">
+        </md-form-field>
+      </p>
+      <div>
+        <button md-raised-button type="submit" [disabled]="!signinForm.valid" color="primary">Sign In</button>
+        <button md-raised-button routerLink = "/signup">Sign Up</button>
+      </div>
+    </form>
+  </md-card>
+</div>
