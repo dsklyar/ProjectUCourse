@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Course } from '../models/course.model';
@@ -13,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardCourseInputComponent implements OnInit {
     newCourse: FormGroup;
     constructor(private dashboardService: DashboardService,
-        private router: Router) { }
+        private location: Location) { }
     ngOnInit() {
         this.newCourse = new FormGroup({
             title: new FormControl(null, Validators.required),
@@ -35,6 +36,9 @@ export class DashboardCourseInputComponent implements OnInit {
             error => console.log(error)
             );
         this.newCourse.reset();
-        this.router.navigateByUrl('dashboard');
+        this.location.back()
+    }
+    onGoBack() {
+        this.location.back()
     }
 }

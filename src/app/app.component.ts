@@ -1,3 +1,4 @@
+import { AnnouncementService } from './Announcement/AnnouncementService/announcemenet.service';
 import { AuthenticationService } from './auth/authService/authentication.service';
 import { DashboardService } from './dashboard/dashboard.service';
 import { Component } from '@angular/core';
@@ -8,7 +9,13 @@ import { SidenavService } from '././sidenav/sidenav.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers:[SidenavService,DashboardService,AuthenticationService]
+  // Global Services
+  providers:[
+    SidenavService,
+    DashboardService,
+    AuthenticationService,
+    AnnouncementService
+  ]
 })
 export class AppComponent {
   title = 'app';

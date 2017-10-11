@@ -1,0 +1,10 @@
+<div class="example-grid">
+    <h1>{{courseID}}</h1>
+    <md-card class="example-card" flex="40" flex-sm="80" routerLink="/newannouncement">
+      <md-card-content>
+        <md-icon class="icon">add_circle_outline</md-icon>
+      </md-card-content>
+    </md-card>
+    <app-announcement *ngFor="let announcement of announcements" 
+      [announcement]="announcement"></app-announcement>
+  </div>

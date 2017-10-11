@@ -1,6 +1,7 @@
 export class Announcement {
   constructor(public title: string,
-              public dateCreated: Date,
-              public dateUpdated: Date,
-              public announcement: string,){}
+              public announcement: string,
+              public dateCreated?: Date,
+              public dateUpdated?: Date,
+              public announcementID?: string){}
 }
