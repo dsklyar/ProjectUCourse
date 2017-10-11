@@ -7,14 +7,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-announcement',
   templateUrl: '/announcement.component.html',
-  styles: [`
-  .example-card {
-    margin-top : 10px;
-  }
-  .menu {
-    margin-left: auto;
-  }
-  `]
+  styleUrls: ['/announcement.component.css']
 })
 
 export class AnnouncementComponent {

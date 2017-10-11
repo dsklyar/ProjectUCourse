@@ -60,7 +60,6 @@ router.post('/:courseID', function (req, res, next) {
   });
 });
 // router.get('/:courseID',function(req, res, next){
-//   Announcement.find().
 //   Course.findById(req.params.courseID)
 //     .populate('announcements')
 //     .exec(function(err,courses){
