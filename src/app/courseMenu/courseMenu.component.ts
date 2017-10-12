@@ -18,11 +18,8 @@ export class CourseMenuComponent implements OnInit{
     this.activatedRoute.paramMap
     .subscribe(params => {
       this.courseID =  params.get('courseID');
-      console.log(this.courseID);
     })
+    // MUST DO IT SO ANNOUNCEMENT LIST KNEW HAT COURSE IT WAS ON
     this.announcementService.setCourseID(this.courseID);
-  }
-  refreshAnnouncements(){
-    this.announcementService.refreshAnnouncements();
   }
 }

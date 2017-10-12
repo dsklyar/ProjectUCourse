@@ -47,7 +47,7 @@ export class SignupComponent implements OnInit {
         );
         this.authService.singUp(user)
         .subscribe(
-            data => console.log(data),
+            //data => console.log(data),
             error => console.log(error)
         );
         this.signupForm.reset();

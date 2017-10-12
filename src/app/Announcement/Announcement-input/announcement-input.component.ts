@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-announcement-input',
-  templateUrl: './announcement-input.component.html'
+  templateUrl: './announcement-input.component.html',
+  styleUrls: ['./announcement-input.component.css']
 })
 
 export class AnnouncementInputComponent implements OnInit {
@@ -24,11 +25,9 @@ export class AnnouncementInputComponent implements OnInit {
     this.announcmentService.addAnnouncement(
       new Announcement(
         this.newAnnouncement.controls['title'].value,
-        this.newAnnouncement.controls['announcement'].value,
-        new Date(),
-        new Date()))
+        this.newAnnouncement.controls['announcement'].value))
       .subscribe(
-      data => console.log(data),
+      //data => console.log(data),
       error => console.log(error)
       );
     this.newAnnouncement.reset();

@@ -32,7 +32,7 @@ export class DashboardCourseInputComponent implements OnInit {
                 this.newCourse.controls['description'].value,
                 this.newCourse.controls['schoolName'].value))
             .subscribe(
-            data => console.log(data),
+            //data => console.log(data),
             error => console.log(error)
             );
         this.newCourse.reset();

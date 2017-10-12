@@ -15,5 +15,10 @@ export class AnnouncementComponent {
 
   constructor(private announcementService : AnnouncementService){}
 
-  onDelete(){}
+  onDelete(){
+    this.announcementService.removeAnnouncement(this.announcement)
+    .subscribe(
+      //result => console.log(result)
+    );
+  }
 }
