@@ -12,11 +12,11 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AnnouncementInputComponent implements OnInit {
-  newAnnouncement: FormGroup;
+  newAnnouncementForm: FormGroup;
   constructor(private announcmentService: AnnouncementService,
     private location: Location) { }
   ngOnInit() {
-    this.newAnnouncement = new FormGroup({
+    this.newAnnouncementForm = new FormGroup({
       title: new FormControl(null, Validators.required),
       announcement: new FormControl(null, Validators.required)
     });
@@ -24,13 +24,13 @@ export class AnnouncementInputComponent implements OnInit {
   onSubmit() {
     this.announcmentService.addAnnouncement(
       new Announcement(
-        this.newAnnouncement.controls['title'].value,
-        this.newAnnouncement.controls['announcement'].value))
+        this.newAnnouncementForm.controls['title'].value,
+        this.newAnnouncementForm.controls['announcement'].value))
       .subscribe(
       //data => console.log(data),
       error => console.log(error)
       );
-    this.newAnnouncement.reset();
+    this.newAnnouncementForm.reset();
     this.location.back()
   }
   onGoBack() {

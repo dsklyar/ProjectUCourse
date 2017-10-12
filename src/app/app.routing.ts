@@ -1,3 +1,4 @@
+import { AnnouncementEditComponent } from './Announcement/Announcement-edit/announcement-edit.component';
 import { AnnouncementInputComponent } from './Announcement/Announcement-input/announcement-input.component';
 import { COURSEMENU_ROUTES } from './courseMenu/courseMenu.routes';
 import { CourseMenuComponent } from './courseMenu/courseMenu.component';
@@ -20,6 +21,7 @@ const APP_ROUTES: Routes = [
     { path: 'dashboard', component: DashboardComponent},
     { path: 'newcourse', component: DashboardCourseInputComponent},
     { path: 'newannouncement', component: AnnouncementInputComponent},
+    { path: 'editannouncement', component: AnnouncementEditComponent},
     { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES}
 ];
 

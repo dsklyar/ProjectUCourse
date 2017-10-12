@@ -133,7 +133,7 @@ router.patch('/:id', function (req, res, next) {
         error: err
       });
     }
-    if (!course) {
+    if (!announcement) {
       return res.status(500).json({
         title: 'No announcement was found!',
         error: {

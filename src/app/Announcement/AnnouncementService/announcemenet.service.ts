@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
@@ -8,9 +9,18 @@ import { Announcement } from '../../models/announcement.model';
 @Injectable()
 export class AnnouncementService {
   private courseID: string;
+  private announcementToEdit : Announcement;
   private announcements: Announcement[] = [];
 
   constructor(private http: Http) { }
+ 
+  // MUST: Run this before opening edit form on the announcement
+  addAnnouncementToEdit(announcementToEdit : Announcement){
+    this.announcementToEdit = announcementToEdit;
+  }
+  getAnnouncementToEdit(){
+    return this.announcementToEdit;
+  }
 
   addAnnouncement(announcement: Announcement) {
     if (this.courseID != null) {
@@ -42,17 +52,18 @@ export class AnnouncementService {
     , body, { headers: headers })
         .map((response: Response) => {
             const result = response.json();
-            const course = new Course(
+            const updatedAnnouncement = new Announcement(
                 result.obj.title,
-                result.obj.registrationNumber,
+                result.obj.announcement,
                 result.obj.dateCreated,
                 result.obj.dateUpdated,
-                result.obj.description,
-                result.obj.schoolName
+                result.obj._id
             );
             this.announcements.splice(this.announcements.indexOf(announcement), 1);
-            this.announcements.unshift(announcement);
-            return course;
+            this.announcements.unshift(updatedAnnouncement);
+            // NOTE: this is done to prevent errors of editing the same announ twice
+            this.announcementToEdit = null;
+            return updatedAnnouncement;
         })
         .catch((error: Response) => Observable.throw(error.json()));
 }

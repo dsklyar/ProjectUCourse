@@ -1,3 +1,5 @@
+import { AnnouncementEditComponent } from './Announcement/Announcement-edit/announcement-edit.component';
+import { AutoGrowDirective } from './directives/autoGrow/autoGrow.directive';
 import { AnnouncementComponent } from './Announcement/announcement.component';
 import { AnnouncementInputComponent } from './Announcement/Announcement-input/announcement-input.component';
 import { AnnouncementListComponent } from './Announcement/Announcement-list/announcement-list.component';
@@ -50,7 +52,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CourseMenuComponent,
     AnnouncementListComponent,
     AnnouncementComponent,
-    AnnouncementInputComponent
+    AnnouncementInputComponent,
+    AnnouncementEditComponent,
+    AutoGrowDirective
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AnnouncementService } from './AnnouncementService/announcemenet.service';
 import { Announcement } from '../models/announcement.model';
 
@@ -11,14 +12,19 @@ import { Component, Input } from '@angular/core';
 })
 
 export class AnnouncementComponent {
-  @Input() announcement : Announcement;
+  @Input() announcement: Announcement;
 
-  constructor(private announcementService : AnnouncementService){}
+  constructor(private announcementService: AnnouncementService,
+    private router: Router) { }
 
-  onDelete(){
+  onDelete() {
     this.announcementService.removeAnnouncement(this.announcement)
-    .subscribe(
+      .subscribe(
       //result => console.log(result)
-    );
+      );
+  }
+  onEdit() {
+    this.router.navigateByUrl('/editannouncement');
+    this.announcementService.addAnnouncementToEdit(this.announcement);
   }
 }
