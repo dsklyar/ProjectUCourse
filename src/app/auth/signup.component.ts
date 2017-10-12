@@ -6,7 +6,7 @@ import {FormGroup, FormControl, Validators } from '@angular/forms';
 @Component ({
     selector : 'app-signup',
     templateUrl: './signup.component.html',
-    //styleUrls : ['./cardcss/card.css']
+    styleUrls : ['./cardcss/card.css']
 })
 export class SignupComponent implements OnInit {
     signupForm: FormGroup;
@@ -47,7 +47,7 @@ export class SignupComponent implements OnInit {
         );
         this.authService.singUp(user)
         .subscribe(
-            data => console.log(data),
+            //data => console.log(data),
             error => console.log(error)
         );
         this.signupForm.reset();

@@ -1,6 +1,7 @@
+import { Router } from '@angular/router';
 import { DashboardService } from './dashboard.service';
 import { Course } from '../models/course.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-course',
@@ -16,17 +17,19 @@ import { Component, Input, OnInit } from '@angular/core';
     }
     `]
 })
-export class DashboardCourseComponent implements OnInit {
+export class DashboardCourseComponent{
   @Input() course: Course;
 
-  constructor(private dashboardService: DashboardService) { }
-
-  ngOnInit() { }
+  constructor(private dashboardService: DashboardService,
+             private router: Router) { }
 
   onDelete(){
     this.dashboardService.removeCourse(this.course)
     .subscribe(
       result => console.log(result)
     );
+  }
+  openCourse(){
+    this.router.navigate(['courseMenu',this.course.courseID]);
   }
 }

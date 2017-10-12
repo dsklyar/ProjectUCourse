@@ -1,3 +1,7 @@
+import { AnnouncementEditComponent } from './Announcement/Announcement-edit/announcement-edit.component';
+import { AnnouncementInputComponent } from './Announcement/Announcement-input/announcement-input.component';
+import { COURSEMENU_ROUTES } from './courseMenu/courseMenu.routes';
+import { CourseMenuComponent } from './courseMenu/courseMenu.component';
 import { DashboardCourseInputComponent } from './dashboard/dashboardCourse-input.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -15,7 +19,10 @@ const APP_ROUTES: Routes = [
     { path: 'signup', component: SignupComponent},
     { path: 'logout', component: LogoutComponent},
     { path: 'dashboard', component: DashboardComponent},
-    { path: 'newcourse', component: DashboardCourseInputComponent}
+    { path: 'newcourse', component: DashboardCourseInputComponent},
+    { path: 'newannouncement', component: AnnouncementInputComponent},
+    { path: 'editannouncement', component: AnnouncementEditComponent},
+    { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

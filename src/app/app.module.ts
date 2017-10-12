@@ -1,3 +1,9 @@
+import { AnnouncementEditComponent } from './Announcement/Announcement-edit/announcement-edit.component';
+import { AutoGrowDirective } from './directives/autoGrow/autoGrow.directive';
+import { AnnouncementComponent } from './Announcement/announcement.component';
+import { AnnouncementInputComponent } from './Announcement/Announcement-input/announcement-input.component';
+import { AnnouncementListComponent } from './Announcement/Announcement-list/announcement-list.component';
+import { CourseMenuComponent } from './courseMenu/courseMenu.component';
 import { DashboardCourseComponent } from './dashboard/dashboardCourse.component';
 import {  HttpModule } from '@angular/http';
 import { DashboardCourseInputComponent } from './dashboard/dashboardCourse-input.component';
@@ -42,7 +48,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SignupComponent,
     DashboardComponent,
     DashboardCourseInputComponent,
-    DashboardCourseComponent
+    DashboardCourseComponent,
+    CourseMenuComponent,
+    AnnouncementListComponent,
+    AnnouncementComponent,
+    AnnouncementInputComponent,
+    AnnouncementEditComponent,
+    AutoGrowDirective
   ],
   imports: [
     BrowserModule,
@@ -59,7 +71,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatInputModule,
     MatCardModule,
     MatMenuModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

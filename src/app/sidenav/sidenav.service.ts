@@ -7,7 +7,6 @@ export class SidenavService {
       }
     
       public open(){
-        console.log(this.sidenav.opened);
         return this.sidenav.open();
       }
     
