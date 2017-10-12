@@ -1,0 +1,34 @@
+<div class="profile-container">
+    <form class="profile-form">
+        
+        <table class="profile-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <md-icon class="material-icons">account_circle</md-icon>
+                </td>
+                <td>
+                    <md-form-field class="profile-full-width">
+                        {{user.firstName}} {{user.lastName}}
+                    </md-form-field>
+                </td>
+                <td>
+                    <md-form-field class = "profile-full-width">
+                        {{user.email}}
+                        <button (click)="onChangeEmail()">change</button>
+                    </md-form-field>
+                </td>
+            </tr>
+        </table>
+
+        <p class = "profile-full-width">
+            <md-form-field class="profile-full-width">
+                {{user.description}}
+                <button (click)="onEdit()">edit</button>     
+            </md-form-field>
+        </p>
+
+        <button (click)="onChangePass()">change password</button>
+
+    </form>
+</div>
+  

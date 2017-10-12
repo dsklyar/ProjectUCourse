@@ -1,3 +1,4 @@
+import { ProfileComponent } from './profile/profile.component';
 import { DashboardCourseComponent } from './dashboard/dashboardCourse.component';
 import {  HttpModule } from '@angular/http';
 import { DashboardCourseInputComponent } from './dashboard/dashboardCourse-input.component';
@@ -42,7 +43,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SignupComponent,
     DashboardComponent,
     DashboardCourseInputComponent,
-    DashboardCourseComponent
+    DashboardCourseComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
