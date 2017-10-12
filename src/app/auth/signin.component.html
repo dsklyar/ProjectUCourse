@@ -14,9 +14,9 @@
           <input mdInput placeholder="Password" formControlName="password" value="" type="password">
         </md-form-field>
       </p>
-      <div>
-        <button md-raised-button type="submit" [disabled]="!signinForm.valid" color="primary">Sign In</button>
-        <button md-raised-button routerLink = "/signup">Sign Up</button>
+      <div class="actions">
+          <button md-raised-button type="submit" [disabled]="!signinForm.valid" color="primary">Sign In</button>
+          <button md-raised-button routerLink = "/signup">Sign Up</button>
       </div>
     </form>
   </md-card>

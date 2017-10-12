@@ -1,58 +1,61 @@
-<md-card class="example-card">
-  <form class="example-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <!--md-form-field class="example-full-width"-->
-    <!--input mdInput placeholder="Company (disabled)" disabled value="Google"-->
-    <!--md-form-field-->
-
-    <table class="example-full-width" cellspacing="0">
-      <tr>
-        <td>
-          <md-form-field class="example-full-width">
-            <input mdInput placeholder="First Name" formControlName="firstName">
-          </md-form-field>
-        </td>
-        <td>
-          <md-form-field class="example-full-width">
-            <input mdInput placeholder="Last Name" formControlName="lastName">
-          </md-form-field>
-        </td>
-      </tr>
-    </table>
-
-    <p>
-      <md-form-field class="example-full-width">
-        <!--This shud probably be a drop down menu for school names-->
-        <input mdInput placeholder="School" formControlName="school">
-      </md-form-field>
-    </p>
-    <p>
-      <md-form-field class="example-full-width">
-        <input mdInput placeholder="Email" formControlName="email" required email>
-      </md-form-field>
-    </p>
-    <table class="example-full-width" cellspacing="0">
-      <tr>
-        <td>
-          <md-form-field class="example-full-width">
-            <input mdInput placeholder="Password" formControlName="password" type="password">
-          </md-form-field>
-        </td>
-        <!-- <td>
-          <md-form-field class="example-full-width">
-            <input mdInput placeholder="Repeat Password" formControlName="rpassword" type="password">
-          </md-form-field>
-      </td> -->
-      </tr>
+<div class="card-container">
+  <md-card class="example-card">
+    <form class="example-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <!--md-form-field class="example-full-width"-->
+      <!--input mdInput placeholder="Company (disabled)" disabled value="Google"-->
+      <!--md-form-field-->
+  
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <md-form-field class="example-full-width">
+              <input mdInput placeholder="First Name" formControlName="firstName">
+            </md-form-field>
+          </td>
+          <td>
+            <md-form-field class="example-full-width">
+              <input mdInput placeholder="Last Name" formControlName="lastName">
+            </md-form-field>
+          </td>
+        </tr>
+      </table>
+  
       <p>
-        <md-select placeholder="User Type" formControlName="userType">
-          <md-option *ngFor="let type of types" [value]="type.value">
-            {{type.viewValue}}
-          </md-option>
-        </md-select>
+        <md-form-field class="example-full-width">
+          <!--This shud probably be a drop down menu for school names-->
+          <input mdInput placeholder="School" formControlName="school">
+        </md-form-field>
       </p>
-    </table>
-    <span class="fill-space"></span>
-    <button md-raised-button type="submit" [disabled]="!signupForm.valid">
-      Sign Up</button>
-  </form>
-</md-card>
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Email" formControlName="email" required email>
+        </md-form-field>
+      </p>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <md-form-field class="example-full-width">
+              <input mdInput placeholder="Password" formControlName="password" type="password">
+            </md-form-field>
+          </td>
+          <!-- <td>
+            <md-form-field class="example-full-width">
+              <input mdInput placeholder="Repeat Password" formControlName="rpassword" type="password">
+            </md-form-field>
+        </td> -->
+        </tr>
+        <p>
+          <md-select placeholder="User Type" formControlName="userType">
+            <md-option *ngFor="let type of types" [value]="type.value">
+              {{type.viewValue}}
+            </md-option>
+          </md-select>
+        </p>
+      </table>
+      <span class="fill-space"></span>
+      <button md-raised-button type="submit" [disabled]="!signupForm.valid">
+        Sign Up</button>
+    </form>
+  </md-card>
+</div>
+

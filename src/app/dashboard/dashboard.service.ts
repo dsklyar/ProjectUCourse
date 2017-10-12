@@ -42,18 +42,6 @@ export class DashboardService {
                 const courses = response.json().obj;    // obj is where courses stored in /courses routes
                 let transformedCourses: Course[] = [];
                 for (let course of courses) {
-                    let transformedAnnouncements: Announcement[] = [];
-                    for (let announcement of course.announcements) {
-                        console.log(announcement);
-                        transformedAnnouncements.push(
-                            new Announcement(
-                                announcement.title,
-                                announcement.dateCreated,
-                                announcement.dateUpdated,
-                                announcement.announcement
-                            )
-                        );
-                    }
                     transformedCourses.push(
                         new Course(
                             course.title,
@@ -62,8 +50,7 @@ export class DashboardService {
                             course.dateUpdated,
                             course.description,
                             course.schoolName,
-                            course._id,
-                            transformedAnnouncements
+                            course._id
                         )
                     );
                 }
@@ -86,7 +73,8 @@ export class DashboardService {
                     result.obj.description,
                     result.obj.schoolName
                 );
-                this.courses.push(course);
+                this.courses.splice(this.courses.indexOf(course), 1);
+                this.courses.unshift(course);
                 return course;
             })
             .catch((error: Response) => Observable.throw(error.json()));

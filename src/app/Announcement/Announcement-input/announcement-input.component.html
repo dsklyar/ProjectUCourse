@@ -1,0 +1,19 @@
+<div class="card-container">
+    <md-card class="example-card">
+      <form class="example-form" [formGroup]="newAnnouncement" (ngSubmit)="onSubmit()">
+        <p>
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="Title" formControlName="title">
+          </md-form-field>
+        </p>
+        <p>
+          <md-form-field class="example-full-width">
+            <textarea mdInput placeholder="Announcement" formControlName="announcement"></textarea>
+          </md-form-field>
+        </p>
+        <button md-raised-button type="Submit">Create Announcement</button>
+        <button md-raised-button (click)="onGoBack()">Go Back</button>
+      </form>
+    </md-card>
+  </div>
+  
