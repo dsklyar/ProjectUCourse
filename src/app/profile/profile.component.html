@@ -1,34 +1,61 @@
-<div class="profile-container">
-    <form class="profile-form">
-        
-        <table class="profile-full-width" cellspacing="0">
-            <tr>
-                <td>
-                    <md-icon class="material-icons">account_circle</md-icon>
-                </td>
-                <td>
-                    <md-form-field class="profile-full-width">
-                        {{user.firstName}} {{user.lastName}}
+<script>
+    isEditProfile = false;
+    isChangeEmail = false;
+    show = false;
+
+</script>
+<md-card class="example-card">
+    <div *ngIf = "isEditProfile != true; then noEditProfile else editProfile" ></div>    
+    <ng-template #noEditProfile>
+        <md-card-header>
+            <button md-raised-button class="btn" (click)="isEditProfile = true"> <md-icon class = "edit-icon">edit</md-icon>edit profile</button>                
+            <md-icon class="material-icons">account_circle</md-icon>
+        </md-card-header>
+        <md-card-content>
+            <h1>
+                firstName lastName
+            </h1>
+            <h2 class = "text">
+                email
+            </h2>  
+            <h4 class="discription">Biography:</h4>
+            <p class = "bio">
+                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+            </p>
+        </md-card-content>
+    </ng-template>
+    <ng-template #editProfile>
+        <md-card-header>
+            <button md-raised-button class="btn" (click)="isEditProfile = false"> <md-icon class = "edit-icon">edit</md-icon>cancel edit</button>                
+            <md-icon class="material-icons" (click)="changePic()">account_circle</md-icon>
+        </md-card-header>
+        <md-card-content>
+            <h1>
+                firstName lastName
+            </h1>
+            <h2 *ngIf = "!isChangeEmail">
+                email
+                <button md-raised-button (click)="isChangeEmail = true">change email</button>                                              
+            </h2>  
+            <h2 *ngIf = "isChangeEmail">
+                <form [formGroup] = emailform>
+                <p>
+                    <md-form-field>
+                    <input mdInput placeholder="Email" formControlName="email" required email>
                     </md-form-field>
-                </td>
-                <td>
-                    <md-form-field class = "profile-full-width">
-                        {{user.email}}
-                        <button (click)="onChangeEmail()">change</button>
-                    </md-form-field>
-                </td>
-            </tr>
-        </table>
-
-        <p class = "profile-full-width">
-            <md-form-field class="profile-full-width">
-                {{user.description}}
-                <button (click)="onEdit()">edit</button>     
-            </md-form-field>
-        </p>
-
-        <button (click)="onChangePass()">change password</button>
-
-    </form>
-</div>
-  
+                    <button md-raised-button (click)="isChangeEmail = false">submit email</button>
+                </p>
+                </form>
+            </h2>
+            <h3>Biography:</h3>
+           <p>
+                <md-form-field >
+                    <textarea class="textarea" mdInput formControlName="userBio">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+                        </textarea>
+                </md-form-field>
+            </p>
+            <button md-raised-button (click)="isChangeBio = false">submit bio</button>
+            
+        </md-card-content>
+    </ng-template>
+</md-card>

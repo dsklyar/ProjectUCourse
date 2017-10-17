@@ -7,5 +7,5 @@ export class User {
                 public schoolName?: string,
                 public userType?: string,
                 public courses?: Course[],
-                public descritpion?: string) {}
+                public biography?: string){}
 }

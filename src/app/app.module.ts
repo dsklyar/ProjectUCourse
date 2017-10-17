@@ -48,7 +48,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DashboardComponent,
     DashboardCourseInputComponent,
     DashboardCourseComponent,
-    ProfileComponent
+    ProfileComponent,
     CourseMenuComponent,
     AnnouncementListComponent,
     AnnouncementComponent,

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs'
 @Injectable()
 export class AuthenticationService {
     constructor(private http: Http){}
+    user: User;
     singUp(user: User){
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type':'application/json'});
@@ -27,5 +28,8 @@ export class AuthenticationService {
 
     isLoggedIn(){
         return localStorage.getItem('token') !== null;
+    }
+    getUser(){
+        return this.user;
     }
 }

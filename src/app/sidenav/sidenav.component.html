@@ -2,7 +2,7 @@
   <md-sidenav #sidenav class="example-sidenav">
     <div>
       <tr>
-        <td><button md-button routerLink="/profile">Profile</button></td>
+        <td><button md-button routerLink="/profile" (click)="sidenav.close()">Profile</button></td>
       </tr>
       <tr>
         <td><button md-button routerLink="/dashboard" (click)="sidenav.close()">Dashboard</button></td>
