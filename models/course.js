@@ -13,8 +13,8 @@ var schema = new Schema({
     schoolName              : {type : String, required : true},
     description             : {type : String, required : true},
     assignments             : [{type : Schema.Types.ObjectId, ref : 'Assignment'}],
-    announcements           : [{type : Schema.Types.ObjectId, ref : 'Announcement'}]
-
+    announcements           : [{type : Schema.Types.ObjectId, ref : 'Announcement'}],
+    questions               : [{type : Schema.Types.ObjectId, ref : 'Question'}]
 });
 schema.plugin(mongooseUniqueValidator);
 module.exports = mongoose.model('Course',schema);
