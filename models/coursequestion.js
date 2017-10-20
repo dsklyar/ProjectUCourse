@@ -8,10 +8,10 @@ var mongooseUniqueValidator = require('mongoose-unique-validator');
 
 var schema = new Schema({
     title                   : {type : String, required : true},
-    coursequestionBody            : {type : String, required : true},
+    coursequestionBody      : {type : String, required : true},
     dateCreated             : {type : Date, required : true},
     dateUpdated             : {type : Date, required : true},
-    responses                : [{type : Schema.Types.ObjectId, ref: 'Response'}]
+    responses               : [{type : Schema.Types.ObjectId, ref: 'Response'}]
 });
 schema.plugin(mongooseUniqueValidator);
 module.exports = mongoose.model('Coursequestion',schema);
