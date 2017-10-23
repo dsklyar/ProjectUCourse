@@ -6,5 +6,6 @@ export class User {
                 public lastName?: string,
                 public schoolName?: string,
                 public userType?: string,
-                public courses?: Course[]) {}
+                public courses?: Course[],
+                public biography?: string){}
 }
