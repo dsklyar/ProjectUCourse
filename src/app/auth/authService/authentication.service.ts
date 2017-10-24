@@ -19,7 +19,11 @@ export class AuthenticationService {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.post('http://localhost:3000/user/signin', body, { headers: headers })
-            .map((response: Response) => response.json())
+            .map((response: Response) => {
+                const data = response.json();
+                // this is how to return data from annonymous function
+                return data;
+            })
             .catch((error: Response) => Observable.throw(error.json()));
     }
     logOut() {
@@ -31,7 +35,21 @@ export class AuthenticationService {
     }
     getUser(userID: string) {
         return this.http.get('http://localhost:3000/user/' + userID)
-            .map((response: Response) => response.json())
+            .map((response: Response) => {
+                const data = response.json();
+                // initialize user in auth service
+                this.user = new User(
+                    data.obj.email,
+                    data.obj.password,
+                    data.obj.firstName,
+                    data.obj.lastName,
+                    data.obj.schoolName,
+                    data.obj.userType,
+                    data.obj.courses,
+                    data.obj.biography
+                )
+                return data;
+            })
             .catch((error: Response) => Observable.throw(error.json()));
     }
     updateUser(user: User) {
@@ -43,9 +61,5 @@ export class AuthenticationService {
             , body, { headers: headers })
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
-    }
-    setUser(user : User){
-        console.log(user);
-        this.user = user;
     }
 }

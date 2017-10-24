@@ -30,27 +30,20 @@ export class SigninComponent implements OnInit {
         this.authService.singIn(user)
             .subscribe(
                 data => {
+                    // NOTE: should this be in service?
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userId', data.userId);
+                    // NOTE: should this be in service?
                     this.authService.getUser(data.userId)
                     .subscribe(
                         data => {
-                            this.authService.setUser(new User(
-                                data.obj.email,
-                                data.obj.password,
-                                data.obj.firstName,
-                                data.obj.lastName,
-                                data.obj.schoolName,
-                                data.obj.userType,
-                                data.obj.courses,
-                                data.obj.biography
-                            ))
+                            // here is the true succesful case
+                            this.router.navigateByUrl('/dashboard');
                         },
-                        error => console.log(error)
+                        error => console.log(error + ' /n this is from error')
                     )
-                    this.router.navigateByUrl('/dashboard');
                 },
-                error => console.log(error)
+                error => console.log(error + ' /n this is from error')
             );
         this.signinForm.reset();
     }

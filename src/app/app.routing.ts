@@ -13,7 +13,7 @@ import { LogoutComponent } from './auth/logout.component';
 import { ProfileComponent} from './profile/profile.component';
 const APP_ROUTES: Routes = [
     // path full only react to this path if it is default path
-    { path: '', redirectTo: '/auth', pathMatch: 'full'},
+    { path: '', redirectTo: '/signin', pathMatch: 'full'},
     { path: 'auth', component: AuthenticationComponent},
     { path: 'signin', component: SigninComponent},
     { path: 'signup', component: SignupComponent},
