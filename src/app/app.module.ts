@@ -1,3 +1,4 @@
+import { SyllabusComponent } from './syllabus/syllabus.component';
 import { AnnouncementEditComponent } from './Announcement/Announcement-edit/announcement-edit.component';
 import { AutoGrowDirective } from './directives/autoGrow/autoGrow.directive';
 import { ProfileComponent } from './profile/profile.component';
@@ -56,7 +57,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AnnouncementComponent,
     AnnouncementInputComponent,
     AnnouncementEditComponent,
-    AutoGrowDirective
+    AutoGrowDirective,
+    SyllabusComponent
   ],
   imports: [
     BrowserModule,

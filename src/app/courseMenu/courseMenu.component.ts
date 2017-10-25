@@ -1,5 +1,5 @@
 import { AnnouncementService } from '../Announcement/AnnouncementService/announcemenet.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '../models/course.model';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class CourseMenuComponent implements OnInit{
+  selectedTab : number  = 0;
   courseID : string;
   constructor (private activatedRoute : ActivatedRoute,
-               private announcementService : AnnouncementService){}
+               private announcementService : AnnouncementService,
+               private router : Router){}
 
   ngOnInit(){
     this.activatedRoute.paramMap
@@ -21,5 +23,20 @@ export class CourseMenuComponent implements OnInit{
     })
     // MUST DO IT SO ANNOUNCEMENT LIST KNEW HAT COURSE IT WAS ON
     this.announcementService.setCourseID(this.courseID);
+  }
+  onLinkClick($event : any){
+    switch ($event.index) {
+      case 0:
+      this.selectedTab = 0;
+      this.router.navigate(['announcements'], {relativeTo : this.activatedRoute});
+        break;
+      case 1:
+      this.selectedTab = 1;
+      this.router.navigate(['syllabus'], {relativeTo : this.activatedRoute});
+        break;
+      default:
+        break;
+    }
+    
   }
 }
