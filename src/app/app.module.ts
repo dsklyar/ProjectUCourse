@@ -72,6 +72,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AssignmentListComponent,
 
     AutoGrowDirective,
+    
     SyllabusComponent
   ],
   imports: [

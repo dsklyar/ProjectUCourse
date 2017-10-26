@@ -12,7 +12,8 @@
         </md-form-field>
       </p>
       <button md-raised-button type="Submit" [disabled]="!newAnnouncementForm.valid">Create Announcement</button>
-      <button md-raised-button (click)="onGoBack()">Go Back</button>
+      <!-- USE type="button"  to make button not of submit type -->
+      <button md-raised-button type="button" (click)="onGoBack()">Go Back</button>
     </form>
   </md-card>
 </div>

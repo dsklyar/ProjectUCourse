@@ -10,9 +10,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['.././auth/cardcss/card.css']
 })
 
-export class CourseMenuComponent implements OnInit{
-  selectedTab : number  = 0;
-  courseID : string;
+export class CourseMenuComponent implements OnInit {
+  courseID: string;
 
   constructor(private activatedRoute: ActivatedRoute,
     private announcementService: AnnouncementService,
@@ -27,19 +26,17 @@ export class CourseMenuComponent implements OnInit{
     // MUST DO IT SO ANNOUNCEMENT LIST KNEW HAT COURSE IT WAS ON
     this.announcementService.setCourseID(this.courseID);
   }
-  onLinkClick($event : any){
-    switch ($event.index) {
+  onLinkClick(e : any) {
+    console.log(e);
+    switch (e.index) {
       case 0:
-      this.selectedTab = 0;
-      this.router.navigate(['announcements'], {relativeTo : this.activatedRoute});
+        this.router.navigate(['announcements'], { relativeTo: this.thisRoute });
         break;
       case 1:
-      this.selectedTab = 1;
-      this.router.navigate(['syllabus'], {relativeTo : this.activatedRoute});
+        this.router.navigate(['assignments'], { relativeTo: this.thisRoute });
         break;
       default:
         break;
     }
-    
   }
 }

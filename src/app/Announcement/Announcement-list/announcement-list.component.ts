@@ -1,6 +1,6 @@
 import { AnnouncementService } from '../AnnouncementService/announcemenet.service';
 import { Announcement } from '../../models/announcement.model';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 
 
@@ -13,8 +13,12 @@ import { Component, Input, OnInit } from '@angular/core';
 
 export class AnnouncementListComponent implements OnInit {
   private announcements: Announcement[];
+  private sub : any;
+  parentRouteId: number;
 
-  constructor(private announcementService: AnnouncementService) { }
+  constructor(private announcementService: AnnouncementService,
+              private router: Router,
+              private thisRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.announcementService.refreshAnnouncements()
