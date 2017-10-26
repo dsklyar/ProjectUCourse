@@ -1,3 +1,5 @@
+import { AssignmentListComponent } from './assignment/assignment-list/assignment-list.component';
+import { AssignmentComponent } from './assignment/assignment.component';
 import { AnnouncementEditComponent } from './Announcement/Announcement-edit/announcement-edit.component';
 import { AutoGrowDirective } from './directives/autoGrow/autoGrow.directive';
 import { ProfileComponent } from './profile/profile.component';
@@ -41,21 +43,33 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
+    
     AuthenticationComponent,
+
     HeaderComponent,
+
     SidenavComponent,
+
     LogoutComponent,
     SigninComponent,
     SignupComponent,
+
     DashboardComponent,
     DashboardCourseInputComponent,
     DashboardCourseComponent,
+
     ProfileComponent,
+
     CourseMenuComponent,
+
     AnnouncementListComponent,
     AnnouncementComponent,
     AnnouncementInputComponent,
     AnnouncementEditComponent,
+
+    AssignmentComponent,
+    AssignmentListComponent,
+
     AutoGrowDirective
   ],
   imports: [

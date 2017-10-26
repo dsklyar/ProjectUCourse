@@ -1,3 +1,4 @@
+import { AssignmentService } from './assignment/assignmentService/assignment.service';
 import { AnnouncementService } from './Announcement/AnnouncementService/announcemenet.service';
 import { AuthenticationService } from './auth/authService/authentication.service';
 import { DashboardService } from './dashboard/dashboard.service';
@@ -14,7 +15,8 @@ import { SidenavService } from '././sidenav/sidenav.service';
     SidenavService,
     DashboardService,
     AuthenticationService,
-    AnnouncementService
+    AnnouncementService,
+    AssignmentService
   ]
 })
 export class AppComponent {
