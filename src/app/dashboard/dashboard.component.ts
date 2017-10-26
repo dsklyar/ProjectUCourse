@@ -1,3 +1,4 @@
+import { AuthenticationService } from '../auth/authService/authentication.service';
 import { Course } from '../models/course.model';
 import { DashboardService } from './dashboard.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,15 +24,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
     courses: Course[];
-    constructor(private dashboardService: DashboardService) { }
+    constructor(private dashboardService: DashboardService,
+                private authService : AuthenticationService) { }
 
     ngOnInit() {
         this.dashboardService.getMessages()
             .subscribe(
-                (courses: Course[]) => {
-                    this.courses = courses;
-                },
-                error => console.log(error)
+            (courses: Course[]) => {
+                this.courses = courses;
+            },
+            error => console.log(error)
             );
+    }
+    isInstructor(){
+        return this.authService.isInstructor();
     }
 }

@@ -3,7 +3,7 @@ Schema = mongoose.Schema,
     Course = require('./course.js'),
     CourseSchema = mongoose.model('Course').schema;
 var mongooseUniqueValidator =  require('mongoose-unique-validator');
-const userType = ['admin','student','teacher']
+const userType = ['admin','student','instructor']
 var schema = new Schema({
     email       : {type : String, required : true, unique : true},
     password    : {type : String, required : true},
