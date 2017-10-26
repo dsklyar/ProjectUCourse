@@ -1,5 +1,6 @@
 import { AssignmentListComponent } from './assignment/assignment-list/assignment-list.component';
 import { AssignmentComponent } from './assignment/assignment.component';
+import { SyllabusComponent } from './syllabus/syllabus.component';
 import { AnnouncementEditComponent } from './Announcement/Announcement-edit/announcement-edit.component';
 import { AutoGrowDirective } from './directives/autoGrow/autoGrow.directive';
 import { ProfileComponent } from './profile/profile.component';
@@ -70,7 +71,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AssignmentComponent,
     AssignmentListComponent,
 
-    AutoGrowDirective
+    AutoGrowDirective,
+    SyllabusComponent
   ],
   imports: [
     BrowserModule,

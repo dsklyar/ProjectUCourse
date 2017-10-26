@@ -12,8 +12,8 @@ import { Component, Input } from '@angular/core';
       padding: 25px;
       margin: 10px;
     }
-    md-card-header button {
-        align-content: right;
+    .menu {
+      margin-left: auto;
     }
     `]
 })
