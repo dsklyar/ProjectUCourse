@@ -10,6 +10,9 @@ import {SidenavService} from '.././sidenav/sidenav.service';
         `.fill-space {
             flex: 1 1 auto;
           }
+          .menu-toolbar {
+            background-size:100% 100%;
+          }
           .menu-toolbar a {
             padding: 1%;
             display: inline-block;

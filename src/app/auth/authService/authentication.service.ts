@@ -1,3 +1,5 @@
+import { resolve } from 'url';
+
 import { User } from '../../models/user.model';
 import { Http, Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -24,7 +26,8 @@ export class AuthenticationService {
                 // this is how to return data from annonymous function
                 return data;
             })
-            .catch((error: Response) => Observable.throw(error.json()));
+            .catch((error: Response) => Observable.throw(error.json()))
+            .share();
     }
     logOut() {
         localStorage.clear();
@@ -48,6 +51,7 @@ export class AuthenticationService {
                     data.obj.courses,
                     data.obj.biography
                 )
+                console.log(this.user.userType);
                 return data;
             })
             .catch((error: Response) => Observable.throw(error.json()));
@@ -62,13 +66,52 @@ export class AuthenticationService {
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
     }
-    isStudent(){
-        return this.user.userType == 'student'
+    // NOTE:
+    // All of the funvtions below
+    // Get the user type REGARDLESS if page was refreshed
+    // Because the user token might still be in the browser memory
+    // I can use that to get the login infomation about that user
+    // instead of making them login again, (notice how I used proper pronouns for all ya special snowflakes :^) )
+    isStudent() {
+        if (this.isPreviouslyLoggedIn()) {
+            return this.user.userType == 'student'
+        }
     }
-    isInstructor(){
-        return this.user.userType == 'instructor'
+    isInstructor() {
+        if (this.isPreviouslyLoggedIn()) {
+            return this.user.userType == 'instructor'
+        }
     }
-    isAdmin(){
-        return this.user.userType == 'admin'
+    isAdmin() {
+        if (this.isPreviouslyLoggedIn()) {
+            return this.user.userType == 'admin'
+        }
+    }
+    // NOTE: 
+    // This somehow syncronously gets the user information
+    // if the token did not expire
+    private isPreviouslyLoggedIn() {
+        if (this.user != null) {
+            console.log(this.user.userType + " still here");
+            return true;
+        } else {
+            var userId = localStorage.getItem('userId');
+            if (userId != null) {
+                this.getUser(userId)
+                    .subscribe(
+                    result => {
+                        console.log(this.user.userType + ' got from service again');
+                        return true;
+                    },
+                    error => {
+                        console.log('failed to get it from service');
+                        return false;
+                    }
+                    );
+            } else {
+                console.log('nope!');
+                return false;
+            }
+        }
     }
 }

@@ -1,10 +1,10 @@
 <md-toolbar class="menu-toolbar">
-    <!--button md-icon-button (click)="sidenav.toggle()"-->
-    <button md-icon-button (click)="navToggle()">
-        <md-icon class="material-icons">account_circle</md-icon>
-    </button>
-    <span class="fill-space"></span>
-    <a routerLink="/signin" *ngIf="!isLoggedIn()">Login</a>
-    <a routerLink="/signup" *ngIf="!isLoggedIn()">Sign Up</a>
-    <a routerLink="/logout" *ngIf="isLoggedIn()">Logout</a>
+  <button md-icon-button (click)="navToggle()">
+    <md-icon class="material-icons">account_circle</md-icon>
+  </button>
+  <span class="fill-space"></span>
+  <a routerLink="/signin" *ngIf="!isLoggedIn()">Login</a>
+  <a routerLink="/signup" *ngIf="!isLoggedIn()">Sign Up</a>
+  <a routerLink="/logout" *ngIf="isLoggedIn()">Logout</a>
+  <!-- <img class="img" src="assets/header/img/img.jpg" alt="image"> -->
 </md-toolbar>
