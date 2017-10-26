@@ -62,4 +62,13 @@ export class AuthenticationService {
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
     }
+    isStudent(){
+        return this.user.userType == 'student'
+    }
+    isInstructor(){
+        return this.user.userType == 'instructor'
+    }
+    isAdmin(){
+        return this.user.userType == 'admin'
+    }
 }

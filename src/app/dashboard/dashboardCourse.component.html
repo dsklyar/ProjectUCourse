@@ -1,24 +1,31 @@
 <div class="card-container">
-  <md-card class="example-card" flex="40" flex-sm="80" (click)="openCourse()">
+  <md-card class="example-card" flex="40" flex-sm="80">
     <md-card-header>
-      <button md-icon-button [mdMenuTriggerFor]="menu">
-      <md-icon>more_vert</md-icon>
-    </button>
-      <md-menu #menu="mdMenu">
-        <button md-menu-item>
-        <md-icon>mode_edit</md-icon>
-        <span>Edit</span>
-      </button>
-        <button md-menu-item (click)="onDelete()">
-        <md-icon>delete_forever</md-icon>
-        <span>Delete</span>
-      </button>
-      </md-menu>
+      <div *ngIf="this.isInstructor(); then instructor"></div>
+      <ng-template #instructor>
+        <div class="menu">
+          <button md-icon-button [mdMenuTriggerFor]="menu">
+            <md-icon>more_vert</md-icon>
+          </button>
+          <md-menu #menu="mdMenu">
+            <button md-menu-item (click)="onEdit()">
+              <md-icon>mode_edit</md-icon>
+              <span>Edit</span>
+            </button>
+            <button md-menu-item (click)="onDelete()">
+              <md-icon>delete_forever</md-icon>
+              <span>Delete</span>
+            </button>
+          </md-menu>
+        </div>
+      </ng-template>
       <!--div md-card-avatar class="example-header-image"></di-->
       <md-card-title>{{course.title}}</md-card-title>
       <md-card-subtitle>{{course.schoolName}}</md-card-subtitle>
     </md-card-header>
-    <md-card-content>
+    <!-- <div class="color-fill" [ngStyle]="{ 'background-color': color }"></div> -->
+    <div #imagebox class="color-fill"></div>
+    <md-card-content (click)="openCourse()">
       <p>
         {{course.description}}
       </p>
