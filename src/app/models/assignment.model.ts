@@ -1,3 +1,5 @@
+import { Question } from './question.model';
+
 export class Assignment {
   constructor(public title: string,
               public description: string,
@@ -5,5 +7,7 @@ export class Assignment {
               public dateDue?: Date,
               public dateCreated?: Date,
               public dateUpdated?: Date,
-              public assignmentID?: string){}
+              public assignmentID?: string,
+              public questions? : Question[]
+            ){}
 }

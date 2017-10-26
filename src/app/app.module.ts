@@ -1,5 +1,9 @@
+import { AssignmentListComponent } from './assignment/assignment-list/assignment-list.component';
+import { AssignmentComponent } from './assignment/assignment.component';
+import { SyllabusComponent } from './syllabus/syllabus.component';
 import { AnnouncementEditComponent } from './Announcement/Announcement-edit/announcement-edit.component';
 import { AutoGrowDirective } from './directives/autoGrow/autoGrow.directive';
+import { ProfileComponent } from './profile/profile.component';
 import { AnnouncementComponent } from './Announcement/announcement.component';
 import { AnnouncementInputComponent } from './Announcement/Announcement-input/announcement-input.component';
 import { AnnouncementListComponent } from './Announcement/Announcement-list/announcement-list.component';
@@ -40,21 +44,35 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
+    
     AuthenticationComponent,
+
     HeaderComponent,
+
     SidenavComponent,
+
     LogoutComponent,
     SigninComponent,
     SignupComponent,
+
     DashboardComponent,
     DashboardCourseInputComponent,
     DashboardCourseComponent,
+
+    ProfileComponent,
+
     CourseMenuComponent,
+
     AnnouncementListComponent,
     AnnouncementComponent,
     AnnouncementInputComponent,
     AnnouncementEditComponent,
-    AutoGrowDirective
+
+    AssignmentComponent,
+    AssignmentListComponent,
+
+    AutoGrowDirective,
+    SyllabusComponent
   ],
   imports: [
     BrowserModule,
