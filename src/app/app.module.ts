@@ -1,3 +1,4 @@
+import { AssignmentInputComponent } from './assignment/assignment-input/assignment-input.component';
 import { AssignmentListComponent } from './assignment/assignment-list/assignment-list.component';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { SyllabusComponent } from './syllabus/syllabus.component';
@@ -22,7 +23,10 @@ import { MatTabsModule,
          MatInputModule,
          MatCardModule,
          MatMenuModule,
-         MatSelectModule } from '@angular/material';
+         MatSelectModule,
+         MatDatepickerModule,
+         MdNativeDateModule,
+         MatCheckboxModule } from '@angular/material';
 import { routing } from './app.routing';
 
 import { NgModule } from '@angular/core';
@@ -70,6 +74,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
     AssignmentComponent,
     AssignmentListComponent,
+    AssignmentInputComponent,
 
     AutoGrowDirective,
     
@@ -91,7 +96,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatCardModule,
     MatMenuModule,
     MatSelectModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDatepickerModule,
+    MdNativeDateModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

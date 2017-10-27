@@ -17,7 +17,7 @@ import {SidenavService} from '.././sidenav/sidenav.service';
             padding: 1%;
             display: inline-block;
             text-decoration: none;
-            color: #282828;
+            color: #232323;
           }
           .material-icons{
               font-size: 48px;

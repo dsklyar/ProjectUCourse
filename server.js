@@ -17,6 +17,7 @@ mongoose.connect('mongodb://daniel:ucourse@ds044709.mlab.com:44709/ucourse', fun
 const courseRoutes = require('./server/routes/course');
 const userRoutes = require('./server/routes/user');
 const announcementRoutes = require('./server/routes/announcement');
+const assignmentRoutes = require('./server/routes/assignment');
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/course',courseRoutes);
 app.use('/user',userRoutes);
 app.use('/announcement',announcementRoutes);
+app.use('/assignment',assignmentRoutes);
 
 
 // Catch all other routes and return the index file

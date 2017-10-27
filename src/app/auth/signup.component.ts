@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
     // andor be validated
     types = [
         {value: 'student', viewValue: 'Student'},
-        {value: 'teacher', viewValue: 'Teacher'}
+        {value: 'instructor', viewValue: 'Instructor'}
     ];
 
     constructor(private authService: AuthenticationService){}

@@ -1,3 +1,4 @@
+import { AuthenticationService } from '../auth/authService/authentication.service';
 
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
@@ -11,14 +12,17 @@ export class DashboardService {
     private courses: Course[] = [];
     // forthis u need at injectable so it will have 
     // a meta data for angular to recognise
-    constructor(private http: Http) { }
+    constructor(private http: Http,
+                private authService : AuthenticationService) { }
 
     addCourse(course: Course) {
         // Stringify our course object
         const body = JSON.stringify(course);
         // Specify that the object is type of Json
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('http://localhost:3000/course' + this.getToken(), body, { headers: headers })
+        return this.http.post('http://localhost:3000/course/' 
+        + this.getUserId()
+        + this.getToken(), body, { headers: headers })
             .map((response: Response) => {
                 const result = response.json();
                 const course = new Course(
@@ -37,7 +41,9 @@ export class DashboardService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
     getMessages() {
-        return this.http.get('http://localhost:3000/course' + this.getToken())
+        return this.http.get('http://localhost:3000/course/' 
+        + this.getUserId()
+        + this.getToken())
             .map((response: Response) => {
                 const courses = response.json().obj;    // obj is where courses stored in /courses routes
                 let transformedCourses: Course[] = [];
@@ -93,5 +99,11 @@ export class DashboardService {
         ? '?token=' + localStorage.getItem('token')
         : '';
         return token;
+    }
+    getUserId(){
+        const userId = (localStorage.getItem('userId'))
+        ? '' + localStorage.getItem('userId')
+        : '';
+        return userId;
     }
 } 

@@ -1,0 +1,30 @@
+<div class="card-container">
+  <md-card class="example-card">
+    <form class="example-form" [formGroup]="newAssignmentForm" (ngSubmit)="onSubmit()">
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Title" formControlName="title">
+        </md-form-field>
+      </p>
+      <p>
+        <md-form-field class="example-full-width">
+          <textarea mdInput appAutoGrow placeholder="Description" formControlName="description"></textarea>
+        </md-form-field>
+      </p>
+      <p>
+        <md-form-field>
+          <input mdInput [mdDatepicker]="picker" placeholder="Choose a due date" formControlName="dateDue">
+          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+          <md-datepicker #picker></md-datepicker>
+        </md-form-field>
+        <md-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">Timed?</md-checkbox>
+        <md-form-field *ngIf="checked">
+            <input mdInput type="number" placeholder="Minutes" value="0" formControlName="timeAvailable">
+        </md-form-field>
+      </p>
+      <button md-raised-button type="Submit" [disabled]="!newAssignmentForm.valid">Schedule Assignment</button>
+      <!-- USE type="button"  to make button not of submit type -->
+      <button md-raised-button type="button" (click)="onGoBack()">Go Back</button>
+    </form>
+  </md-card>
+</div>

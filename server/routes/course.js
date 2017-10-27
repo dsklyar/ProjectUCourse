@@ -5,6 +5,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 
 var Course = require('../../models/course');
+var User = require('../../models/user');
 
 router.use('/', function (req, res, next) {
   jwt.verify(req.query.token,
@@ -20,46 +21,79 @@ router.use('/', function (req, res, next) {
       next();
     })
 });
-// Store in the back end
-// You only reach this route when you hav course route before hand
-// Such as course/
-router.post('/', function (req, res, next) {
-  var course = new Course({
-    title: req.body.title,
-    registrationNumber: req.body.regNum,
-    dateCreated: req.body.dateCreated,
-    dateUpdated: req.body.dateUpdated,
-    description: req.body.description,
-    schoolName: req.body.schoolName
-  });
-  course.save(function (err, result) {
+// this will bind the course to the instructor creating it
+router.post('/:userID', function (req, res, next) {
+  console.log()
+  User.findById(req.params.userID, function (err, user) {
     if (err) {
       return res.status(500).json({
-        title: 'An error occured when creating a course!',
+        title: 'An error occured!',
         error: err
       });
     }
-    res.status(201).json({
-      message: 'Saved course!',
-      obj: result
+    if (!user) {
+      return res.status(500).json({
+        title: 'No user was found!',
+        error: {
+          message: 'user was not found!'
+        }
+      });
+    }
+    var course = new Course({
+      title: req.body.title,
+      registrationNumber: req.body.regNum,
+      dateCreated: req.body.dateCreated,
+      dateUpdated: req.body.dateUpdated,
+      description: req.body.description,
+      schoolName: req.body.schoolName
     });
-  });
+    course.save(function (err, course) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured when creating a course!',
+          error: err
+        });
+      }
+      user.courseList.push(course._id);
+      user.save(function (err, result) {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occured!',
+            error: err
+          });
+        }
+        res.status(201).json({
+          message: 'Saved course!',
+          obj: course
+        });
+      });
+    });
+  })
 });
-
-router.get('/', function (req, res, next) {
-  Course.find(function (err, courses) {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({
-        title: 'An error occurred!',
-        error: err
+// This will return all courses bounded to that userID
+router.get('/:userID', function (req, res, next) {
+  User.findById(req.params.userID)
+    .populate('courseList')
+    .exec(function (err, user) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured!',
+          error: err
+        });
+      }
+      if (!user) {
+        return res.status(500).json({
+          title: 'No user was found!',
+          error: {
+            message: 'user was not found!'
+          }
+        });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: user.courseList
       });
-    }
-    res.status(200).json({
-      message: 'Success',
-      obj: courses
     });
-  });
 });
 router.patch('/:id', function (req, res, next) {
   Course.findById(req.params.id, function (err, course) {

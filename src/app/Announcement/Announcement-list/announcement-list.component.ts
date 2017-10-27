@@ -13,12 +13,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 export class AnnouncementListComponent implements OnInit {
   private announcements: Announcement[];
-  private sub : any;
-  parentRouteId: number;
 
-  constructor(private announcementService: AnnouncementService,
-              private router: Router,
-              private thisRoute: ActivatedRoute) { }
+  constructor(private announcementService: AnnouncementService) { }
 
   ngOnInit() {
     this.announcementService.refreshAnnouncements()
