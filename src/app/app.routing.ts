@@ -1,3 +1,4 @@
+import { AssignmentMenuComponent } from './assignmentMenu/assignmentMenu.component';
 import { AssignmentInputComponent } from './assignment/assignment-input/assignment-input.component';
 import { AnnouncementEditComponent } from './Announcement/Announcement-edit/announcement-edit.component';
 import { AnnouncementInputComponent } from './Announcement/Announcement-input/announcement-input.component';
@@ -25,7 +26,8 @@ const APP_ROUTES: Routes = [
     { path: 'newannouncement', component: AnnouncementInputComponent},
     { path: 'editannouncement', component: AnnouncementEditComponent},
     { path: 'newassignment', component: AssignmentInputComponent},
-    { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES}
+    { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES},
+    { path: 'assignmentMenu/:assignmentID', component: AssignmentMenuComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

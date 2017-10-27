@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
 
 
 @Injectable()
-export class AssignmentService{
+export class AssignmentService {
   private courseID: string;
-  private assignmentToEdit : Assignment;
-  private assignments : Assignment[] = [];
+  private assignmentToEdit: Assignment;
+  private assignments: Assignment[] = [];
 
   constructor(private http: Http) { }
 
@@ -18,9 +18,9 @@ export class AssignmentService{
     if (this.courseID != null) {
       const body = JSON.stringify(newAssignment);
       const headers = new Headers({ 'Content-Type': 'application/json' });
-      return this.http.post('http://localhost:3000/assignment/' 
-      + this.courseID
-      + this.getToken(), body, { headers: headers })
+      return this.http.post('http://localhost:3000/assignment/'
+        + this.courseID
+        + this.getToken(), body, { headers: headers })
         .map((response: Response) => {
           const result = response.json();
           const returnedAssignment = new Assignment(
@@ -42,25 +42,25 @@ export class AssignmentService{
   // YOU MUST REFRESH FIRST BEFORE ADDING NEW ASSIGNMENTS
   // OTHERWISE COURSEID IS UNDEFINED
   refreshAssignments() {
-    return this.http.get('http://localhost:3000/assignment/' 
-    + this.courseID
-    + this.getToken())
-    .map((response: Response) => {
+    return this.http.get('http://localhost:3000/assignment/'
+      + this.courseID
+      + this.getToken())
+      .map((response: Response) => {
         const assignments = response.json().obj;    // obj is where courses stored in /courses routes
         let transformedAssignments: Assignment[] = [];
         for (let assignment of assignments) {
           transformedAssignments.push(
-                new Assignment(
-                  assignment.title,
-                  assignment.description,
-                  assignment.timeAvailable,
-                  assignment.dateDue,
-                  assignment.dateCreated,
-                  assignment.dateUpdated,
-                  assignment.assignmentQuestions,
-                  assignment._id
-                )
-            );
+            new Assignment(
+              assignment.title,
+              assignment.description,
+              assignment.timeAvailable,
+              assignment.dateDue,
+              assignment.dateCreated,
+              assignment.dateUpdated,
+              assignment.assignmentQuestions,
+              assignment._id
+            )
+          );
         }
         // SORT: This is used to sort and show the latest assignments
         this.assignments = transformedAssignments.sort((a, b) => {
@@ -71,10 +71,22 @@ export class AssignmentService{
           }
         });
         return this.assignments;
-    })
-    .catch((error: Response) => Observable.throw('Error in Assignment Service'));
+      })
+      .catch((error: Response) => Observable.throw('Error in Assignment Service'));
   }
-  setCourseID(courseID : string){
+  removeAssignment(assignment: Assignment) {
+    return this.http.delete('http://localhost:3000/assignment/'
+      + assignment.assignmentID
+      + "/"
+      + this.courseID
+      + this.getToken())
+      .map((response: Response) => {
+        response.json();
+        this.assignments.splice(this.assignments.indexOf(assignment), 1);
+      })
+      .catch((error: Response) => Observable.throw(error.json()));
+  }
+  setCourseID(courseID: string) {
     this.courseID = courseID;
   }
   getToken() {

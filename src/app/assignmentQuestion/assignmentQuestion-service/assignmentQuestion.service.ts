@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AssignmentQuestionService{
+  private assignmentID : string;
   private assignmentQuestions : AssignmentQuestion[] = [
     { title : 'Question 1', description : 'Do jumpy jacks.', dateUpdated: new Date() },
     { title : 'Question 2', description : 'Do runny runs.', dateUpdated: new Date() },
@@ -15,6 +16,9 @@ export class AssignmentQuestionService{
 
   getAssignmentQuestions(){
     return this.assignmentQuestions;
+  }
+  setAssignmentID(assignmentID : string){
+    this.assignmentID = assignmentID;
   }
 
 }

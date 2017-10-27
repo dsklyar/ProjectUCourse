@@ -81,4 +81,54 @@ router.get('/:courseID', function (req, res, next) {
       });
     });
 });
+router.delete('/:id/:courseID', function (req, res, next) {
+  // MUST DO IT THIS WAY
+  Assignment.findOneAndRemove({'_id' : req.params.id},
+    function (err, assignment) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured!',
+          error: err
+        });
+      }
+      if (!assignment) {
+        return res.status(500).json({
+          title: 'No assignment was found!',
+          error: {
+            message: 'assignment was not found!'
+          }
+        });
+      }
+      Course.findById(req.params.courseID,
+        function(err, course) {
+          if (err) {
+            return res.status(500).json({
+              title: 'An error occured!',
+              error: err
+            });
+          }
+          if (!course) {
+            return res.status(500).json({
+              title: 'No course was found!',
+              error: {
+                message: 'Course was not found!'
+              }
+            });
+          }
+          course.assignments.splice(course.assignments.indexOf(req.params.id), 1);
+          course.save(function (err, result) {
+            if (err) {
+              return res.status(500).json({
+                title: 'An error occured!',
+                error: err
+              });
+            }
+            res.status(200).json({
+              message: 'Deleted announcement and update course',
+              obj: result
+            });
+          });
+        });
+    });
+})
 module.exports = router;

@@ -51,7 +51,7 @@ export class DashboardService {
                     transformedCourses.push(
                         new Course(
                             course.title,
-                            course.regNum,
+                            course.registrationNumber,
                             course.dateCreated,
                             course.dateUpdated,
                             course.description,
@@ -86,7 +86,11 @@ export class DashboardService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
     removeCourse(course: Course) {
-        return this.http.delete('http://localhost:3000/course/' + course.courseID + this.getToken())
+        return this.http.delete('http://localhost:3000/course/' 
+        + course.courseID 
+        + "/"
+        + this.getUserId()
+        + this.getToken())
             .map((response: Response) => {
                 response.json();
                 this.courses.splice(this.courses.indexOf(course), 1);

@@ -10,6 +10,7 @@ import { Observable } from 'rxjs'
 export class AuthenticationService {
     constructor(private http: Http) { }
     user: User;
+
     singUp(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });

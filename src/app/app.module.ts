@@ -1,3 +1,9 @@
+import { MathJaxDirective } from './directives/mathJax/mathjax.directive';
+import { AssignmentQuestionComponent } from './assignmentQuestion/assignmentQuestion.component';
+import {
+  AssignmentQuestionListComponent,
+} from './assignmentQuestion/assignmentQuestion-list.component/assignmentQuestion-list.component';
+import { AssignmentMenuComponent } from './assignmentMenu/assignmentMenu.component';
 import { AssignmentInputComponent } from './assignment/assignment-input/assignment-input.component';
 import { AssignmentListComponent } from './assignment/assignment-list/assignment-list.component';
 import { AssignmentComponent } from './assignment/assignment.component';
@@ -76,7 +82,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AssignmentListComponent,
     AssignmentInputComponent,
 
+    AssignmentQuestionComponent,
+    AssignmentQuestionListComponent,
+
+    AssignmentMenuComponent,
+
     AutoGrowDirective,
+    MathJaxDirective,
     
     SyllabusComponent
   ],

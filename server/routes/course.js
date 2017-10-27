@@ -130,37 +130,61 @@ router.patch('/:id', function (req, res, next) {
     });
   });
 })
-// TODO:
-// delete all assignments and announcments and other inhereted ids
-// when course is deleted
-router.delete('/:id', function (req, res, next) {
-  Course.findById(req.params.id, function (err, course) {
+
+router.delete('/:id/:userID', function (req, res, next) {
+  User.findById(req.params.userID, function (err, user) {
     if (err) {
       return res.status(500).json({
-        title: 'An error occured!',
+        title: 'An error occurred!',
         error: err
       });
     }
-    if (!course) {
+    if (!user) {
       return res.status(500).json({
-        title: 'No course was found!',
+        title: 'No user was found!',
         error: {
-          message: 'Course was not found!'
+          message: 'user was not found!'
         }
       });
     }
-    course.remove(function (err, result) {
-      if (err) {
-        return res.status(500).json({
-          title: 'An error occured!',
-          error: err
+    Course.findOneAndRemove({
+        '_id': req.params.id
+      },
+      function (err, course) {
+        // NOTE:
+        // This is needed if you want to trigger the
+        // remove function inside the course model
+        // otherwise it will not automatically
+        // remove assignments and announcements and etc
+        course.remove();
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occured!',
+            error: err
+          });
+        }
+        if (!course) {
+          return res.status(500).json({
+            title: 'No course was found!',
+            error: {
+              message: 'course was not found!'
+            }
+          });
+        }
+        user.courseList.splice(user.courseList.indexOf(req.params.id), 1);
+        user.save(function (err, result) {
+          if (err) {
+            return res.status(500).json({
+              title: 'An error occured!',
+              error: err
+            });
+          }
+          res.status(200).json({
+            message: 'Deleted course and updated the user',
+            obj: result
+          });
         });
-      }
-      res.status(200).json({
-        message: 'Deleted course',
-        obj: result
       });
-    });
   });
 })
 

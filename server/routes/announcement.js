@@ -63,7 +63,6 @@ router.delete('/:id/:courseID', function (req, res, next) {
                 error: err
               });
             }
-            console.log(course.announcements);
             res.status(200).json({
               message: 'Deleted announcement and update course',
               obj: result

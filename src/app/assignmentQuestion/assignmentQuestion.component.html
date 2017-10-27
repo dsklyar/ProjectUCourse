@@ -20,6 +20,7 @@
       <md-card-subtitle>{{assignmentQuestion.dateUpdated | date:'medium'}}</md-card-subtitle>
     </md-card-header>
     <md-card-content>
+      <div [mathJax]="someEq"></div>
       <p>
         {{assignmentQuestion.description}}
       </p>
