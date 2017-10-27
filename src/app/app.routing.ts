@@ -1,3 +1,4 @@
+import { flashCardsComponent } from './flashCards/flashCards.component';
 import { AnnouncementEditComponent } from './Announcement/Announcement-edit/announcement-edit.component';
 import { AnnouncementInputComponent } from './Announcement/Announcement-input/announcement-input.component';
 import { COURSEMENU_ROUTES } from './courseMenu/courseMenu.routes';
@@ -23,7 +24,8 @@ const APP_ROUTES: Routes = [
     { path: 'profile', component: ProfileComponent},
     { path: 'newannouncement', component: AnnouncementInputComponent},
     { path: 'editannouncement', component: AnnouncementEditComponent},
-    { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES}
+    { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES},
+    { path: 'flashCards', component: flashCardsComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

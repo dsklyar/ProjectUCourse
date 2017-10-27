@@ -1,3 +1,4 @@
+import { flashCardsComponent } from './flashCards/flashCards.component';
 import { AssignmentListComponent } from './assignment/assignment-list/assignment-list.component';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { SyllabusComponent } from './syllabus/syllabus.component';
@@ -73,7 +74,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
     AutoGrowDirective,
     
-    SyllabusComponent
+    SyllabusComponent,
+
+    flashCardsComponent
   ],
   imports: [
     BrowserModule,
