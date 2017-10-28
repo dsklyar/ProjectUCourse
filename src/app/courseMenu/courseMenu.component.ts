@@ -36,6 +36,9 @@ export class CourseMenuComponent implements OnInit{
       this.selectedTab = 1;
       this.router.navigate(['syllabus'], {relativeTo : this.activatedRoute});
         break;
+      case 5:
+      this.selectedTab = 1;
+      this.router.navigate(['courseQuestion'],{relativeTo : this.activatedRoute});
       default:
         break;
     }

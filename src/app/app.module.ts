@@ -1,3 +1,4 @@
+import { courseQuestionComponent } from './courseQuestion/courseQuestion.component';
 import { AssignmentListComponent } from './assignment/assignment-list/assignment-list.component';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { SyllabusComponent } from './syllabus/syllabus.component';
@@ -72,7 +73,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AssignmentListComponent,
 
     AutoGrowDirective,
-    SyllabusComponent
+    SyllabusComponent,
+
+    courseQuestionComponent
+    
   ],
   imports: [
     BrowserModule,

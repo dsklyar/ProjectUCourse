@@ -1,30 +1,31 @@
 import { Router } from '@angular/router';
-//import { AnnouncementService } from './courseQuestionService/courseQuestion.service'; //TODO
-import { Announcement } from '../models/announcement.model';
+//import { courseQuestionService } from './courseQuestionService/courseQuestion.service'; //TODO
+import { courseQuestion } from '../models/courseQuestion.model';
 
 
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-announcement',
-  templateUrl: '/announcement.component.html',
-  styleUrls: ['/announcement.component.css']
+  selector: 'app-courseQuestion',
+  templateUrl: './courseQuestion.component.html',
+  styleUrls: ['./courseQuestion.component.css']
 })
 
-export class AnnouncementComponent {
-  @Input() announcement: Announcement;
+export class courseQuestionComponent {
+  @Input() courseQuestion: courseQuestion = 
+  new courseQuestion('title','question');
 
-  constructor(private announcementService: AnnouncementService,
-    private router: Router) { }
+  //constructor(private courseQuestionService: courseQuestionService,
+   // private router: Router) { }
 
   onDelete() {
-    this.announcementService.removeAnnouncement(this.announcement)
-      .subscribe(
+    //this.courseQuestionService.removecourseQuestion(this.courseQuestion)
+     // .subscribe(
       //result => console.log(result)
-      );
+      //);
   }
   onEdit() {
-    this.router.navigateByUrl('/editannouncement');
-    this.announcementService.addAnnouncementToEdit(this.announcement);
+    //this.router.navigateByUrl('/editcourseQuestion');
+   // this.courseQuestionService.addcourseQuestionToEdit(this.courseQuestion);
   }
 }
