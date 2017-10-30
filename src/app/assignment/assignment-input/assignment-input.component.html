@@ -13,13 +13,20 @@
       </p>
       <p>
         <md-form-field>
-          <input mdInput [mdDatepicker]="picker" placeholder="Choose a due date" formControlName="dateDue">
-          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+          <!-- <input mdInput placeholder="Date" [mdDatepicker]="picker" (focus)="picker.open()" readonly> -->
+          <input mdInput placeholder="Date" 
+                [mdDatepicker]="picker" 
+                placeholder="Choose a due date" 
+                formControlName="dateDue" 
+                (focus)="picker.open()"
+                readonly>
+          <!-- <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle> -->
           <md-datepicker #picker></md-datepicker>
         </md-form-field>
         <md-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">Timed?</md-checkbox>
         <md-form-field *ngIf="checked">
-            <input mdInput type="number" placeholder="Minutes" value="0" formControlName="timeAvailable">
+          <!-- <input mdInput type="number" min="1" placeholder="Age"> -->
+          <input mdInput type="number" placeholder="Minutes" min="1" value="0" formControlName="timeAvailable">
         </md-form-field>
       </p>
       <button md-raised-button type="Submit" [disabled]="!newAssignmentForm.valid">Schedule Assignment</button>
