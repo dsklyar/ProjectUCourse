@@ -11,6 +11,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./assignmentQuestion-input.component.css']
 })
 
+// export class Object {
+//   public constructor(public choiceText : string,
+//                      public isAnswer : boolean,
+//                      public answerText : string,
+//                      public choiceNumber : number){}
+// }
 export class AssignmentQuestionInputComponent {
   questionForm: FormGroup;
 
@@ -42,28 +48,28 @@ export class AssignmentQuestionInputComponent {
 
   createForm() {
     this.questionForm = this.formBuilder.group({
-      
+
       questionProperties: this.formBuilder.group({
-        questionType : ['',Validators.required],
-        numberOfChoices : [1,Validators.min(1)],
-        numberOfTries : [1,Validators.min(1)],
-        pointsLostPerTry : [0,Validators.min(0)],
-        pointsAvailable : [0,Validators.min(0)]
+        questionType: ['', Validators.required],
+        numberOfChoices: [1, Validators.min(1)],
+        numberOfTries: [1, Validators.min(1)],
+        pointsLostPerTry: [0, Validators.min(0)],
+        pointsAvailable: [0, Validators.min(0)]
       }),
       questionHeader: this.formBuilder.group({
         questionTitle: ['', Validators.required],
         qustionDescription: ['']
       }),
-      questionBody : this.formBuilder.group({
-        body : ['',Validators.required]
+      questionBody: this.formBuilder.group({
+        body: ['', Validators.required]
       }),
-      questionStructure : this.formBuilder.group({
-        questionArray : [[],Validators.required],
+      questionStructure: this.formBuilder.group({
+        questionArray: [[], Validators.required],
 
       })
     });
   }
-  func(){
+  func() {
     this.questionForm.get('').get('').value;
   }
 
