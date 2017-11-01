@@ -13,12 +13,12 @@
         </md-expansion-panel-header>
 
         <div formGroupName="questionHeader">
-          <md-form-field>
-            <input mdInput placeholder="Question Title" class="example-full-width" formControlName="questionTitle">
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="Question Title" formControlName="questionTitle">
           </md-form-field>
           <p></p>
-          <md-form-field>
-            <textarea mdInput appAutoGrow placeholder="Question Description" class="example-full-width" formControlName="qustionDescription"></textarea>
+          <md-form-field class="example-full-width">
+            <textarea mdInput appAutoGrow placeholder="Question Description" formControlName="qustionDescription"></textarea>
           </md-form-field>
         </div>
 
@@ -39,36 +39,54 @@
         </md-expansion-panel-header>
 
         <div formGroupName="questionProperties">
-          <md-select placeholder="Question Type" [formControlName]="selectedType">
+          <md-select placeholder="Question Type" formControlName="questionType">
             <md-option *ngFor="let type of questionType" [value]="type.value">
               {{type.viewValue}}
             </md-option>
           </md-select>
 
           <div>
-            <md-form-field>
-              <input mdInput type="number" placeholder="Number of tries" formControlName="numberOfTries">
-            </md-form-field>
-            <md-form-field>
-              <input mdInput type="number" placeholder="Points lost per try" formControlName="pointsLostPerTry">
-            </md-form-field>
-            <md-form-field>
-              <input mdInput type="number" placeholder="Total points available" formControlName="pointsAvailable">
-            </md-form-field>
 
-            <div [ngSwitch]="selectedType">
+            <div [ngSwitch]="questionForm.get('questionProperties').get('questionType').value">
 
               <div *ngSwitchCase="'multipleChoice'">
+                <md-form-field>
+                  <input mdInput type="number" placeholder="Number of tries" formControlName="numberOfTries">
+                </md-form-field>
+                <md-form-field>
+                  <input mdInput type="number" placeholder="Points lost per try" formControlName="pointsLostPerTry">
+                </md-form-field>
+                <md-form-field>
+                  <input mdInput type="number" placeholder="Total points available" formControlName="pointsAvailable">
+                </md-form-field>
                 <md-form-field>
                   <input mdInput type="number" placeholder="Number of choices" formControlName="numberOfChoices">
                 </md-form-field>
               </div>
               <div *ngSwitchCase="'allThatApply'">
                 <md-form-field>
+                  <input mdInput type="number" placeholder="Number of tries" formControlName="numberOfTries">
+                </md-form-field>
+                <md-form-field>
+                  <input mdInput type="number" placeholder="Points lost per try" formControlName="pointsLostPerTry">
+                </md-form-field>
+                <md-form-field>
+                  <input mdInput type="number" placeholder="Total points available" formControlName="pointsAvailable">
+                </md-form-field>
+                <md-form-field>
                   <input mdInput type="number" placeholder="Number of choices" formControlName="numberOfChoices">
                 </md-form-field>
               </div>
               <div *ngSwitchCase="'fillInTheBlank'">
+                <md-form-field>
+                  <input mdInput type="number" placeholder="Number of tries" formControlName="numberOfTries">
+                </md-form-field>
+                <md-form-field>
+                  <input mdInput type="number" placeholder="Points lost per try" formControlName="pointsLostPerTry">
+                </md-form-field>
+                <md-form-field>
+                  <input mdInput type="number" placeholder="Total points available" formControlName="pointsAvailable">
+                </md-form-field>
                 <md-form-field>
                   <input mdInput type="number" placeholder="Number of blanks" formControlName="numberOfChoices">
                 </md-form-field>
@@ -76,6 +94,9 @@
               <div *ngSwitchCase="'freeResponse'">
                 <md-form-field>
                   <input mdInput type="number" placeholder="Number of blanks" formControlName="numberOfChoices">
+                </md-form-field>
+                <md-form-field>
+                  <input mdInput type="number" placeholder="Total points available" formControlName="pointsAvailable">
                 </md-form-field>
               </div>
               <div *ngSwitchDefault>Please select the question type</div>
@@ -86,11 +107,11 @@
 
         <md-action-row>
           <button md-button color="warn" (click)="prevStep()">Previous</button>
-          <button md-button color="primary" (click)="nextStep()">Next</button>
+          <button md-button color="primary" (click)="nextStep()" [disabled]="!questionForm.get('questionProperties').valid">Next</button>
         </md-action-row>
       </md-expansion-panel>
 
-      <md-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+      <md-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" [disabled]="!questionForm.get('questionProperties').valid" hideToggle="true">
         <md-expansion-panel-header>
           <md-panel-title>
             Question Body
@@ -106,17 +127,19 @@
           <md-icon class="example-icon">favorite</md-icon>
           <md-icon class="example-icon">delete</md-icon>
         </md-toolbar> -->
-        <md-form-field class="example-full-width">
-          <textarea mdInput appAutoGrow placeholder="Question Body" [(ngModel)]="questionBody" [ngModelOptions]="{standalone: true}"></textarea>
-        </md-form-field>
+        <div formGroupName="questionBody">
+          <md-form-field class="example-full-width">
+            <textarea mdInput appAutoGrow placeholder="Question Body" formControlName="body"></textarea>
+          </md-form-field>
+        </div>
 
         <md-action-row>
           <button md-button color="warn" (click)="prevStep()">Previous</button>
-          <button md-button color="primary" (click)="nextStep()">Next</button>
+          <button md-button color="primary" (click)="nextStep()" [disabled]="!questionForm.get('questionBody').valid">Next</button>
         </md-action-row>
       </md-expansion-panel>
 
-      <md-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle="true">
+      <md-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" [disabled]="!questionForm.get('questionBody').valid" hideToggle="true">
         <md-expansion-panel-header>
           <md-panel-title>
             Question Structure
@@ -127,7 +150,7 @@
           </md-panel-description>
         </md-expansion-panel-header>
 
-        <div [ngSwitch]="selectedType">
+        <div [ngSwitch]="questionForm.get('questionProperties').get('questionType').value">
           <div *ngSwitchCase="'multipleChoice'">
 
             <md-radio-group class="example-radio-group" [(ngModel)]="correctAnswer" [ngModelOptions]="{standalone: true}">

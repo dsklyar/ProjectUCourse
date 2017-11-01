@@ -54,8 +54,13 @@ export class AssignmentQuestionInputComponent {
         questionTitle: ['', Validators.required],
         qustionDescription: ['']
       }),
-      // questionBody : ['',Validators.required],
-      // questionAnswers : [[],Validators.required]
+      questionBody : this.formBuilder.group({
+        body : ['',Validators.required]
+      }),
+      questionStructure : this.formBuilder.group({
+        questionArray : [[],Validators.required],
+
+      })
     });
   }
   func(){

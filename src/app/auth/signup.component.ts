@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { AuthenticationService } from './authService/authentication.service';
 import {Component, OnInit} from '@angular/core';
@@ -20,7 +21,8 @@ export class SignupComponent implements OnInit {
         {value: 'instructor', viewValue: 'Instructor'}
     ];
 
-    constructor(private authService: AuthenticationService){}
+    constructor(private authService: AuthenticationService,
+                private router : Router){}
 
     ngOnInit() {
         this.signupForm = new FormGroup({
@@ -47,7 +49,9 @@ export class SignupComponent implements OnInit {
         );
         this.authService.singUp(user)
         .subscribe(
-            //data => console.log(data),
+            data => {
+                this.router.navigate(['signin']);
+            },
             error => console.log(error)
         );
         this.signupForm.reset();
