@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class SyllabusComponent implements OnInit {
-    private syllabus : Syllabus;
+    public syllabus : Syllabus;
     constructor(private syllabusService : SyllabusService){}
 
     ngOnInit() {

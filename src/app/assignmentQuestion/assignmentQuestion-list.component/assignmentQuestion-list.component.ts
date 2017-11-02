@@ -12,7 +12,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 
 export class AssignmentQuestionListComponent implements OnInit {
-  private assignmentQuestions: AssignmentQuestion[];
+  public assignmentQuestions: AssignmentQuestion[];
 
   constructor(private assignmentQuestionService : AssignmentQuestionService) {}
 
