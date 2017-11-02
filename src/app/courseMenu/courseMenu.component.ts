@@ -1,3 +1,4 @@
+import { AssignmentService } from '../assignment/assignmentService/assignment.service';
 import { switchMapTo } from 'rxjs/operator/switchMapTo';
 import { AnnouncementService } from '../Announcement/AnnouncementService/announcemenet.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,6 +16,7 @@ export class CourseMenuComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     private announcementService: AnnouncementService,
+    private assignmentService: AssignmentService,
     private router: Router,
     private thisRoute: ActivatedRoute) { }
 
@@ -25,6 +27,7 @@ export class CourseMenuComponent implements OnInit {
       })
     // MUST DO IT SO ANNOUNCEMENT LIST KNEW HAT COURSE IT WAS ON
     this.announcementService.setCourseID(this.courseID);
+    this.assignmentService.setCourseID(this.courseID);
   }
   onLinkClick(e : any) {
     console.log(e);

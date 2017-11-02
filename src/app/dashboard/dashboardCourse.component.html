@@ -20,14 +20,14 @@
         </div>
       </ng-template>
       <!--div md-card-avatar class="example-header-image"></di-->
-      <md-card-title>{{course.title}}</md-card-title>
+      <md-card-title  (click)="openCourse()">{{course.title}}</md-card-title>
       <md-card-subtitle>{{course.schoolName}}</md-card-subtitle>
     </md-card-header>
     <!-- <div class="color-fill" [ngStyle]="{ 'background-color': color }"></div> -->
     <div #imagebox class="color-fill"></div>
-    <md-card-content (click)="openCourse()">
+    <md-card-content>
       <p>
-        {{course.description}}
+          {{ (course.description.length>100)? (course.description | slice:0:100)+'..':(course.description) }}
       </p>
     </md-card-content>
     <!-- <md-card-actions>

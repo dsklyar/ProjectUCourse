@@ -14,10 +14,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AssignmentListComponent implements OnInit {
   private assignments: Assignment[];
 
-  constructor(private assignmentService : AssignmentService) { console.log('created!');}
+  constructor(private assignmentService : AssignmentService) {}
 
   ngOnInit() {
-    this.assignments = this.assignmentService.getAssignments();
+    this.assignmentService.refreshAssignments()
+    .subscribe(
+      (assignments: Assignment[]) => {
+        this.assignments = assignments;
+      },
+      error => console.log(error)
+    )
   }
 }
 

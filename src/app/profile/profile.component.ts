@@ -51,6 +51,8 @@ export class ProfileComponent implements OnInit {
     // newBio: FormGroup;
     // newEmail:FormGroup;
     user : User;
+    isEditProfile = false;
+    isChangeEmail = false;
 
     constructor(private authService : AuthenticationService) {}
 
@@ -78,6 +80,7 @@ export class ProfileComponent implements OnInit {
         this.authService.updateUser(updatedUser)
         .subscribe (
         data => {
+            console.log(data);
             this.user.biography = data.obj.biography;
             this.user.email = data.obj.email;
         },

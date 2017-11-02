@@ -22,7 +22,8 @@ router.use('/', function (req, res, next) {
     })
 });
 router.delete('/:id/:courseID', function (req, res, next) {
-  Announcement.findOneAndRemove(req.params.id,
+  // MUST DO IT THIS WAY
+  Announcement.findOneAndRemove({'_id' : req.params.id},
     function (err, announcement) {
       if (err) {
         return res.status(500).json({
@@ -87,7 +88,7 @@ router.post('/:courseID', function (req, res, next) {
     Course.findById(req.params.courseID, function (err, course) {
       if (err) {
         return res.status(500).json({
-          title: 'An error occured when creating a course!',
+          title: 'An error occured when finding a course!',
           error: err
         });
       }
@@ -101,7 +102,8 @@ router.post('/:courseID', function (req, res, next) {
         }
         res.status(201).json({
           message: 'Saved announcement and pushed to course array!',
-          obj: result
+          // returning result object here wil lreturn the course object and not the announcement
+          obj: announcement
         });
       });
     });

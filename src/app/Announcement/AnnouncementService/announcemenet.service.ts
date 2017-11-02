@@ -22,23 +22,25 @@ export class AnnouncementService {
     return this.announcementToEdit;
   }
 
-  addAnnouncement(announcement: Announcement) {
+  addAnnouncement(newAnnouncement: Announcement) {
     if (this.courseID != null) {
-      const body = JSON.stringify(announcement);
+      const body = JSON.stringify(newAnnouncement);
       const headers = new Headers({ 'Content-Type': 'application/json' });
       return this.http.post('http://localhost:3000/announcement/' 
       + this.courseID
       + this.getToken(), body, { headers: headers })
         .map((response: Response) => {
           const result = response.json();
-          const course = new Announcement(
+          const returnedAnnouncement = new Announcement(
             result.obj.title,
             result.obj.announcement,
             result.obj.dateCreated,
-            result.obj.dateUpdated
+            result.obj.dateUpdated,
+            result.obj._id
           );
-          this.announcements.unshift(announcement);
-          return course;
+          console.log(returnedAnnouncement);
+          this.announcements.unshift(returnedAnnouncement);
+          return returnedAnnouncement;
         })
         .catch((error: Response) => Observable.throw(error.json()));
     }

@@ -17,10 +17,16 @@ export class AssignmentComponent {
               private router: Router) { }
 
   onDelete() {
-
+    this.assignmentService.removeAssignment(this.assignment)
+    .subscribe(
+    //result => console.log(result)
+    );
   }
   onEdit() {
     //this.router.navigateByUrl('/editannouncement');
     //this.announcementService.addAnnouncementToEdit(this.announcement);
+  }
+  openAssignment() {
+    this.router.navigate(['assignmentMenu', this.assignment.assignmentID]);
   }
 }
