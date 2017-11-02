@@ -1,5 +1,6 @@
 import { Assignment } from '../../models/assignment.model';
 import { AssignmentQuestion } from '../../models/assignmentQuestion.model';
+import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
@@ -18,7 +19,7 @@ export class AssignmentService {
     if (this.courseID != null) {
       const body = JSON.stringify(newAssignment);
       const headers = new Headers({ 'Content-Type': 'application/json' });
-      return this.http.post('http://localhost:3000/assignment/'
+      return this.http.post(environment.baseUrl + '/assignment/'
         + this.courseID
         + this.getToken(), body, { headers: headers })
         .map((response: Response) => {
@@ -42,7 +43,7 @@ export class AssignmentService {
   // YOU MUST REFRESH FIRST BEFORE ADDING NEW ASSIGNMENTS
   // OTHERWISE COURSEID IS UNDEFINED
   refreshAssignments() {
-    return this.http.get('http://localhost:3000/assignment/'
+    return this.http.get(environment.baseUrl + '/assignment/'
       + this.courseID
       + this.getToken())
       .map((response: Response) => {
@@ -75,7 +76,7 @@ export class AssignmentService {
       .catch((error: Response) => Observable.throw('Error in Assignment Service'));
   }
   removeAssignment(assignment: Assignment) {
-    return this.http.delete('http://localhost:3000/assignment/'
+    return this.http.delete(environment.baseUrl + 'assignment/'
       + assignment.assignmentID
       + "/"
       + this.courseID

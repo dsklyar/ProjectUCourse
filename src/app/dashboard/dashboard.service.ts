@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { AuthenticationService } from '../auth/authService/authentication.service';
 
 import { Injectable } from '@angular/core';
@@ -16,11 +17,12 @@ export class DashboardService {
                 private authService : AuthenticationService) { }
 
     addCourse(course: Course) {
+        
         // Stringify our course object
         const body = JSON.stringify(course);
         // Specify that the object is type of Json
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post('http://localhost:3000/course/' 
+        return this.http.post(environment.baseUrl + '/course/' 
         + this.getUserId()
         + this.getToken(), body, { headers: headers })
             .map((response: Response) => {
@@ -41,7 +43,7 @@ export class DashboardService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
     getMessages() {
-        return this.http.get('http://localhost:3000/course/' 
+        return this.http.get(environment.baseUrl + '/course/' 
         + this.getUserId()
         + this.getToken())
             .map((response: Response) => {
@@ -68,7 +70,7 @@ export class DashboardService {
     updateCourse(course: Course){
         const body = JSON.stringify(course);
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.patch('http://localhost:3000/course/' + course.courseID, body, { headers: headers })
+        return this.http.patch(environment.baseUrl + '/course/' + course.courseID, body, { headers: headers })
             .map((response: Response) => {
                 const result = response.json();
                 const course = new Course(
@@ -86,7 +88,7 @@ export class DashboardService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
     removeCourse(course: Course) {
-        return this.http.delete('http://localhost:3000/course/' 
+        return this.http.delete(environment.baseUrl + '/course/' 
         + course.courseID 
         + "/"
         + this.getUserId()
