@@ -1,0 +1,79 @@
+<div class="card-container">
+  <md-toolbar color="primary">
+    <span>Question Preview</span>
+    <span class="example-spacer"></span>
+    <div *ngIf="wasAttempted && isCorrect;">
+      <span>Correct</span>
+    </div>
+    <div *ngIf="wasAttempted && !isCorrect;">
+      <span>Wrong</span>
+    </div>
+    <span class="example-spacer"></span>
+    <div>Tries {{numberOfTries-numberTriesUsed}} out of {{numberOfTries}}</div>
+  </md-toolbar>
+  <md-card>
+    <md-card-header>
+      <md-card-title>{{questionTitle}}</md-card-title>
+      <md-card-subtitle>{{qustionDescription}}</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+
+      <div *ngIf="questionBody">
+        <div [mathJax]="questionBody"></div>
+      </div>
+
+      <div [ngSwitch]="questionType" class="choices-block">
+        <div *ngSwitchCase="'multipleChoice'">
+
+          <md-radio-group class="example-radio-group" [(ngModel)]="selectedAnswer">
+            <md-radio-button class="example-radio-button" *ngFor="let choice of questionArray.controls" [value]="choice.value.choiceNumber">
+              <div [mathJax]="choice.value.choiceText"></div>
+            </md-radio-button>
+          </md-radio-group>
+
+        </div>
+        <div *ngSwitchCase="'allThatApply'">
+
+          <!-- <div class="newline-me">
+            <md-checkbox *ngFor="let choice of choiceArray">{{choice.choiceText}}</md-checkbox>
+          </div> -->
+
+        </div>
+        <div *ngSwitchCase="'fillInTheBlank'">
+
+          <!-- <div class="newline-me">
+            <div *ngFor="let choice of choiceArray">
+              <div class="fill-in-blank">
+                <label [mathJax]="choice.choiceText">:</label>
+                <span></span>
+                <md-form-field>
+                  <input mdInput type="text">
+                </md-form-field>
+              </div>
+            </div>
+          </div> -->
+
+        </div>
+        <div *ngSwitchCase="'freeResponse'">
+
+          <!-- <div *ngFor="let choice of choiceArray">
+            <div class="free-response">
+              <label [mathJax]="choice.choiceText">:</label>
+              <span></span>
+              <md-form-field>
+                <textarea mdInput appAutoGrow></textarea>
+              </md-form-field>
+            </div>
+          </div> -->
+
+        </div>
+      </div>
+      <span>Points Available: {{pointsAvailable - (numberTriesUsed*pointsLostPerTry)}}</span>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button color="primary" (click)="openDialog()">Submit</button>
+      <button md-button color="primary" (click)="onTry()" [disabled]="isCorrect || (numberOfTries - numberTriesUsed) == 0">Try</button>
+      <button md-button color="primary" (click)="onReset()">Reset</button>
+    </md-card-actions>
+  </md-card>
+</div>

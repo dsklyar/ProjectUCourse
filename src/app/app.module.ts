@@ -1,3 +1,6 @@
+import {
+  AssignmentQuestionTestComponent,
+} from './assignmentQuestion/assignmentQuestion-test/assignmentQuestion-test.component';
 import { ConfirmDialog } from './dialog/confirmDialog.component';
 
 import {
@@ -93,6 +96,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AssignmentQuestionComponent,
     AssignmentQuestionListComponent,
     AssignmentQuestionInputComponent,
+    AssignmentQuestionTestComponent,
 
     AssignmentMenuComponent,
 
