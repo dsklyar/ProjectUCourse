@@ -72,7 +72,9 @@ export class AssignmentQuestionInputComponent {
     const assignmentQuestionFormArray = this.formBuilder.array(assignmentQuestionFormGroup);
     this.questionForm.get('questionStructure').value.setControl('questionArray', assignmentQuestionFormArray);
   }
-
+  // get numberOfChocies() : number {
+    
+  // }
   openDialog() {
     this.confirmDialogService
       .confirm('Confirm Dialog', 'Are you sure you want to do this?')
