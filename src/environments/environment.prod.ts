@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
+  production: false,
   baseUrl : 'https://polar-mesa-36555.herokuapp.com'
 };
