@@ -109,7 +109,7 @@ export class AssignmentQuestionInputComponent {
       } else {
         this.choiceArray.splice(num, num * -1);
       }
-    }
+    } 
     console.log(this.choiceArray);
     return this.choiceArray;
   }
