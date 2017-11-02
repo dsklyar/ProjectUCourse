@@ -150,7 +150,7 @@
           </md-panel-description>
         </md-expansion-panel-header>
 
-        <div [ngSwitch]="questionForm.get('questionProperties').get('questionType').value">
+        <div [ngSwitch]="questionForm.get('questionProperties.questionType').value">
           <div *ngSwitchCase="'multipleChoice'">
 
             <md-radio-group class="example-radio-group" [(ngModel)]="correctAnswer" [ngModelOptions]="{standalone: true}">
@@ -209,7 +209,7 @@
     </md-accordion>
   </md-card>
 </div>
-<div class="card-container">
+<!-- <div class="card-container">
   <md-toolbar color="primary">
     <span>Question Preview</span>
     <span class="example-spacer"></span>
@@ -288,4 +288,4 @@
       <button md-button color="primary" (click)="onReset()">Reset</button>
     </md-card-actions>
   </md-card>
-</div>
+</div> -->

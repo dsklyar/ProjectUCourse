@@ -1,3 +1,4 @@
+import { AssignmentQuestionSeeder } from '../../models/seeders/assignmentQuestion.seeder';
 import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 import { ConfirmDialogService } from '../../dialog/confirmDialog.service';
 
@@ -11,12 +12,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./assignmentQuestion-input.component.css']
 })
 
-// export class Object {
-//   public constructor(public choiceText : string,
-//                      public isAnswer : boolean,
-//                      public answerText : string,
-//                      public choiceNumber : number){}
-// }
 export class AssignmentQuestionInputComponent {
   questionForm: FormGroup;
 
@@ -64,13 +59,18 @@ export class AssignmentQuestionInputComponent {
         body: ['', Validators.required]
       }),
       questionStructure: this.formBuilder.group({
-        questionArray: [[], Validators.required],
-
+        questionArray: this.formBuilder.array([]),
+        autoGrade : [false, Validators.required]
       })
     });
   }
-  func() {
-    this.questionForm.get('').get('').value;
+
+  setQuestionArray(assignmentQuestions : AssignmentQuestionSeeder[]){
+    // TODO: 
+    // Validation for if the question formating is correct
+    const assignmentQuestionFormGroup = assignmentQuestions.map(address => this.formBuilder.group(address));
+    const assignmentQuestionFormArray = this.formBuilder.array(assignmentQuestionFormGroup);
+    this.questionForm.get('questionStructure').value.setControl('questionArray', assignmentQuestionFormArray);
   }
 
   openDialog() {
@@ -90,7 +90,7 @@ export class AssignmentQuestionInputComponent {
   }
   generateChoices(num: number, dropArray: boolean) {
     if (dropArray) {
-      this.choiceArray = [];
+      this.setQuestionArray([]);  // set it to empty
       for (var _i = 0; _i < this.numberOfChocies; _i++) {
         this.choiceArray.push({
           choiceText: 'Enter Choice ' + (_i + 1), isAnswer: false,
