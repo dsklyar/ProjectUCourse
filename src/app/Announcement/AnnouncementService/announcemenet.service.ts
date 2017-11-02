@@ -102,7 +102,7 @@ export class AnnouncementService {
     .catch((error: Response) => Observable.throw('Error in Announcement Service'));
   }
   removeAnnouncement(announcement: Announcement) {
-    return this.http.delete(environment.baseUrl + 'announcement/' 
+    return this.http.delete(environment.baseUrl + '/announcement/' 
     + announcement.announcementID 
     + "/"
     + this.courseID
