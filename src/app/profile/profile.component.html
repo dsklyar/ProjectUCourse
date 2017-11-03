@@ -47,11 +47,7 @@
             <textarea class="textarea" mdInput placeholder="Biography" appAutoGrow [ngModel]="user.biography" name="biography"></textarea>
           </md-form-field>
         </p>
-<<<<<<< HEAD
-        <button md-raised-button type="Submit" [disabled]="!f.valid" (click)="onSubmit(f); isEditProfile = false ">Submit Bio</button>
-=======
         <button md-raised-button type="Submit" (click) ="onSubmit(f); isEditProfile = false">Submit</button>
->>>>>>> CrimsonMonk
       </form>
     </md-card-content>
   </ng-template>
