@@ -1,3 +1,4 @@
+import { LanguageService } from '@angular/language-service';
 import { AssignmentQuestionSeeder } from '../../models/seeders/assignmentQuestion.seeder';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 import { ConfirmDialogService } from '../../dialog/confirmDialog.service';
@@ -67,12 +68,16 @@ export class AssignmentQuestionInputComponent {
     return this.questionForm.get('questionProperties.questionType') as FormControl;
   };
 
-  setAnswer(e){
-    const numberOfChoices = this.questionForm.get('questionProperties.numberOfChoices').value;
-    for (var index = 0; index < numberOfChoices; index++) {
-      this.questionArray.controls[index].value.isAnswer = false;
+  onRadioGroupChange(e) {
+    if (e) {
+      const numberOfChoices = this.questionForm.get('questionProperties.numberOfChoices').value;
+      for (var index = 0; index < numberOfChoices; index++) {
+        this.questionArray.controls[index].value.isAnswer = false;
+      }
+      if(numberOfChoices > e.value){
+        this.questionArray.controls[e.value].value.isAnswer = true;
+      }
     }
-    this.questionArray.controls[e.value].value.isAnswer = true;
   }
 
   generateChoices(num: number, dropArray: boolean) {

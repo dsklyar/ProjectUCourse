@@ -17,7 +17,8 @@ export class AssignmentQuestionTestComponent {
   numberTriesUsed: number = 0;
   wasAttempted: boolean = false;
   isCorrect: boolean = false;
-  selectedAnswer: string;
+
+  constructor(private confirmDialogService: ConfirmDialogService) { this.generateStudentChoiceArray(); }
 
   get pointsAvailable(): number {
     return this.questionForm.get('questionProperties.pointsAvailable').value as number;
@@ -31,8 +32,8 @@ export class AssignmentQuestionTestComponent {
   get numberOfChoices(): number {
     return this.questionForm.get('questionProperties.numberOfChoices').value as number;
   }
-  get questionType(): string {
-    return this.questionForm.get('questionProperties.questionType').value as string;
+  get questionType(): FormControl {
+    return this.questionForm.get('questionProperties.questionType') as FormControl;
   }
   get questionTitle(): string {
     return this.questionForm.get('questionHeader.questionTitle').value as string;
@@ -44,10 +45,36 @@ export class AssignmentQuestionTestComponent {
     return this.questionForm.get('questionBody.body').value as string;
   }
   get questionArray(): FormArray {
-    
     console.log(this.questionForm.get('questionStructure.questionArray'));
     return this.questionForm.get('questionStructure.questionArray') as FormArray;
   };
+
+  studentChoiceAray: any[] = [];
+  generateStudentChoiceArray() {
+    const source: AssignmentQuestionSeeder[] = this.getArray();
+    for (var index = 0; index < source.length; index++) {
+      this.studentChoiceAray.push(
+        {
+          choiceText: source[index].choiceText,
+          studentAnswer: '',
+          answerText: source[index].answerText,
+          choiceNumber: source[index].choiceNumber,
+          isAnswer: source[index].isAnswer
+        }
+      );
+    }
+  }
+  onRadioGroupChange(e) {
+    if (e) {
+      const numberOfChoices = this.numberOfChoices
+      for (var index = 0; index < numberOfChoices; index++) {
+        this.studentChoiceAray[index].studentAnswer = false;
+      }
+      if (numberOfChoices > e.value) {
+        this.studentChoiceAray[e.value].studentAnswer = true;
+      }
+    }
+  }
 
   getArray() {
     const arr = this.questionArray.controls;
@@ -60,16 +87,23 @@ export class AssignmentQuestionTestComponent {
   }
   getAnswer() {
     const array: AssignmentQuestionSeeder[] = [];
-    switch (this.questionType) {
+    switch (this.questionType.value) {
       case "multipleChoice":
-        for (var index = 0; index < array.length; index++) {
+        for (var index = 0; index < this.questionArray.length; index++) {
           const o = this.questionArray.controls[index].value;
           if (o.isAnswer) {
             array.push(o);
           }
         }
-        break;
-
+        return array;
+      case "allThatApply":
+        for (var index = 0; index < this.questionArray.length; index++) {
+          const o = this.questionArray.controls[index].value;
+          if (o.isAnswer) {
+            array.push(o);
+          }
+        }
+        return array;
       default:
         break;
     }
@@ -77,20 +111,21 @@ export class AssignmentQuestionTestComponent {
   }
   onTry() {
     const answers: AssignmentQuestionSeeder[] = this.getAnswer();
-    switch (this.questionType) {
+    switch (this.questionType.value) {
       case "multipleChoice":
-        if (answers.length === 1) {
-          if (this.selectedAnswer === answers[0].choiceText) {
-            this.wasAttempted = true;
-            this.isCorrect = true;
-          } else {
-            this.wasAttempted = true;
-            this.isCorrect = false;
-            this.numberTriesUsed++;
-          }
-        }
+        // if (answers.length === 1) {
+        //   if (this.questionArray.controls[this.selectedAnswerIndex].value.choiceText == answers[0].choiceText) {
+        //     this.wasAttempted = true;
+        //     this.isCorrect = true;
+        //   } else {
+        //     this.wasAttempted = true;
+        //     this.isCorrect = false;
+        //     this.numberTriesUsed++;
+        //   }
+        // }
         break;
-
+      case "allThatApply":
+        break;
       default:
         break;
     }
@@ -100,6 +135,12 @@ export class AssignmentQuestionTestComponent {
     this.wasAttempted = false;
     this.isCorrect = false;
     this.numberTriesUsed = 0;
+  }
+  dialogResult: any;
+  openDialog() {
+    this.confirmDialogService
+      .confirm('Confirm Dialog', 'Are you sure you want to do this?')
+      .subscribe(res => this.dialogResult = res);
   }
 
 }

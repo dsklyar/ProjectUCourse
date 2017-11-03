@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
         text-align: center;
       }
     .material-icons{
-        font-size: 150px;
         height: 150px;
         width: 150px;
         margin-left: auto;
@@ -27,6 +26,24 @@ import { Router } from '@angular/router';
     .edit-icon{
         font-size: 24px;
         height: 24px;
+        width:24px;
+    }
+    .icon-edit{
+        padding-top: 7px;	
+        padding-right: 7px;
+        position: absolute;
+        right: 135px;
+        top: 142px;
+        display: none;
+    }
+    .material-icons:hover .icon-edit{
+        display: block;
+    }
+    #xbtn{
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        height:24px;
         width:24px;
     }
     .text{
@@ -43,26 +60,44 @@ import { Router } from '@angular/router';
         right: 10px;
         top: 5px;
     }
+    .hov {
+        font-size: 34px;
+    }
+    .pic{
+        font-size: 150px;   
+        max-height: 150px;
+        max-width: 150px;
+        margin-left: auto;
+        margin-right: auto;     
+    }
+    .newPic{
+        max-width: 600px;
+        margin-top: -523px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        z-index: 10;
+    }
+    #newPic{
+        display:none
+    }
+    #table{
+        margin: 0 auto 0 auto;
+    }
 
     
     `]
 })
 export class ProfileComponent implements OnInit {
-    // newBio: FormGroup;
-    // newEmail:FormGroup;
+
     user : User;
     isEditProfile = false;
     isChangeEmail = false;
+    one = "21979385_10208583556301210_1472323086_n.jpg";
 
     constructor(private authService : AuthenticationService) {}
 
     ngOnInit() {
-    //   this.newBio = new FormGroup({
-    //     userbio: new FormControl(null, Validators.required)
-    //   });
-    //   this.newEmail = new FormGroup({
-    //     email: new FormControl(null, Validators.required)
-    //   });
         this.user = this.authService.user;
     }
 
@@ -87,7 +122,12 @@ export class ProfileComponent implements OnInit {
         error => console.log(error)
         );
     }
-
-   
-   
+    changePic(){
+        var x = document.getElementById("newPic");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }  
 }

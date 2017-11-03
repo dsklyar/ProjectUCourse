@@ -22,10 +22,10 @@
         <div [mathJax]="questionBody"></div>
       </div>
 
-      <div [ngSwitch]="questionType" class="choices-block">
+      <div [ngSwitch]="questionType.value" class="choices-block">
         <div *ngSwitchCase="'multipleChoice'">
 
-          <md-radio-group class="example-radio-group" [(ngModel)]="selectedAnswer">
+          <md-radio-group class="example-radio-group" (change)="onRadioGroupChange($event)">
             <md-radio-button class="example-radio-button" *ngFor="let choice of questionArray.controls" [value]="choice.value.choiceNumber">
               <div [mathJax]="choice.value.choiceText"></div>
             </md-radio-button>
@@ -34,9 +34,9 @@
         </div>
         <div *ngSwitchCase="'allThatApply'">
 
-          <!-- <div class="newline-me">
-            <md-checkbox *ngFor="let choice of choiceArray">{{choice.choiceText}}</md-checkbox>
-          </div> -->
+          <div class="newline-me" *ngFor="let choice of questionArray.controls" >
+            <md-checkbox [mathJax]="choice.value.choiceText"></md-checkbox>
+          </div>
 
         </div>
         <div *ngSwitchCase="'fillInTheBlank'">
