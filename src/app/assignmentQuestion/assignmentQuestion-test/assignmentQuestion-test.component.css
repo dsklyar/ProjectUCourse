@@ -1,12 +1,3 @@
-.example-headers-align .mat-expansion-panel-header-title, 
-.example-headers-align .mat-expansion-panel-header-description {
-  flex-basis: 0;
-}
-
-.example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
 .example-icon {
   padding: 0 14px;
 }
@@ -31,6 +22,7 @@
 }
 .newline-me {
   display: grid;
+  margin-top: 5px;
 }
 .fill-in-blank span {
   margin-right: 5%;
@@ -41,7 +33,9 @@
 .example-full-width {
   width : 100%;
 }
-
+.choices-block {
+  margin-top: 10px;
+}
 .inline-me {
   display: inline;
 }

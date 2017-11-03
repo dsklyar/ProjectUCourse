@@ -14,6 +14,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
       max-width: 300px;
       padding: 25px;
       margin: 10px;
+      background-image: url("/assets/background/background_3.png");
     }
     .menu {
       margin-left: auto;

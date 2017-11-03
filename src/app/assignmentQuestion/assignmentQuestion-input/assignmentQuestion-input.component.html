@@ -111,7 +111,8 @@
         </md-action-row>
       </md-expansion-panel>
 
-      <md-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" [disabled]="!questionForm.get('questionProperties').valid" hideToggle="true">
+      <md-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" [disabled]="!questionForm.get('questionProperties').valid"
+        hideToggle="true">
         <md-expansion-panel-header>
           <md-panel-title>
             Question Body
@@ -150,55 +151,62 @@
           </md-panel-description>
         </md-expansion-panel-header>
 
-        <div [ngSwitch]="questionForm.get('questionProperties.questionType').value">
-          <div *ngSwitchCase="'multipleChoice'">
+        <div formGroupName="questionStructure">
 
-            <md-radio-group class="example-radio-group" [(ngModel)]="correctAnswer" [ngModelOptions]="{standalone: true}">
-              <md-radio-button class="example-radio-button" *ngFor="let choice of choiceArray" [value]="choice.choiceNumber">
-                <input mdInput type="text" [(ngModel)]="choice.choiceText" [ngModelOptions]="{standalone: true}" [value]="choice.choiceText">
-              </md-radio-button>
-            </md-radio-group>
-            <div>Correct answer is {{choiceArray[correctAnswer]?.choiceText}}</div>
+          <div formArrayName="questionArray">
 
-          </div>
-          <div *ngSwitchCase="'allThatApply'">
+            <div [ngSwitch]="questionForm.get('questionProperties.questionType').value">
+              <div *ngSwitchCase="'multipleChoice'">
 
-            <div class="newline-me">
-              <md-checkbox *ngFor="let choice of choiceArray" [(ngModel)]="choice.isAnswer" [ngModelOptions]="{standalone: true}">
-                <input mdInput type="text" [(ngModel)]="choice.choiceText" [value]="choice.choiceText" [ngModelOptions]="{standalone: true}">
-              </md-checkbox>
-            </div>
-            <div>Correct answers are </div>
-            <li *ngFor="let choice of getOnlyAnswers()">
-              {{choice.choiceText}}
-            </li>
+                <md-radio-group class="example-radio-group" (change)="onRadioGroupChange($event)">
+                  <md-radio-button class="example-radio-button" *ngFor="let choice of questionArray.controls; let i=index" [formGroupName]="i"
+                    [value]="choice.value.choiceNumber">
+                    <input mdInput type="text" [value]="choice.value.choiceText" formControlName="choiceText">
+                  </md-radio-button>
+                </md-radio-group>
 
-          </div>
-          <div *ngSwitchCase="'fillInTheBlank'">
+              </div>
+              <div *ngSwitchCase="'allThatApply'">
 
-            <div class="newline-me">
-              <div *ngFor="let choice of choiceArray">
-                <md-form-field>
-                  <input mdInput type="text" [(ngModel)]="choice.choiceText" [value]="choice.choiceText" [ngModelOptions]="{standalone: true}">
-                </md-form-field>
-                <md-form-field>
-                  <input mdInput type="text" [(ngModel)]="choice.answerText" [value]="choice.answerText" [ngModelOptions]="{standalone: true}">
-                </md-form-field>
+                <div class="newline-me" *ngFor="let choice of questionArray.controls; let i=index" [formGroupName]="i">
+                  <md-checkbox formControlName="isAnswer"
+                    [value]="choice.value.isAnswer">
+                    <input mdInput type="text" formControlName="choiceText" [value]="choice.value.choiceText">
+                  </md-checkbox>
+                </div>
+
+              </div>
+              <div *ngSwitchCase="'fillInTheBlank'">
+
+                <div class="newline-me">
+
+                  <div *ngFor="let choice of questionArray.controls; let i=index" [formGroupName]="i">
+                    <md-form-field>
+                      <input mdInput type="text" formControlName="choiceText"  [value]="choice.value.choiceText">
+                    </md-form-field>
+                    <md-form-field>
+                      <input mdInput type="text" formControlName="answerText" [value]="choice.value.answerText">
+                    </md-form-field>
+                  </div>
+
+                </div>
+
+              </div>
+              <div *ngSwitchCase="'freeResponse'">
+
+                <div *ngFor="let choice of questionArray.controls; let i=index" [formGroupName]="i">
+                  <div class="free-response">
+                    <md-form-field>
+                      <input mdInput type="text" formControlName="choiceText" [value]="choice.value.choiceText">
+                    </md-form-field>
+                  </div>
+                </div>
+
               </div>
             </div>
 
           </div>
-          <div *ngSwitchCase="'freeResponse'">
 
-            <div *ngFor="let choice of choiceArray">
-              <div class="free-response">
-                <md-form-field>
-                  <input mdInput type="text" [(ngModel)]="choice.choiceText" [value]="choice.choiceText" [ngModelOptions]="{standalone: true}">
-                </md-form-field>
-              </div>
-            </div>
-
-          </div>
         </div>
 
         <md-action-row>
@@ -209,83 +217,4 @@
     </md-accordion>
   </md-card>
 </div>
-<!-- <div class="card-container">
-  <md-toolbar color="primary">
-    <span>Question Preview</span>
-    <span class="example-spacer"></span>
-    <div *ngIf="wasAttempted && isCorrect;">
-      <span>Correct</span>
-    </div>
-    <div *ngIf="wasAttempted && !isCorrect;">
-      <span>Wrong</span>
-    </div>
-    <span class="example-spacer"></span>
-    <span>Points Available: {{pointsAvailable - (numberTriesUsed*pointsLostPerTry)}}</span>
-    <span class="example-spacer"></span>
-    <div>Tries {{numberOfTries-numberTriesUsed}} out of {{numberOfTries}}</div>
-  </md-toolbar>
-  <md-card>
-    <md-card-header>
-      <md-card-title>{{questionForm.get('questionHeader').get('questionTitle').value}}</md-card-title>
-      <md-card-subtitle>{{questionForm.get('questionHeader').get('qustionDescription').value }}</md-card-subtitle>
-    </md-card-header>
-    <md-card-content>
-
-      <div *ngIf="questionBody">
-        <div [mathJax]="questionBody"></div>
-      </div>
-
-      <div [ngSwitch]="selectedType">
-        <div *ngSwitchCase="'multipleChoice'">
-
-          <md-radio-group class="example-radio-group" [(ngModel)]="selectedAnswer" [ngModelOptions]="{standalone: true}">
-            <md-radio-button class="example-radio-button" *ngFor="let choice of choiceArray" [value]="choice.choiceNumber">
-              <div [mathJax]="choice.choiceText"></div>
-            </md-radio-button>
-          </md-radio-group>
-
-        </div>
-        <div *ngSwitchCase="'allThatApply'">
-
-          <div class="newline-me">
-            <md-checkbox *ngFor="let choice of choiceArray">{{choice.choiceText}}</md-checkbox>
-          </div>
-
-        </div>
-        <div *ngSwitchCase="'fillInTheBlank'">
-
-          <div class="newline-me">
-            <div *ngFor="let choice of choiceArray">
-              <div class="fill-in-blank">
-                <label [mathJax]="choice.choiceText">:</label>
-                <span></span>
-                <md-form-field>
-                  <input mdInput type="text">
-                </md-form-field>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div *ngSwitchCase="'freeResponse'">
-
-          <div *ngFor="let choice of choiceArray">
-            <div class="free-response">
-              <label [mathJax]="choice.choiceText">:</label>
-              <span></span>
-              <md-form-field>
-                <textarea mdInput appAutoGrow></textarea>
-              </md-form-field>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </md-card-content>
-    <md-card-actions>
-      <button md-button color="primary" (click)="openDialog()">Submit</button>
-      <button md-button color="primary" (click)="onTry()" [disabled]="isCorrect || (numberOfTries - numberTriesUsed) == 0">Try</button>
-      <button md-button color="primary" (click)="onReset()">Reset</button>
-    </md-card-actions>
-  </md-card>
-</div> -->
+<app-assignmentQuestion-test [questionForm]="questionForm"></app-assignmentQuestion-test>

@@ -1,5 +1,6 @@
+import { LanguageService } from '@angular/language-service';
 import { AssignmentQuestionSeeder } from '../../models/seeders/assignmentQuestion.seeder';
-import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 import { ConfirmDialogService } from '../../dialog/confirmDialog.service';
 
 import { Router } from '@angular/router';
@@ -7,34 +8,20 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-assignmentInputQuestion',
+  selector: 'app-assignmentQuestion-input',
   templateUrl: './assignmentQuestion-input.component.html',
   styleUrls: ['./assignmentQuestion-input.component.css']
 })
 
 export class AssignmentQuestionInputComponent {
   questionForm: FormGroup;
-
-
-  correctAnswer: string;
-  selectedType: string;
-  questionBody: string;
-  numberOfChocies: number = 1;
-  numberOfTries: number = 1;
-  pointsLostPerTry: number = 1;
-  pointsAvailable: number = 1;
-  choiceArray = [];
+  step = 0;
   questionType = [
     { value: 'multipleChoice', viewValue: 'Multiple Choice' },
     { value: 'allThatApply', viewValue: 'All That Apply' },
     { value: 'fillInTheBlank', viewValue: 'Fill In The Blank' },
     { value: 'freeResponse', viewValue: 'Free Response' }
   ];
-  step = 0;
-  selectedAnswer: string;
-  numberTriesUsed: number = 0;
-  isCorrect: boolean = false;
-  wasAttempted: boolean = false;
 
   dialogResult: any;
 
@@ -60,69 +47,78 @@ export class AssignmentQuestionInputComponent {
       }),
       questionStructure: this.formBuilder.group({
         questionArray: this.formBuilder.array([]),
-        autoGrade : [false, Validators.required]
+        autoGrade: [false, Validators.required]
       })
     });
   }
-
-  setQuestionArray(assignmentQuestions : AssignmentQuestionSeeder[]){
+  setQuestionChoiceArray(assignmentQuestions: AssignmentQuestionSeeder[]) {
     // TODO: 
     // Validation for if the question formating is correct
     const assignmentQuestionFormGroup = assignmentQuestions.map(address => this.formBuilder.group(address));
     const assignmentQuestionFormArray = this.formBuilder.array(assignmentQuestionFormGroup);
-    this.questionForm.get('questionStructure').value.setControl('questionArray', assignmentQuestionFormArray);
+    this.questionForm.setControl('questionStructure.questionArray', assignmentQuestionFormArray);
   }
-  // get numberOfChocies() : number {
-    
-  // }
-  openDialog() {
-    this.confirmDialogService
-      .confirm('Confirm Dialog', 'Are you sure you want to do this?')
-      .subscribe(res => this.dialogResult = res);
+  addQuestionChoice(newQuestionChoice: AssignmentQuestionSeeder) {
+    this.questionArray.push(this.formBuilder.group(newQuestionChoice));
   }
+  get questionArray(): FormArray {
+    return this.questionForm.get('questionStructure.questionArray') as FormArray;
+  };
+  get questionTypeValue(): FormControl {
+    return this.questionForm.get('questionProperties.questionType') as FormControl;
+  };
 
-  getOnlyAnswers() {
-    var retval = [];
-    for (var _i = 0; _i < this.choiceArray.length; _i++) {
-      if (this.choiceArray[_i].isAnswer === true) {
-        retval.push(this.choiceArray[_i]);
+  onRadioGroupChange(e) {
+    if (e) {
+      const numberOfChoices = this.questionForm.get('questionProperties.numberOfChoices').value;
+      for (var index = 0; index < numberOfChoices; index++) {
+        this.questionArray.controls[index].value.isAnswer = false;
+      }
+      if(numberOfChoices > e.value){
+        this.questionArray.controls[e.value].value.isAnswer = true;
       }
     }
-    return retval;
   }
+
   generateChoices(num: number, dropArray: boolean) {
     if (dropArray) {
-      this.setQuestionArray([]);  // set it to empty
-      for (var _i = 0; _i < this.numberOfChocies; _i++) {
-        this.choiceArray.push({
-          choiceText: 'Enter Choice ' + (_i + 1), isAnswer: false,
-          answerText: 'Enter Answer ' + (_i + 1), choiceNumber: _i
-        });
+      this.setQuestionChoiceArray([]);  // set it to empty
+      const numberOfChoices = this.questionForm.get('questionProperties.numberOfChoices').value;
+      for (var i = 0; i < numberOfChoices; i++) {
+        this.addQuestionChoice(
+          new AssignmentQuestionSeeder(
+            'Enter Choice ' + (i + 1),
+            false,
+            'Enter Answer ' + (i + 1),
+            i
+          ));
       }
     } else {
       if (num > 0) {
         for (var _i = 0; _i < num; _i++) {
-          this.choiceArray.push(
-            {
-              choiceText: 'Enter Choice ' + (this.choiceArray.length + 1), isAnswer: false,
-              answerText: 'Enter Answer ' + (_i + 1), choiceNumber: this.choiceArray.length
-            });
+          this.addQuestionChoice(
+            new AssignmentQuestionSeeder(
+              'Enter Choice ' + (this.questionArray.length + 1),
+              false,
+              'Enter Answer ' + (i + 1),
+              this.questionArray.length
+            ));
         }
       } else {
-        this.choiceArray.splice(num, num * -1);
+        this.questionArray.controls.splice(num, num * -1);
       }
-    } 
-    console.log(this.choiceArray);
-    return this.choiceArray;
+    }
   }
+
   setStep(index: number) {
+    const numberOfChoices = this.questionForm.get('questionProperties.numberOfChoices').value;
     switch (index) {
       case 3:
-        if (this.choiceArray.length === 0) {
-          this.generateChoices(this.numberOfChocies, true);
+        if (this.questionArray.length === 0) {
+          this.generateChoices(numberOfChoices, true);
         }
-        else if (this.choiceArray.length !== this.numberOfChocies) {
-          this.generateChoices(this.numberOfChocies - this.choiceArray.length, false);
+        else if (this.questionArray.length !== numberOfChoices) {
+          this.generateChoices(numberOfChoices - this.questionArray.length, false);
         }
         break;
 
@@ -131,34 +127,15 @@ export class AssignmentQuestionInputComponent {
     }
     this.step = index;
   }
-  onTry() {
-    switch (this.selectedType) {
-      case "multipleChoice":
-        if (this.selectedAnswer === this.correctAnswer) {
-          this.wasAttempted = true;
-          this.isCorrect = true;
-        } else {
-          this.wasAttempted = true;
-          this.isCorrect = false;
-          this.numberTriesUsed++;
-        }
-        break;
-
-      default:
-        break;
-    }
-  }
-  onReset() {
-    this.numberTriesUsed = 0;
-    this.wasAttempted = false;
-    this.isCorrect = false;
-    this.numberTriesUsed = 0;
-  }
   nextStep() {
     this.step++;
   }
-
   prevStep() {
     this.step--;
+  }
+  openDialog() {
+    this.confirmDialogService
+      .confirm('Confirm Dialog', 'Are you sure you want to do this?')
+      .subscribe(res => this.dialogResult = res);
   }
 }
