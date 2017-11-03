@@ -41,3 +41,7 @@
 .example-full-width {
   width : 100%;
 }
+
+.inline-me {
+  display: inline;
+}

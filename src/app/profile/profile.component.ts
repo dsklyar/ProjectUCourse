@@ -1,3 +1,4 @@
+import { ChangeProfilePictureDialogService } from '../dialog/changeProfilePictureDialog/changeProfilePictureDialog.service';
 import { NgForm } from '@angular/forms/src/directives';
 import { AuthenticationService } from '../auth/authService/authentication.service';
 import { User } from '../models/user.model';
@@ -95,7 +96,8 @@ export class ProfileComponent implements OnInit {
     isChangeEmail = false;
     one = "21979385_10208583556301210_1472323086_n.jpg";
 
-    constructor(private authService : AuthenticationService) {}
+    constructor(private authService : AuthenticationService,
+                private changeProfilePictureDialogService : ChangeProfilePictureDialogService) {}
 
     ngOnInit() {
         this.user = this.authService.user;
@@ -129,5 +131,11 @@ export class ProfileComponent implements OnInit {
         } else {
             x.style.display = "none";
         }
-    }  
+    }
+    dialogResult : any;
+    openDialog(){
+        this.changeProfilePictureDialogService
+        .confirm('Confirm Dialog', 'Are you sure you want to do this?')
+        .subscribe(res => this.dialogResult = res);
+    } 
 }

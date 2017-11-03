@@ -1,4 +1,7 @@
 import {
+    ChangeProfilePictureDialogComponent,
+} from './dialog/changeProfilePictureDialog/changeProfilePictureDialog.component';
+import {
   AssignmentQuestionTestComponent,
 } from './assignmentQuestion/assignmentQuestion-test/assignmentQuestion-test.component';
 import { ConfirmDialog } from './dialog/confirmDialog.component';
@@ -104,6 +107,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MathJaxDirective,
 
     ConfirmDialog,
+    ChangeProfilePictureDialogComponent,
 
     SyllabusComponent
   ],
@@ -135,6 +139,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   bootstrap: [AppComponent],
   entryComponents: [
     ConfirmDialog,
+    ChangeProfilePictureDialogComponent
 ],
 })
 export class AppModule { }

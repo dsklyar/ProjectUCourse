@@ -171,7 +171,7 @@
                 <div class="newline-me" *ngFor="let choice of questionArray.controls; let i=index" [formGroupName]="i">
                   <md-checkbox formControlName="isAnswer"
                     [value]="choice.value.isAnswer">
-                    <input mdInput type="text" formControlName="answerText" [value]="choice.value.choiceText">
+                    <input mdInput type="text" formControlName="choiceText" [value]="choice.value.choiceText">
                   </md-checkbox>
                 </div>
 

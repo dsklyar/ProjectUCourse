@@ -22,6 +22,7 @@
 }
 .newline-me {
   display: grid;
+  margin-top: 5px;
 }
 .fill-in-blank span {
   margin-right: 5%;
@@ -34,4 +35,7 @@
 }
 .choices-block {
   margin-top: 10px;
+}
+.inline-me {
+  display: inline;
 }

@@ -18,7 +18,7 @@ export class AssignmentQuestionTestComponent {
   wasAttempted: boolean = false;
   isCorrect: boolean = false;
 
-  constructor(private confirmDialogService: ConfirmDialogService) { this.generateStudentChoiceArray(); }
+  constructor(private confirmDialogService: ConfirmDialogService) { }
 
   get pointsAvailable(): number {
     return this.questionForm.get('questionProperties.pointsAvailable').value as number;
@@ -49,82 +49,86 @@ export class AssignmentQuestionTestComponent {
     return this.questionForm.get('questionStructure.questionArray') as FormArray;
   };
 
-  studentChoiceAray: any[] = [];
-  generateStudentChoiceArray() {
-    const source: AssignmentQuestionSeeder[] = this.getArray();
-    for (var index = 0; index < source.length; index++) {
-      this.studentChoiceAray.push(
-        {
-          choiceText: source[index].choiceText,
-          studentAnswer: '',
-          answerText: source[index].answerText,
-          choiceNumber: source[index].choiceNumber,
-          isAnswer: source[index].isAnswer
-        }
-      );
-    }
-  }
   onRadioGroupChange(e) {
     if (e) {
       const numberOfChoices = this.numberOfChoices
       for (var index = 0; index < numberOfChoices; index++) {
-        this.studentChoiceAray[index].studentAnswer = false;
+        this.questionArray.controls[index].value.studentAnswer = false;
       }
       if (numberOfChoices > e.value) {
-        this.studentChoiceAray[e.value].studentAnswer = true;
+        this.questionArray.controls[e.value].value.studentAnswer = true;
       }
     }
   }
 
-  getArray() {
-    const arr = this.questionArray.controls;
-    const retval: AssignmentQuestionSeeder[] = [];
-    for (var index = 0; index < arr.length; index++) {
-      retval.push(arr[index].value);
-    }
-    console.log(retval);
-    return retval;
-  }
-  getAnswer() {
-    const array: AssignmentQuestionSeeder[] = [];
+  isAnswer() {
     switch (this.questionType.value) {
       case "multipleChoice":
-        for (var index = 0; index < this.questionArray.length; index++) {
-          const o = this.questionArray.controls[index].value;
-          if (o.isAnswer) {
-            array.push(o);
+        for (var index = 0; index < this.numberOfChoices; index++) {
+          if (this.questionArray.controls[index].value.isAnswer &&
+            this.questionArray.controls[index].value.studentAnswer as boolean) {
+            return true;
           }
         }
-        return array;
-      case "allThatApply":
-        for (var index = 0; index < this.questionArray.length; index++) {
-          const o = this.questionArray.controls[index].value;
-          if (o.isAnswer) {
-            array.push(o);
-          }
-        }
-        return array;
-      default:
         break;
+      case "allThatApply":
+        for (var index = 0; index < this.numberOfChoices; index++) {
+          if (this.questionArray.controls[index].value.isAnswer !=
+            this.questionArray.controls[index].value.studentAnswer) {
+            if (this.questionArray.controls[index].value.studentAnswer != null) {
+              return false;
+            }
+          }
+        }
+        return true;
+      case "fillInTheBlank":
+        for (var index = 0; index < this.numberOfChoices; index++) {
+          if (this.questionArray.controls[index].value.answerText !=
+            this.questionArray.controls[index].value.studentAnswer) {
+            return false;
+          }
+        }
+        return true;
+      default:
+        return false;
     }
-    return array;
+    return false;
   }
   onTry() {
-    const answers: AssignmentQuestionSeeder[] = this.getAnswer();
     switch (this.questionType.value) {
       case "multipleChoice":
-        // if (answers.length === 1) {
-        //   if (this.questionArray.controls[this.selectedAnswerIndex].value.choiceText == answers[0].choiceText) {
-        //     this.wasAttempted = true;
-        //     this.isCorrect = true;
-        //   } else {
-        //     this.wasAttempted = true;
-        //     this.isCorrect = false;
-        //     this.numberTriesUsed++;
-        //   }
-        // }
+        if (this.isAnswer()) {
+          this.wasAttempted = true;
+          this.isCorrect = true;
+        } else {
+          this.wasAttempted = true;
+          this.isCorrect = false;
+          this.numberTriesUsed++;
+        }
         break;
       case "allThatApply":
+        if (this.isAnswer()) {
+          this.wasAttempted = true;
+          this.isCorrect = true;
+        } else {
+          this.wasAttempted = true;
+          this.isCorrect = false;
+          this.numberTriesUsed++;
+        }
+        break;
+      case "fillInTheBlank":
+        if (this.isAnswer()) {
+          this.wasAttempted = true;
+          this.isCorrect = true;
+        } else {
+          this.wasAttempted = true;
+          this.isCorrect = false;
+          this.numberTriesUsed++;
+        }
+        break;
+      case "freeResponse":
+        this.wasAttempted = true;
+        this.isCorrect = true;
         break;
       default:
         break;

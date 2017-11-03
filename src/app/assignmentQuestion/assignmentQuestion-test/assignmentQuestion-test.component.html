@@ -34,37 +34,40 @@
         </div>
         <div *ngSwitchCase="'allThatApply'">
 
-          <div class="newline-me" *ngFor="let choice of questionArray.controls" >
-            <md-checkbox [mathJax]="choice.value.choiceText"></md-checkbox>
+          <div class="newline-me" *ngFor="let choice of questionArray.controls">
+            <div class="inline-me">
+              <md-checkbox [(ngModel)]="choice.value.studentAnswer"></md-checkbox>
+              <label [mathJax]="choice.value.choiceText"></label>
+            </div>
           </div>
 
         </div>
         <div *ngSwitchCase="'fillInTheBlank'">
 
-          <!-- <div class="newline-me">
-            <div *ngFor="let choice of choiceArray">
+          <div class="newline-me">
+            <div *ngFor="let choice of questionArray.controls">
               <div class="fill-in-blank">
-                <label [mathJax]="choice.choiceText">:</label>
+                <label [mathJax]="choice.value.choiceText">:</label>
                 <span></span>
                 <md-form-field>
-                  <input mdInput type="text">
+                  <input mdInput type="text" [(ngModel)]="choice.value.studentAnswer">
                 </md-form-field>
               </div>
             </div>
-          </div> -->
+          </div>
 
         </div>
         <div *ngSwitchCase="'freeResponse'">
 
-          <!-- <div *ngFor="let choice of choiceArray">
+          <div *ngFor="let choice of questionArray.controls">
             <div class="free-response">
-              <label [mathJax]="choice.choiceText">:</label>
+              <label [mathJax]="choice.value.choiceText">:</label>
               <span></span>
               <md-form-field>
-                <textarea mdInput appAutoGrow></textarea>
+                <textarea mdInput appAutoGrow [(ngModel)]="choice.value.studentAnswer"></textarea>
               </md-form-field>
             </div>
-          </div> -->
+          </div>
 
         </div>
       </div>
