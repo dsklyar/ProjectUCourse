@@ -44,15 +44,10 @@
         </p>
         <h3>Biography:</h3>
         <p>
-<<<<<<< HEAD
-          <md-form-field id = "textarea">
-            <textarea mdInput placeholder="Biography" appAutoGrow [ngModel]="user.biography" name="biography"></textarea>
-=======
           <md-form-field>
             <textarea class="textarea" mdInput placeholder="Biography" appAutoGrow [ngModel]="this.authService.user.biography" name="biography">
               {{this.authService.user?.biography}}
             </textarea>
->>>>>>> Daniel
           </md-form-field>
         </p>
         <button md-raised-button type="Submit" (click) ="onSubmit(f); isEditProfile = false">Submit</button>
