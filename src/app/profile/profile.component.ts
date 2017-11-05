@@ -73,15 +73,15 @@ import { Router } from '@angular/router';
         margin-right: auto;     
     }
     #textarea{
-        width: 64%;
+        width: 519px;
+        text-align: center;
     }
-    
-    #table{
-        margin: 0 auto 0 auto;
+    #textAreaFormField{
+        width: 519px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-
-    
     `]
 })
 export class ProfileComponent implements OnInit {

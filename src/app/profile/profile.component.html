@@ -44,8 +44,8 @@
         </p>
         <h3>Biography:</h3>
         <p>
-          <md-form-field>
-            <textarea class="textarea" mdInput placeholder="Biography" appAutoGrow [ngModel]="this.authService.user.biography" name="biography">
+          <md-form-field id = "textAreaFormField">
+            <textarea id="textarea" mdInput placeholder="Biography" appAutoGrow [ngModel]="this.authService.user.biography" name="biography">
               {{this.authService.user?.biography}}
             </textarea>
           </md-form-field>
