@@ -1,7 +1,7 @@
 <div class="card-container">
   <md-card class="example-card" flex="40" flex-sm="80">
     <md-card-header>
-      <div *ngIf="this.isInstructor(); then instructor"></div>
+      <div *ngIf="isInstructor(); then instructor"></div>
       <ng-template #instructor>
         <div class="menu">
           <button md-icon-button [mdMenuTriggerFor]="menu">
