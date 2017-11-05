@@ -58,7 +58,7 @@ export class AuthenticationService {
             .map((response: Response) => {
                 const data = response.json();
                 // initialize user in auth service
-                this.user = new User(
+                const o = new User(
                     data.obj.email,
                     data.obj.password,
                     data.obj.firstName,
@@ -67,7 +67,8 @@ export class AuthenticationService {
                     data.obj.userType,
                     data.obj.courses,
                     data.obj.biography
-                )
+                );
+                this.user = o;
                 this.userType = this.user.userType;
                 console.log(this.user.userType);
                 return data;
