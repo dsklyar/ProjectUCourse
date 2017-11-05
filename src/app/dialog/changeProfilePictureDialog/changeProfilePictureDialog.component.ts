@@ -30,13 +30,21 @@ import { Component } from '@angular/core';
         display: block;
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 11px;
         font-size: 150px;
         max-height: 150px;
         max-width: 150px; 
         font-family: 'Material Icons';   
     }
     .img-grid {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        text-align: center;
+    }
+    #dialogH1{
+        text-align: center;
+        margin-top: auto;
     }
     `]
 })
