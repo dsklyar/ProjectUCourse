@@ -33,7 +33,7 @@ import { Router } from '@angular/router';
         padding-top: 7px;	
         padding-right: 7px;
         position: absolute;
-        right: 135px;
+        right: 167px;
         top: 142px;
         display: none;
     }
@@ -52,6 +52,7 @@ import { Router } from '@angular/router';
     }
     .bio{
         margin-top: -15px;
+        white-space: pre-line;
     }
     .discription{
         text-align: left;
@@ -71,20 +72,14 @@ import { Router } from '@angular/router';
         margin-left: auto;
         margin-right: auto;     
     }
-    .newPic{
-        max-width: 600px;
-        margin-top: -523px;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-        z-index: 10;
+    #textarea{
+        width: 64%;
     }
-    #newPic{
-        display:none
-    }
+    
     #table{
         margin: 0 auto 0 auto;
     }
+
 
     
     `]
