@@ -15,5 +15,5 @@ export class AssignmentQuestion {
     }], 
     public dateCreated?: Date,
     public dateUpdated?: Date,
-    public assignmentID?: string) { }
+    public assignmentQuestionID?: string) { }
 }
