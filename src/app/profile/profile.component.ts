@@ -90,15 +90,27 @@ export class ProfileComponent implements OnInit {
     isEditProfile = false;
     isChangeEmail = false;
     one = "21979385_10208583556301210_1472323086_n.jpg";
-
     constructor(private authService : AuthenticationService,
-                private changeProfilePictureDialogService : ChangeProfilePictureDialogService) {}
+                private changeProfilePictureDialogService : ChangeProfilePictureDialogService) {
+                    // NOTE:
+                    // For Dylan with love from Daniel
+                    // this should fix refrshing issue with user being lost
+                    this.authService.checkIfPreviouslyLoggedIn();
+                }
 
     ngOnInit() {
-        this.user = this.authService.user;
+        // this is crap, pointers in js are trash or i just dont get how they work in js
+        // i like the trash idea tho, makes me feel smart 
+        //this.user = this.authService.user;
+        this.user = new User('','','','','','',[],'');
     }
 
+
     onSubmit(form : NgForm){
+        // get it again from the service
+        this.user = this.authService.user;
+        // or just directly use the one from service
+        // i.e. this.authService.user.firstName
         const updatedUser = new User(
             form.value.email,
             this.user.password,

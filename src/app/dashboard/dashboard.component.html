@@ -1,5 +1,5 @@
 <div class="example-grid">
-  <div *ngIf="this.isInstructor(); then instructor"></div>
+  <div *ngIf="isInstructor(); then instructor"></div>
   <ng-template #instructor>
     <md-card class="example-card" flex="40" flex-sm="80" routerLink="/newcourse">
       <md-card-content>

@@ -10,6 +10,21 @@ import { Observable } from 'rxjs'
 @Injectable()
 export class AuthenticationService {
     constructor(private http: Http) { }
+
+    // TODO:
+    // Somehow unite the valueof the types[] with
+    // the backend user.js mongoose model's enum called userType
+    // value here must match the enum in the mongoose model
+    // andor be validated
+    types = [
+        {value: 'student', viewValue: 'Student'},
+        {value: 'instructor', viewValue: 'Instructor'},
+        {value: 'undefined', viewValue: 'Undefined'}
+    ];
+
+    public userType : string = 'undefined';
+
+    
     user: User;
 
     singUp(user: User) {
@@ -43,7 +58,7 @@ export class AuthenticationService {
             .map((response: Response) => {
                 const data = response.json();
                 // initialize user in auth service
-                this.user = new User(
+                const o = new User(
                     data.obj.email,
                     data.obj.password,
                     data.obj.firstName,
@@ -52,7 +67,9 @@ export class AuthenticationService {
                     data.obj.userType,
                     data.obj.courses,
                     data.obj.biography
-                )
+                );
+                this.user = o;
+                this.userType = this.user.userType;
                 console.log(this.user.userType);
                 return data;
             })
@@ -68,38 +85,18 @@ export class AuthenticationService {
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
     }
-    // NOTE:
-    // All of the funvtions below
-    // Get the user type REGARDLESS if page was refreshed
-    // Because the user token might still be in the browser memory
-    // I can use that to get the login infomation about that user
-    // instead of making them login again, (notice how I used proper pronouns for all ya special snowflakes :^) )
-    isStudent() {
-        if (this.isPreviouslyLoggedIn()) {
-            return this.user.userType == 'student'
-        }
-    }
-    isInstructor() {
-        if (this.isPreviouslyLoggedIn()) {
-            return this.user.userType == 'instructor'
-        }
-    }
-    isAdmin() {
-        if (this.isPreviouslyLoggedIn()) {
-            return this.user.userType == 'admin'
-        }
-    }
     // NOTE: 
-    // This somehow syncronously gets the user information
-    // if the token did not expire
-    private isPreviouslyLoggedIn() {
+    // Use this in case if page is refreshed and needs user information
+    // put this in component constructor, so once component is initialized
+    // it async gets user ONCE, and sets up the values
+    checkIfPreviouslyLoggedIn() {
         if (this.user != null) {
             console.log(this.user.userType + " still here");
             return true;
         } else {
             var userId = localStorage.getItem('userId');
             if (userId != null) {
-                this.getUser(userId)
+                return this.getUser(userId)
                     .subscribe(
                     result => {
                         console.log(this.user.userType + ' got from service again');
