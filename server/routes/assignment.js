@@ -67,7 +67,7 @@ router.post('/:courseID', function (req, res, next) {
 router.get('/:courseID', function (req, res, next) {
   Course.findById(req.params.courseID)
     .populate('assignments')
-    .exec(function (err, courses) {
+    .exec(function (err, course) {
       if (err) {
         console.log(err);
         return res.status(500).json({
@@ -77,7 +77,7 @@ router.get('/:courseID', function (req, res, next) {
       }
       res.status(200).json({
         message: 'Success',
-        obj: courses.assignments
+        obj: course.assignments
       });
     });
 });

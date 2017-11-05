@@ -13,6 +13,8 @@ export class AssignmentService {
   private assignmentToEdit: Assignment;
   private assignments: Assignment[] = [];
 
+  private assignmentSelected : Assignment;
+
   constructor(private http: Http) { }
 
   addAssignment(newAssignment: Assignment) {
@@ -89,6 +91,12 @@ export class AssignmentService {
   }
   setCourseID(courseID: string) {
     this.courseID = courseID;
+  }
+  setSelectedAssignment(selectedAssignment : Assignment){
+    this.assignmentSelected = selectedAssignment;
+  }
+  getSelectedAssignment(){
+    return this.assignmentSelected;
   }
   getToken() {
     const token = (localStorage.getItem('token'))

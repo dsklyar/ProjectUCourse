@@ -1,3 +1,4 @@
+import { AuthenticationService } from '../auth/authService/authentication.service';
 import { MathJaxDirective } from '../directives/mathJax/mathjax.directive';
 import { AssignmentQuestionService } from './assignmentQuestion-service/assignmentQuestion.service';
 import { AssignmentQuestion } from '../models/assignmentQuestion.model';
@@ -14,10 +15,12 @@ import { Component, Input } from '@angular/core';
 
 export class AssignmentQuestionComponent {
   @Input() assignmentQuestion: AssignmentQuestion;
-  someEq : string = '$$\\idotsint_V \\mu(u_1,\\dots,u_k) \\,du_1 \\dots du_k$$';
 
   constructor(private assignmentQuestionService: AssignmentQuestionService,
-              private router: Router) { }
+    private router: Router,
+    private authService: AuthenticationService) {
+    this.authService.checkIfPreviouslyLoggedIn();
+  }
 
   onDelete() {
 
@@ -25,5 +28,9 @@ export class AssignmentQuestionComponent {
   onEdit() {
     //this.router.navigateByUrl('/editannouncement');
     //this.announcementService.addAnnouncementToEdit(this.announcement);
+  }
+
+  isInstructor() {
+    return this.authService.userType == 'instructor'
   }
 }

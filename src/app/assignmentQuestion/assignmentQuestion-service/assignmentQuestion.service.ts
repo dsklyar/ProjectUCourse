@@ -42,6 +42,7 @@ export class AssignmentQuestionService {
             result.obj.dateUpdated,
             result.obj.assignmentQuestionID
           );
+          console.log(returnedAssignmentQuestion);
           this.assignmentQuestions.unshift(returnedAssignmentQuestion);
           return returnedAssignmentQuestion;
         })
@@ -51,30 +52,35 @@ export class AssignmentQuestionService {
     // YOU MUST REFRESH FIRST BEFORE ADDING NEW ASSIGNMENTS
   // OTHERWISE COURSEID IS UNDEFINED
   refreshAssignmentQuestions() {
-    return this.http.get(environment.baseUrl + '/assignment/'
+    return this.http.get(environment.baseUrl + '/assignmentQuestion/'
       + this.assignmentID
       + this.getToken())
       .map((response: Response) => {
         const assignmentQuestions = response.json().obj;    // obj is where courses stored in /courses routes
         let transformedAssignmentQuestions: AssignmentQuestion[] = [];
         for (let assignmentQuestion of assignmentQuestions) {
-          transformedAssignmentQuestions.push(
-            new AssignmentQuestion(
-              assignmentQuestion.title,
-              assignmentQuestion.description,
-              assignmentQuestion.questionType,
-              assignmentQuestion.numberOfChoices,
-              assignmentQuestion.numberOfTries,
-              assignmentQuestion.pointsLostPerTry,
-              assignmentQuestion.pointsAvailable,
-              assignmentQuestion.questionBody,
-              assignmentQuestion.questionArray,
-              assignmentQuestion.dateCreated,
-              assignmentQuestion.dateUpdated,
-              assignmentQuestion.assignmentQuestionID
-            )
+          var aq = new AssignmentQuestion(
+            assignmentQuestion.title,
+            assignmentQuestion.description,
+            assignmentQuestion.questionType,
+            assignmentQuestion.numberOfChoices,
+            assignmentQuestion.numberOfTries,
+            assignmentQuestion.pointsLostPerTry,
+            assignmentQuestion.pointsAvailable,
+            assignmentQuestion.questionBody,
+            assignmentQuestion.questionArray,
+            assignmentQuestion.dateCreated,
+            assignmentQuestion.dateUpdated,
+            assignmentQuestion.assignmentQuestionID
           );
+          // NOTE:
+          // for some reason mongodb adds id in the beginigod the array
+          // so i remove here
+          aq.questionArray.shift();
+          transformedAssignmentQuestions.push(aq);
         }
+        console.log(transformedAssignmentQuestions);
+        this.assignmentQuestions = transformedAssignmentQuestions;
         return this.assignmentQuestions;
       })
       .catch((error: Response) => Observable.throw('Error in AssignmentQuestion Service'));

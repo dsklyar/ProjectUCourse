@@ -17,7 +17,13 @@ export class AssignmentQuestionListComponent implements OnInit {
   constructor(private assignmentQuestionService : AssignmentQuestionService) {}
 
   ngOnInit() {
-    this.assignmentQuestions = this.assignmentQuestionService.getAssignmentQuestions();
+    this.assignmentQuestionService.refreshAssignmentQuestions()
+    .subscribe(
+      (assignmentQuestions: AssignmentQuestion[]) => {
+        this.assignmentQuestions = assignmentQuestions;
+      },
+      error => console.log(error)
+    );
   }
 }
 

@@ -1,4 +1,5 @@
-import { Router } from '@angular/router';
+import { AssignmentService } from '../assignment/assignmentService/assignment.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentQuestionService } from '../assignmentQuestion/assignmentQuestion-service/assignmentQuestion.service';
 import { Assignment } from '../models/assignment.model';
 import { Component, Input, OnInit } from '@angular/core';
@@ -12,9 +13,12 @@ import { Component, Input, OnInit } from '@angular/core';
 
 export class AssignmentMenuComponent implements OnInit {
   assignmentID : string;
+  assignment : Assignment;
 
   constructor(private assignmentQuestionService : AssignmentQuestionService,
-              private router : Router) { }
+              private assignmentService : AssignmentService,
+              private router : Router,
+              private activatedRoute : ActivatedRoute) { }
 
   onDelete() {
 
@@ -23,6 +27,13 @@ export class AssignmentMenuComponent implements OnInit {
 
   }
   ngOnInit(){
+    this.activatedRoute.paramMap
+    .subscribe(params => {
+      this.assignmentID = params.get('assignmentID');
+    })
     this.assignmentQuestionService.setAssignmentID(this.assignmentID);
+
+    // get name
+    this.assignment = this.assignmentService.getSelectedAssignment()
   }
 }
