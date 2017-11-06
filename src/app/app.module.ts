@@ -1,3 +1,4 @@
+import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
 import {
     ChangeProfilePictureDialogComponent,
 } from './dialog/changeProfilePictureDialog/changeProfilePictureDialog.component';
@@ -82,6 +83,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DashboardComponent,
     DashboardCourseInputComponent,
     DashboardCourseComponent,
+    DashboardCourseAddComponent,
 
     ProfileComponent,
 

@@ -14,5 +14,9 @@ var schema = new Schema({
     dateUpdated             : {type : Date, required : true},
     assignmentQuestions     : [{type : Schema.Types.ObjectId, ref : 'AssignmentQuestion'}]
 });
+schema.pre('remove', function(callback) {
+    // Remove all the docs that refers
+    this.model('AssignmentQuestion').remove({_id: {$in: this.assignmentQuestions}}, callback);
+});
 schema.plugin(mongooseUniqueValidator);
 module.exports = mongoose.model('Assignment',schema);

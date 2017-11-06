@@ -1,0 +1,17 @@
+<div class="card-container">
+    <md-card class="example-card">
+      <form class="example-form" [formGroup]="addCourse" (ngSubmit)="onSubmit()">
+        <!--md-form-field class="example-full-width"-->
+        <!--input mdInput placeholder="Company (disabled)" disabled value="Google"-->
+        <!--md-form-field-->
+        <p>
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="Registration Number" formControlName="regNum">
+          </md-form-field>
+        </p>
+        <button md-raised-button type="Submit">Register</button>
+        <button md-raised-button type="button"  (click)="onGoBack()">Go Back</button>
+      </form>
+    </md-card>
+  </div>
+  

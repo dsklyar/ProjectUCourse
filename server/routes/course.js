@@ -3,26 +3,13 @@ var express = require('express');
 //var HttpStatus = require('http-status-codes');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
+var middleware = require('./middleware');
 
 var Course = require('../../models/course');
 var User = require('../../models/user');
 
-router.use('/', function (req, res, next) {
-  jwt.verify(req.query.token,
-    'In Kor lies Morz, the frozen throne' +
-    'Where lord’s of lakes, have made their home',
-    function (err, decoded) {
-      if (err) {
-        return res.status(401).json({
-          title: 'Not Authenticated!',
-          error: err
-        });
-      }
-      next();
-    })
-});
 // this will bind the course to the instructor creating it
-router.post('/:userID', function (req, res, next) {
+router.post('/:userID',middleware, function (req, res, next) {
   console.log()
   User.findById(req.params.userID, function (err, user) {
     if (err) {
@@ -71,7 +58,7 @@ router.post('/:userID', function (req, res, next) {
   })
 });
 // This will return all courses bounded to that userID
-router.get('/:userID', function (req, res, next) {
+router.get('/:userID',middleware, function (req, res, next) {
   User.findById(req.params.userID)
     .populate('courseList')
     .exec(function (err, user) {
@@ -95,7 +82,7 @@ router.get('/:userID', function (req, res, next) {
       });
     });
 });
-router.patch('/:id', function (req, res, next) {
+router.patch('/:id',middleware, function (req, res, next) {
   Course.findById(req.params.id, function (err, course) {
     if (err) {
       return res.status(500).json({
@@ -131,7 +118,7 @@ router.patch('/:id', function (req, res, next) {
   });
 })
 
-router.delete('/:id/:userID', function (req, res, next) {
+router.delete('/:id/:userID',middleware, function (req, res, next) {
   User.findById(req.params.userID, function (err, user) {
     if (err) {
       return res.status(500).json({
@@ -187,5 +174,4 @@ router.delete('/:id/:userID', function (req, res, next) {
       });
   });
 })
-
 module.exports = router;
