@@ -18,6 +18,7 @@ const courseRoutes = require('./server/routes/course');
 const userRoutes = require('./server/routes/user');
 const announcementRoutes = require('./server/routes/announcement');
 const assignmentRoutes = require('./server/routes/assignment');
+const assignmentQuestionRoutes = require('./server/routes/assignmentQuestion');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use('/course',courseRoutes);
 app.use('/user',userRoutes);
 app.use('/announcement',announcementRoutes);
 app.use('/assignment',assignmentRoutes);
+app.use('/assignmentQuestion',assignmentQuestionRoutes);
 
 
 // Catch all other routes and return the index file

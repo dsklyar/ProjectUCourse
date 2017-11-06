@@ -1,7 +1,14 @@
 <div class="example-grid">
-  <div *ngIf="this.isInstructor(); then instructor"></div>
+  <div *ngIf="isInstructor(); then instructor; else student"></div>
   <ng-template #instructor>
     <md-card class="example-card" flex="40" flex-sm="80" routerLink="/newcourse">
+      <md-card-content>
+        <md-icon class="icon">add_circle_outline</md-icon>
+      </md-card-content>
+    </md-card>
+  </ng-template>
+  <ng-template #student>
+    <md-card class="example-card" flex="40" flex-sm="80" routerLink="/addcourse">
       <md-card-content>
         <md-icon class="icon">add_circle_outline</md-icon>
       </md-card-content>

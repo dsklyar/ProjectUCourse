@@ -29,7 +29,8 @@ export class DashboardComponent implements OnInit {
     courses: Course[];
     constructor(private dashboardService: DashboardService,
         private authService: AuthenticationService,
-        private router: Router) { }
+        private router: Router) { 
+            this.authService.checkIfPreviouslyLoggedIn(); }
 
     ngOnInit() {
         this.dashboardService.getMessages()
@@ -46,6 +47,6 @@ export class DashboardComponent implements OnInit {
             );
     }
     isInstructor() {
-        return this.authService.isInstructor();
+        return this.authService.userType == 'instructor'
     }
 }

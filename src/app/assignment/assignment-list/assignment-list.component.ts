@@ -23,7 +23,7 @@ export class AssignmentListComponent implements OnInit {
         this.assignments = assignments;
       },
       error => console.log(error)
-    )
+    );
   }
 }
 

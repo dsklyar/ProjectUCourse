@@ -44,22 +44,7 @@ export class DashboardCourseComponent implements OnInit {
 
   constructor(private dashboardService: DashboardService,
               private router: Router,
-              private authService: AuthenticationService) {
-    // NOTE:
-    // Long story short angular likes to evaluate ngIf statements
-    // like times a call for reasons I am not sure enough
-    // so I made this call so that it evaluates ngIf a certain 
-    // interval at a time
-    // What it does is it calls the function and sets a boolean [isUserInstructor]
-    // which I pass to ngIf to evaluate
-    // check out this link 
-    // https://stackoverflow.com/questions/39850484/angular2-ngif-afunctioncall-results-in-the-function-being-called-9-times
-    // This is a terrible hack imho, if you know better please contact me if I am still programming in Angular,
-    // probably not tho I since I probs turn into a monk or something...
-    // setTimeout(() => {
-    //   this.isInstructor();
-    // }, 50000);
-  }
+              private authService: AuthenticationService) { this.authService.checkIfPreviouslyLoggedIn(); }
 
   onDelete() {
     this.dashboardService.removeCourse(this.course)
@@ -71,9 +56,7 @@ export class DashboardCourseComponent implements OnInit {
     this.router.navigate(['courseMenu', this.course.courseID]);
   }
   isInstructor() {
-    // NOTE:
-    // this gets the user type from the backend
-    return this.authService.isInstructor();
+    return this.authService.userType == 'instructor'
   }
   randomColor() {
     return this.colors[Math.random() * this.colors.length | 0]

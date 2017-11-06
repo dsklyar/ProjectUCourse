@@ -1,3 +1,4 @@
+import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
 import {
   AssignmentQuestionInputComponent,
 } from './assignmentQuestion/assignmentQuestion-input/assignmentQuestion-input.component';
@@ -25,6 +26,7 @@ const APP_ROUTES: Routes = [
     { path: 'logout', component: LogoutComponent},
     { path: 'dashboard', component: DashboardComponent},
     { path: 'newcourse', component: DashboardCourseInputComponent},
+    { path: 'addcourse', component: DashboardCourseAddComponent},
     { path: 'profile', component: ProfileComponent},
     { path: 'newannouncement', component: AnnouncementInputComponent},
     { path: 'editannouncement', component: AnnouncementEditComponent},

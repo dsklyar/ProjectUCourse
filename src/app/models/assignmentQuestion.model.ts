@@ -7,13 +7,13 @@ export class AssignmentQuestion {
     public pointsLostPerTry: number,
     public pointsAvailable : number,
     public questionBody : string,
-    public questionArray : [{
-      choiceText : string,
-      answerText : string,
-      isAnswer : boolean,
-      choiceNumber : number
+    public questionArray? : [{
+      choiceText? : string,
+      answerText? : string,
+      isAnswer? : boolean,
+      choiceNumber? : number
     }], 
     public dateCreated?: Date,
     public dateUpdated?: Date,
-    public assignmentID?: string) { }
+    public assignmentQuestionID?: string) { }
 }
