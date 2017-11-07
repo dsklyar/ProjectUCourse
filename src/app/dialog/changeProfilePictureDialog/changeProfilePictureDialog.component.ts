@@ -22,6 +22,8 @@ import { Component } from '@angular/core';
         margin: 1.66%;
         max-height: 150px;
         max-width: 150px;
+        font-size: 150px;
+        font-family: 'Material Icons';           
     }
     #optionTable{
         text-align: center;
@@ -39,7 +41,6 @@ import { Component } from '@angular/core';
     .img-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 1fr);
         text-align: center;
     }
     #dialogH1{
@@ -54,12 +55,12 @@ export class ChangeProfilePictureDialogComponent {
     public message: string;
     profPic = "";
     array = [
-        {src : "https://www.smashingmagazine.com/wp-content/uploads/2015/06/10-dithering-opt.jpg"},
-        {src : "https://cdn.theatlantic.com/assets/media/img/photo/2015/11/images-from-the-2016-sony-world-pho/s01_130921474920553591/main_900.jpg?1448476701"},
-        {src : "https://s-media-cache-ak0.pinimg.com/originals/10/e4/03/10e40345d2e7fc3966ffc6f8a546e0b5.jpg"},
-        {src : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD5HHkIzrnqxBDOfrZsapGv3m47qs2Vyvv9vH5a-_hxpisB2uI"},
-        {src : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwswZVnaDs2Sn9AyTVbEhdfGc3cCr3tbh_tiytTGd_cJf1d8_a"},
-        {src : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUzmcXfpKcca8Y0zQLCpLVohzfk-7yf4pR4NcNEr750mkKiMZDoA"}
+        {src : "./assets/profilePic/dropouts_dream.jpg"},
+        {src : "./assets/profilePic/ecrypted_dreams.jpg"},
+        {src : "./assets/profilePic/nothing_personal_kid.jpg"},
+        {src : "./assets/profilePic/software_dreams.jpg"},
+        {src : "./assets/profilePic/wake_me_up.jpg"},
+        {src : " "}
     ];
     constructor(public dialogRef: MdDialogRef<ChangeProfilePictureDialogComponent>) {}
     
