@@ -146,38 +146,41 @@ export class AssignmentQuestionTestComponent {
 
   dialogResult: any;
   openDialog() {
-    // this.confirmDialogService
-    //   .confirm('Confirm Dialog', 'Are you sure you want to do this?')
-    //   .subscribe(res => this.dialogResult = res);
-    const newaq = new AssignmentQuestion(
-      this.questionForm.get('questionHeader.questionTitle').value,
-      this.questionForm.get('questionHeader.qustionDescription').value,
-      this.questionForm.get('questionProperties.questionType').value,
-      this.questionForm.get('questionProperties.numberOfChoices').value,
-      this.questionForm.get('questionProperties.numberOfTries').value,
-      this.questionForm.get('questionProperties.pointsLostPerTry').value,
-      this.questionForm.get('questionProperties.pointsAvailable').value,
-      this.questionForm.get('questionBody.body').value,
-      [{}],
-      new Date(),
-      new Date()
-    )
-    const arr = this.questionArray.controls;
-    for (var index = 0; index < this.numberOfChoices; index++) {
-      const choice = arr[index].value;
-      newaq.questionArray.push({
-        choiceText: choice.choiceText,
-        answerText: choice.answerText,
-        isAnswer: choice.isAnswer,
-        choiceNumber: choice.choiceNumber
+    this.confirmDialogService
+      .confirm('Confirm Dialog', 'Are you sure you want to do this?')
+      .subscribe(res => {
+        this.dialogResult = res;
+        if (this.dialogResult == true) {
+          const newaq = new AssignmentQuestion(
+            this.questionForm.get('questionHeader.questionTitle').value,
+            this.questionForm.get('questionHeader.qustionDescription').value,
+            this.questionForm.get('questionProperties.questionType').value,
+            this.questionForm.get('questionProperties.numberOfChoices').value,
+            this.questionForm.get('questionProperties.numberOfTries').value,
+            this.questionForm.get('questionProperties.pointsLostPerTry').value,
+            this.questionForm.get('questionProperties.pointsAvailable').value,
+            this.questionForm.get('questionBody.body').value,
+            [{}],
+            new Date(),
+            new Date()
+          )
+          const arr = this.questionArray.controls;
+          for (var index = 0; index < this.numberOfChoices; index++) {
+            const choice = arr[index].value;
+            newaq.questionArray.push({
+              choiceText: choice.choiceText,
+              answerText: choice.answerText,
+              isAnswer: choice.isAnswer,
+              choiceNumber: choice.choiceNumber
+            });
+          }
+          console.log(newaq);
+          this.assignmentQuestionService.addAssignmentQuestion(newaq)
+            .subscribe(
+            data => console.log(data),
+            error => console.log(error)
+            );
+        }
       });
-    }
-    console.log(newaq);
-    this.assignmentQuestionService.addAssignmentQuestion(newaq)
-    .subscribe(
-      data => console.log(data),
-      error => console.log(error)
-    )
   }
-
 }
