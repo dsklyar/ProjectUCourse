@@ -1,0 +1,11 @@
+<div class="example-grid">
+  <div class="card-container">
+    <md-card class="example-card" flex="40" flex-sm="80" routerLink="/newassignmentQuestion">
+      <md-card-content>
+        <md-icon class="icon">add_circle_outline</md-icon>
+      </md-card-content>
+    </md-card>
+  </div>
+  <app-assignmentQuestion *ngFor="let assignmentQuestion of assignmentQuestions" 
+    [assignmentQuestion]="assignmentQuestion"></app-assignmentQuestion>
+</div>

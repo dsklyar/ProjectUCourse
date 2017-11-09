@@ -1,4 +1,10 @@
 import { flashCardsComponent } from './flashCards/flashCards.component';
+import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
+import {
+  AssignmentQuestionInputComponent,
+} from './assignmentQuestion/assignmentQuestion-input/assignmentQuestion-input.component';
+import { AssignmentMenuComponent } from './assignmentMenu/assignmentMenu.component';
+import { AssignmentInputComponent } from './assignment/assignment-input/assignment-input.component';
 import { AnnouncementEditComponent } from './Announcement/Announcement-edit/announcement-edit.component';
 import { AnnouncementInputComponent } from './Announcement/Announcement-input/announcement-input.component';
 import { COURSEMENU_ROUTES } from './courseMenu/courseMenu.routes';
@@ -21,11 +27,16 @@ const APP_ROUTES: Routes = [
     { path: 'logout', component: LogoutComponent},
     { path: 'dashboard', component: DashboardComponent},
     { path: 'newcourse', component: DashboardCourseInputComponent},
+    { path: 'addcourse', component: DashboardCourseAddComponent},
     { path: 'profile', component: ProfileComponent},
     { path: 'newannouncement', component: AnnouncementInputComponent},
     { path: 'editannouncement', component: AnnouncementEditComponent},
     { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES},
-    { path: 'flashCards', component: flashCardsComponent}
+    { path: 'flashCards', component: flashCardsComponent},
+    { path: 'newassignment', component: AssignmentInputComponent},
+    { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES},
+    { path: 'assignmentMenu/:assignmentID', component: AssignmentMenuComponent},
+    { path : 'newassignmentQuestion', component: AssignmentQuestionInputComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

@@ -13,8 +13,13 @@ var schema = new Schema({
     schoolName              : {type : String, required : true},
     description             : {type : String, required : true},
     assignments             : [{type : Schema.Types.ObjectId, ref : 'Assignment'}],
-    announcements           : [{type : Schema.Types.ObjectId, ref : 'Announcement'}]
-
+    announcements           : [{type : Schema.Types.ObjectId, ref : 'Announcement'}],
+    //courseQuestions               : [{type : Schema.Types.ObjectId, ref : 'CourseQuestion'}]
+});
+schema.pre('remove', function(callback) {
+    // Remove all the docs that refers
+    this.model('Announcement').remove({_id: {$in: this.announcements}}, callback);
+    this.model('Assignment').remove({_id: {$in: this.assignments}}, callback);
 });
 schema.plugin(mongooseUniqueValidator);
 module.exports = mongoose.model('Course',schema);

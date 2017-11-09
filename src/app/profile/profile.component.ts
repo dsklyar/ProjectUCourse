@@ -1,3 +1,4 @@
+import { ChangeProfilePictureDialogService } from '../dialog/changeProfilePictureDialog/changeProfilePictureDialog.service';
 import { NgForm } from '@angular/forms/src/directives';
 import { AuthenticationService } from '../auth/authService/authentication.service';
 import { User } from '../models/user.model';
@@ -18,7 +19,6 @@ import { Router } from '@angular/router';
         text-align: center;
       }
     .material-icons{
-        font-size: 150px;
         height: 150px;
         width: 150px;
         margin-left: auto;
@@ -29,11 +29,30 @@ import { Router } from '@angular/router';
         height: 24px;
         width:24px;
     }
+    .icon-edit{
+        padding-top: 7px;	
+        padding-right: 7px;
+        position: absolute;
+        right: 167px;
+        top: 142px;
+        display: none;
+    }
+    .material-icons:hover .icon-edit{
+        display: block;
+    }
+    #xbtn{
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        height:24px;
+        width:24px;
+    }
     .text{
         margin-top: -25px;
     }
     .bio{
         margin-top: -15px;
+        white-space: pre-line;
     }
     .discription{
         text-align: left;
@@ -43,28 +62,55 @@ import { Router } from '@angular/router';
         right: 10px;
         top: 5px;
     }
+    .hov {
+        font-size: 34px;
+    }
+    .pic{
+        font-size: 150px;   
+        max-height: 150px;
+        max-width: 150px;
+        margin-left: auto;
+        margin-right: auto;     
+    }
+    #textarea{
+        width: 64%;
+    }
+    
+    #table{
+        margin: 0 auto 0 auto;
+    }
+
 
     
     `]
 })
 export class ProfileComponent implements OnInit {
-    // newBio: FormGroup;
-    // newEmail:FormGroup;
-    user : User;
 
-    constructor(private authService : AuthenticationService) {}
+    user : User;
+    isEditProfile = false;
+    isChangeEmail = false;
+    one = "21979385_10208583556301210_1472323086_n.jpg";
+    constructor(private authService : AuthenticationService,
+                private changeProfilePictureDialogService : ChangeProfilePictureDialogService) {
+                    // NOTE:
+                    // For Dylan with love from Daniel
+                    // this should fix refrshing issue with user being lost
+                    this.authService.checkIfPreviouslyLoggedIn();
+                }
 
     ngOnInit() {
-    //   this.newBio = new FormGroup({
-    //     userbio: new FormControl(null, Validators.required)
-    //   });
-    //   this.newEmail = new FormGroup({
-    //     email: new FormControl(null, Validators.required)
-    //   });
-        this.user = this.authService.user;
+        // this is crap, pointers in js are trash or i just dont get how they work in js
+        // i like the trash idea tho, makes me feel smart 
+        //this.user = this.authService.user;
+        this.user = new User('','','','','','',[],'');
     }
 
+
     onSubmit(form : NgForm){
+        // get it again from the service
+        this.user = this.authService.user;
+        // or just directly use the one from service
+        // i.e. this.authService.user.firstName
         const updatedUser = new User(
             form.value.email,
             this.user.password,
@@ -78,13 +124,25 @@ export class ProfileComponent implements OnInit {
         this.authService.updateUser(updatedUser)
         .subscribe (
         data => {
+            console.log(data);
             this.user.biography = data.obj.biography;
             this.user.email = data.obj.email;
         },
         error => console.log(error)
         );
     }
-
-   
-   
+    changePic(){
+        var x = document.getElementById("newPic");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    dialogResult : any;
+    openDialog(){
+        this.changeProfilePictureDialogService
+        .confirm('Confirm Dialog', 'Are you sure you want to do this?')
+        .subscribe(res => this.dialogResult = res);
+    } 
 }

@@ -1,0 +1,42 @@
+<h1>Select A Photo</h1>
+<div>
+  <img id="chosenPic" src="{{profPic}}" alt="account_circle">
+</div>
+<!-- <div id = "optionTable">
+  <label>
+      <input type="radio" name="op" (click) = "switch(one)"/>
+      <img class = "picOption" src="{{one}}">
+  </label>
+  <label>
+    <input type="radio" name="op" (click) = "switch(two)"/>
+    <img class = "picOption" src="{{two}}">
+  </label> 
+  <label>
+    <input type="radio" name="op" (click) = "switch(three)"/>
+    <img class = "picOption" src="{{three}}">
+  </label>
+  <label>
+    <input type="radio" name="op" (click) = "switch(four)"/>
+    <img class = "picOption" src="{{four}}">
+  </label>
+  <label>
+    <input type="radio" name="op" (click) = "switch(five)"/>
+    <img class = "picOption" src="{{five}}">
+  </label>
+  <label>
+    <input type="radio" name="op" (click) = "switch(six)"/>
+    <img class = "picOption" src="{{six}}">
+  </label>
+</div> -->
+<div class="img-grid" lex="40" flex-sm="80">
+  <div *ngFor="let img of array">
+    <label>
+      <input type="radio" name="op" (click)="switch(img.src)" />
+      <img class="picOption" src="{{img.src}}">
+    </label>
+  </div>
+</div>
+
+
+<button type="button" md-raised-button (click)="dialogRef.close(true)">OK</button>
+<button type="button" md-button (click)="dialogRef.close()">Cancel</button>

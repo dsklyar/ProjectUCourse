@@ -1,58 +1,56 @@
-<script>
-  isEditProfile = false;
-  isChangeEmail = false;
-  show = false;
-
-</script>
 <md-card class="example-card">
   <div *ngIf="isEditProfile != true; then noEditProfile else editProfile"></div>
   <ng-template #noEditProfile>
     <md-card-header>
       <button md-raised-button class="btn" (click)="isEditProfile = true">
-        <md-icon class="edit-icon">edit</md-icon>edit profile</button>
-      <md-icon class="material-icons">account_circle</md-icon>
+        <md-icon class="edit-icon">edit</md-icon>Edit Profile</button>
+            <img class = "pic material-icons" src="" alt="account_circle" >
     </md-card-header>
     <md-card-content>
       <h1>
-        {{user.firstName}} {{user.lastName}}
+        {{ this.authService.user?.firstName}} {{ this.authService.user?.lastName}}
       </h1>
       <h2 class="text">
-        {{user.email}}
+        {{this.authService.user?.email}}
       </h2>
       <h4 class="discription">Biography:</h4>
       <p class="bio">
-        {{user.biography}}
+        {{this.authService.user?.biography}}
       </p>
     </md-card-content>
   </ng-template>
   <ng-template #editProfile>
     <md-card-header>
       <button md-raised-button class="btn" (click)="isEditProfile = false">
-        <md-icon class="edit-icon">edit</md-icon>cancel edit</button>
-      <md-icon class="material-icons" (click)="changePic()">account_circle</md-icon>
+        <md-icon class="edit-icon">edit</md-icon>Cancel Edit</button>
+        <div class="material-icons" (click)="openDialog()">
+          <img class = "pic" src="" alt="account_circle" >
+          <md-icon class = "icon-edit">edit</md-icon>
+        </div>
     </md-card-header>
     <md-card-content>
       <h1>
-        {{user.firstName}} {{user.lastName}}
+        {{this.authService.user?.firstName}} {{this.authService.user?.lastName}}
       </h1>
       <h2>
-        {{user.email}}
-        <!-- <button md-raised-button (click)="isChangeEmail = true">change email</button>                                               -->
+        {{this.authService.user?.email}}
       </h2>
       <form #f="ngForm" (ngSubmit)="onSubmit(f)">
         <p>
           <md-form-field>
-            <input mdInput placeholder="Email" [ngModel]="user.email" name="email" required email>
+            <input mdInput placeholder="Email" [ngModel]="this.authService.user.email" name="email" required email
+            value="{{this.authService.user?.email}}">
           </md-form-field>
-          <!-- <button md-raised-button (click)="isChangeEmail = false">submit email</button> -->
         </p>
         <h3>Biography:</h3>
         <p>
           <md-form-field>
-            <textarea class="textarea" mdInput placeholder="Biography" [ngModel]="user.biography" name="biography"></textarea>
+            <textarea class="textarea" mdInput placeholder="Biography" appAutoGrow [ngModel]="this.authService.user.biography" name="biography">
+              {{this.authService.user?.biography}}
+            </textarea>
           </md-form-field>
         </p>
-        <button md-raised-button type="Submit" [disabled]="!f.valid">submit bio</button>
+        <button md-raised-button type="Submit" (click) ="onSubmit(f); isEditProfile = false">Submit</button>
       </form>
     </md-card-content>
   </ng-template>

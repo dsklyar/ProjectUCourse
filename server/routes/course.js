@@ -3,65 +3,86 @@ var express = require('express');
 //var HttpStatus = require('http-status-codes');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
+var middleware = require('./middleware');
 
 var Course = require('../../models/course');
+var User = require('../../models/user');
 
-router.use('/', function (req, res, next) {
-  jwt.verify(req.query.token,
-    'In Kor lies Morz, the frozen throne' +
-    'Where lord’s of lakes, have made their home',
-    function (err, decoded) {
+// this will bind the course to the instructor creating it
+router.post('/:userID',middleware, function (req, res, next) {
+  console.log()
+  User.findById(req.params.userID, function (err, user) {
+    if (err) {
+      return res.status(500).json({
+        title: 'An error occured!',
+        error: err
+      });
+    }
+    if (!user) {
+      return res.status(500).json({
+        title: 'No user was found!',
+        error: {
+          message: 'user was not found!'
+        }
+      });
+    }
+    var course = new Course({
+      title: req.body.title,
+      registrationNumber: req.body.regNum,
+      dateCreated: req.body.dateCreated,
+      dateUpdated: req.body.dateUpdated,
+      description: req.body.description,
+      schoolName: req.body.schoolName
+    });
+    course.save(function (err, course) {
       if (err) {
-        return res.status(401).json({
-          title: 'Not Authenticated!',
+        return res.status(500).json({
+          title: 'An error occured when creating a course!',
           error: err
         });
       }
-      next();
-    })
-});
-// Store in the back end
-// You only reach this route when you hav course route before hand
-// Such as course/
-router.post('/', function (req, res, next) {
-  var course = new Course({
-    title: req.body.title,
-    registrationNumber: req.body.regNum,
-    dateCreated: req.body.dateCreated,
-    dateUpdated: req.body.dateUpdated,
-    description: req.body.description,
-    schoolName: req.body.schoolName
-  });
-  course.save(function (err, result) {
-    if (err) {
-      return res.status(500).json({
-        title: 'An error occured when creating a course!',
-        error: err
+      user.courseList.push(course._id);
+      user.save(function (err, result) {
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occured!',
+            error: err
+          });
+        }
+        res.status(201).json({
+          message: 'Saved course!',
+          obj: course
+        });
       });
-    }
-    res.status(201).json({
-      message: 'Saved course!',
-      obj: result
     });
-  });
+  })
 });
-
-router.get('/', function (req, res, next) {
-  Course.find(function (err, courses) {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({
-        title: 'An error occurred!',
-        error: err
+// This will return all courses bounded to that userID
+router.get('/:userID',middleware, function (req, res, next) {
+  User.findById(req.params.userID)
+    .populate('courseList')
+    .exec(function (err, user) {
+      if (err) {
+        return res.status(500).json({
+          title: 'An error occured!',
+          error: err
+        });
+      }
+      if (!user) {
+        return res.status(500).json({
+          title: 'No user was found!',
+          error: {
+            message: 'user was not found!'
+          }
+        });
+      }
+      res.status(200).json({
+        message: 'Success',
+        obj: user.courseList
       });
-    }
-    res.status(200).json({
-      message: 'Success',
-      obj: courses
     });
-  });
 });
-router.patch('/:id', function (req, res, next) {
+router.patch('/:id',middleware, function (req, res, next) {
   Course.findById(req.params.id, function (err, course) {
     if (err) {
       return res.status(500).json({
@@ -96,38 +117,61 @@ router.patch('/:id', function (req, res, next) {
     });
   });
 })
-// TODO:
-// delete all assignments and announcments and other inhereted ids
-// when course is deleted
-router.delete('/:id', function (req, res, next) {
-  Course.findById(req.params.id, function (err, course) {
+
+router.delete('/:id/:userID',middleware, function (req, res, next) {
+  User.findById(req.params.userID, function (err, user) {
     if (err) {
       return res.status(500).json({
-        title: 'An error occured!',
+        title: 'An error occurred!',
         error: err
       });
     }
-    if (!course) {
+    if (!user) {
       return res.status(500).json({
-        title: 'No course was found!',
+        title: 'No user was found!',
         error: {
-          message: 'Course was not found!'
+          message: 'user was not found!'
         }
       });
     }
-    course.remove(function (err, result) {
-      if (err) {
-        return res.status(500).json({
-          title: 'An error occured!',
-          error: err
+    Course.findOneAndRemove({
+        '_id': req.params.id
+      },
+      function (err, course) {
+        // NOTE:
+        // This is needed if you want to trigger the
+        // remove function inside the course model
+        // otherwise it will not automatically
+        // remove assignments and announcements and etc
+        course.remove();
+        if (err) {
+          return res.status(500).json({
+            title: 'An error occured!',
+            error: err
+          });
+        }
+        if (!course) {
+          return res.status(500).json({
+            title: 'No course was found!',
+            error: {
+              message: 'course was not found!'
+            }
+          });
+        }
+        user.courseList.splice(user.courseList.indexOf(req.params.id), 1);
+        user.save(function (err, result) {
+          if (err) {
+            return res.status(500).json({
+              title: 'An error occured!',
+              error: err
+            });
+          }
+          res.status(200).json({
+            message: 'Deleted course and updated the user',
+            obj: result
+          });
         });
-      }
-      res.status(200).json({
-        message: 'Deleted course',
-        obj: result
       });
-    });
   });
 })
-
 module.exports = router;

@@ -1,3 +1,6 @@
+import { ChangeProfilePictureDialogService } from './dialog/changeProfilePictureDialog/changeProfilePictureDialog.service';
+import { ConfirmDialogService } from './dialog/confirmDialog.service';
+import { AssignmentQuestionService } from './assignmentQuestion/assignmentQuestion-service/assignmentQuestion.service';
 import { AssignmentService } from './assignment/assignmentService/assignment.service';
 import { SyllabusService } from './syllabus/syllabus-service/syllabus.service';
 import { AnnouncementService } from './Announcement/AnnouncementService/announcemenet.service';
@@ -18,7 +21,10 @@ import { SidenavService } from '././sidenav/sidenav.service';
     AuthenticationService,
     AnnouncementService,
     AssignmentService,
-    SyllabusService
+    AssignmentQuestionService,
+    SyllabusService,
+    ConfirmDialogService,
+    ChangeProfilePictureDialogService
   ]
 })
 export class AppComponent {
