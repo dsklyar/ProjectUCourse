@@ -1,4 +1,5 @@
-import { courseQuestionComponent } from './courseQuestion/courseQuestion.component';
+import { courseQuestionListComponent } from './courseQuestion/courseQuestion-list/courseQuestion-list.component';
+import { CourseQuestionComponent } from './courseQuestion/courseQuestion.component';
 import { AssignmentListComponent } from './assignment/assignment-list/assignment-list.component';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { SyllabusComponent } from './syllabus/syllabus.component';
@@ -75,7 +76,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AutoGrowDirective,
     SyllabusComponent,
 
-    courseQuestionComponent
+    CourseQuestionComponent,
+    courseQuestionListComponent
     
   ],
   imports: [

@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 //import { courseQuestionService } from './courseQuestionService/courseQuestion.service'; //TODO
-import { courseQuestion } from '../models/courseQuestion.model';
+import { CourseQuestion } from '../models/courseQuestion.model';
 
 
 import { Component, Input } from '@angular/core';
@@ -11,9 +11,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./courseQuestion.component.css']
 })
 
-export class courseQuestionComponent {
-  @Input() courseQuestion: courseQuestion = 
-  new courseQuestion('title','question');
+export class CourseQuestionComponent {
+  @Input() courseQuestion: CourseQuestion = 
+  new CourseQuestion('title','question');
 
   //constructor(private courseQuestionService: courseQuestionService,
    // private router: Router) { }
