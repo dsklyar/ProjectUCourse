@@ -1,6 +1,5 @@
 import { AssignmentQuestion } from '../../models/assignmentQuestion.model';
 import { AssignmentQuestionService } from '../assignmentQuestion-service/assignmentQuestion.service';
-import { AssignmentQuestionSeeder } from '../../models/seeders/assignmentQuestion.seeder';
 
 import { FormArray, FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 import { ConfirmDialogService } from '../../dialog/confirmDialog.service';

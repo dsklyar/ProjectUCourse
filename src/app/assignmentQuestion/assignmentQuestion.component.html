@@ -1,4 +1,10 @@
 <div class="card-container">
+  <md-toolbar>
+    <span>Score {{assignmentQuestionStudent.assignmentQuestionAnswer.score}}/{{assignmentQuestionStudent.assignmentQuestion.pointsAvailable}}</span>
+    <span class="example-spacer"></span>
+    <span>Tries {{assignmentQuestionStudent.assignmentQuestion.numberOfTries - assignmentQuestionStudent.assignmentQuestionAnswer.triesUsed}} 
+      out of {{assignmentQuestionStudent.assignmentQuestion.numberOfTries}}</span>
+  </md-toolbar>
   <md-card class="example-card" flex="40" flex-sm="80">
     <md-card-header>
 
@@ -21,17 +27,18 @@
         </div>
       </ng-template>
 
-      <md-card-title>{{assignmentQuestion.title}}</md-card-title>
-      <md-card-subtitle>{{assignmentQuestion.description}}</md-card-subtitle>
+      <md-card-title>{{assignmentQuestionStudent.assignmentQuestion.title}}</md-card-title>
+      <md-card-subtitle>{{assignmentQuestionStudent.assignmentQuestion.description}}</md-card-subtitle>
     </md-card-header>
     <md-card-content>
 
-      <div [mathJax]="assignmentQuestion.questionBody"></div>
-      <div [ngSwitch]="assignmentQuestion.questionType" class="choices-block">
+      <div [mathJax]="assignmentQuestionStudent.assignmentQuestion.questionBody"></div>
+      <div [ngSwitch]="assignmentQuestionStudent.assignmentQuestion.questionType" class="choices-block">
           <div *ngSwitchCase="'multipleChoice'">
   
-            <md-radio-group class="example-radio-group" >
-              <md-radio-button class="example-radio-button" *ngFor="let choice of assignmentQuestion.questionArray" [value]="choice.choiceNumber">
+            <md-radio-group class="example-radio-group" [(ngModel)]="answerObject" [disabled] = "disabled"
+             (change)="onRadioGroupChange($event)">
+              <md-radio-button class="example-radio-button" *ngFor="let choice of assignmentQuestionStudent.assignmentQuestion.questionArray" [value]="choice.choiceNumber">
                 <div [mathJax]="choice.choiceText"></div>
               </md-radio-button>
             </md-radio-group>
@@ -39,7 +46,7 @@
           </div>
           <div *ngSwitchCase="'allThatApply'">
   
-            <div class="newline-me" *ngFor="let choice of assignmentQuestion.questionArray">
+            <div class="newline-me" *ngFor="let choice of assignmentQuestionStudent.assignmentQuestion.questionArray">
               <div class="inline-me">
                 <md-checkbox ></md-checkbox>
                 <label [mathJax]="choice.choiceText"></label>
@@ -79,7 +86,7 @@
 
     </md-card-content>
     <md-card-actions>
-      <button md-button>Try</button>
+      <button md-button (click)="onTry()" [disabled]="isCompleted()">Try</button>
       <button md-button>Save</button>
     </md-card-actions>
   </md-card>

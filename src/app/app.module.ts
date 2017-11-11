@@ -1,3 +1,4 @@
+
 import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
 import {
     ChangeProfilePictureDialogComponent,
@@ -30,6 +31,10 @@ import { CourseMenuComponent } from './courseMenu/courseMenu.component';
 import { DashboardCourseComponent } from './dashboard/dashboardCourse.component';
 import {  HttpModule } from '@angular/http';
 import { DashboardCourseInputComponent } from './dashboard/dashboardCourse-input.component';
+
+// import { ChartistModule } from 'angular2-chartist/src/chartist.component';
+
+
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

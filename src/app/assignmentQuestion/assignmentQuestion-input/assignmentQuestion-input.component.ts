@@ -1,5 +1,5 @@
 import { LanguageService } from '@angular/language-service';
-import { AssignmentQuestionSeeder } from '../../models/seeders/assignmentQuestion.seeder';
+import { AssignmentQuestionChoiceSeeder } from '../../models/seeders/assignmentQuestionChoice.seeder';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
 import { ConfirmDialogService } from '../../dialog/confirmDialog.service';
 
@@ -50,15 +50,16 @@ export class AssignmentQuestionInputComponent {
         autoGrade: [false, Validators.required]
       })
     });
+    
   }
-  setQuestionChoiceArray(assignmentQuestions: AssignmentQuestionSeeder[]) {
+  setQuestionChoiceArray(assignmentQuestions: AssignmentQuestionChoiceSeeder[]) {
     // TODO: 
     // Validation for if the question formating is correct
-    const assignmentQuestionFormGroup = assignmentQuestions.map(address => this.formBuilder.group(address));
+    const assignmentQuestionFormGroup = assignmentQuestions.map(assignmentQuestion => this.formBuilder.group(assignmentQuestion));
     const assignmentQuestionFormArray = this.formBuilder.array(assignmentQuestionFormGroup);
     this.questionForm.setControl('questionStructure.questionArray', assignmentQuestionFormArray);
   }
-  addQuestionChoice(newQuestionChoice: AssignmentQuestionSeeder) {
+  addQuestionChoice(newQuestionChoice: AssignmentQuestionChoiceSeeder) {
     this.questionArray.push(this.formBuilder.group(newQuestionChoice));
   }
   get questionArray(): FormArray {
@@ -86,7 +87,7 @@ export class AssignmentQuestionInputComponent {
       const numberOfChoices = this.questionForm.get('questionProperties.numberOfChoices').value;
       for (var i = 0; i < numberOfChoices; i++) {
         this.addQuestionChoice(
-          new AssignmentQuestionSeeder(
+          new AssignmentQuestionChoiceSeeder(
             'Enter Choice ' + (i + 1),
             false,
             'Enter Answer ' + (i + 1),
@@ -97,7 +98,7 @@ export class AssignmentQuestionInputComponent {
       if (num > 0) {
         for (var _i = 0; _i < num; _i++) {
           this.addQuestionChoice(
-            new AssignmentQuestionSeeder(
+            new AssignmentQuestionChoiceSeeder(
               'Enter Choice ' + (this.questionArray.length + 1),
               false,
               'Enter Answer ' + (i + 1),
