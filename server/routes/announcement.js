@@ -8,9 +8,9 @@ var middleware = require('./middleware');
 var Course = require('../../models/course')
 var Announcement = require('../../models/announcement');
 
-router.delete('/:id/:courseID',middleware, function (req, res, next) {
+router.delete('/:id/:courseID', middleware, function (req, res, next) {
   // MUST DO IT THIS WAY
-  Announcement.findOneAndRemove({'_id' : req.params.id},
+  Announcement.findOneAndRemove({ '_id': req.params.id },
     function (err, announcement) {
       if (err) {
         return res.status(500).json({
@@ -27,7 +27,7 @@ router.delete('/:id/:courseID',middleware, function (req, res, next) {
         });
       }
       Course.findById(req.params.courseID,
-        function(err, course) {
+        function (err, course) {
           if (err) {
             return res.status(500).json({
               title: 'An error occured!',
@@ -58,7 +58,7 @@ router.delete('/:id/:courseID',middleware, function (req, res, next) {
         });
     });
 })
-router.post('/:courseID',middleware, function (req, res, next) {
+router.post('/:courseID', middleware, function (req, res, next) {
   var announcement = new Announcement({
     title: req.body.title,
     announcement: req.body.announcement,
@@ -96,7 +96,7 @@ router.post('/:courseID',middleware, function (req, res, next) {
     });
   });
 });
-router.get('/:courseID',middleware, function (req, res, next) {
+router.get('/:courseID', middleware, function (req, res, next) {
   Course.findById(req.params.courseID)
     .populate('announcements')
     .exec(function (err, courses) {
@@ -114,7 +114,7 @@ router.get('/:courseID',middleware, function (req, res, next) {
     });
 });
 
-router.patch('/:id',middleware, function (req, res, next) {
+router.patch('/:id', middleware, function (req, res, next) {
   Announcement.findById(req.params.id, function (err, announcement) {
     if (err) {
       return res.status(500).json({

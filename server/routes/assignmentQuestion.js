@@ -3,26 +3,13 @@ var express = require('express');
 //var HttpStatus = require('http-status-codes');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
+var middleware = require('./middleware');
 
 var Assignment = require('../../models/assignment')
 var AssignmentQuestion = require('../../models/assignmentQuestion');
 
-router.use('/', function (req, res, next) {
-  jwt.verify(req.query.token,
-    'In Kor lies Morz, the frozen throne' +
-    'Where lord’s of lakes, have made their home',
-    function (err, decoded) {
-      if (err) {
-        return res.status(401).json({
-          title: 'Not Authenticated!',
-          error: err
-        });
-      }
-      next();
-    })
-});
 
-router.post('/:assignmentID', function (req, res, next) {
+router.post('/:assignmentID',middleware, function (req, res, next) {
   var assignmentQuestion = new AssignmentQuestion({
     title: req.body.title,
     description: req.body.description,
@@ -67,7 +54,7 @@ router.post('/:assignmentID', function (req, res, next) {
     });
   });
 });
-router.get('/:assignmentID', function (req, res, next) {
+router.get('/:assignmentID',middleware, function (req, res, next) {
   Assignment.findById(req.params.assignmentID)
     .populate('assignmentQuestions')
     .exec(function (err, assignment) {

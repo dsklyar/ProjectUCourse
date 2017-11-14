@@ -31,4 +31,7 @@ export class AssignmentComponent {
     this.assignmentService.setSelectedAssignment(this.assignment);
     this.router.navigate(['assignmentMenu', this.assignment.assignmentID]);
   }
+  openStats(){
+    this.router.navigate(['chartist', this.assignment.assignmentID]);
+  }
 }

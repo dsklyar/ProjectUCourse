@@ -1,3 +1,5 @@
+import { AssignmentChartistComponent } from './assignmentChartist/assignmentChartist.component';
+
 import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
 import {
     ChangeProfilePictureDialogComponent,
@@ -30,6 +32,10 @@ import { CourseMenuComponent } from './courseMenu/courseMenu.component';
 import { DashboardCourseComponent } from './dashboard/dashboardCourse.component';
 import {  HttpModule } from '@angular/http';
 import { DashboardCourseInputComponent } from './dashboard/dashboardCourse-input.component';
+
+import { ChartistModule } from 'ng-chartist';
+
+
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -103,6 +109,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AssignmentQuestionInputComponent,
     AssignmentQuestionTestComponent,
 
+    AssignmentChartistComponent,
+
     AssignmentMenuComponent,
 
     AutoGrowDirective,
@@ -135,7 +143,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatCheckboxModule,
     MatExpansionModule,
     MatRadioModule,
-    MatDialogModule
+    MatDialogModule,
+    ChartistModule
   ],
   providers: [],
   bootstrap: [AppComponent],

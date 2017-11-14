@@ -1,3 +1,5 @@
+import { AssignmentChartistComponent } from './assignmentChartist/assignmentChartist.component';
+
 import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
 import {
   AssignmentQuestionInputComponent,
@@ -33,7 +35,8 @@ const APP_ROUTES: Routes = [
     { path: 'newassignment', component: AssignmentInputComponent},
     { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES},
     { path: 'assignmentMenu/:assignmentID', component: AssignmentMenuComponent},
-    { path : 'newassignmentQuestion', component: AssignmentQuestionInputComponent}
+    { path : 'newassignmentQuestion', component: AssignmentQuestionInputComponent},
+    { path : 'chartist/:assignmentID', component: AssignmentChartistComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

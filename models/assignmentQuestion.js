@@ -1,3 +1,4 @@
+
 var mongoose = require('mongoose'),
 Schema = mongoose.Schema;
 var mongooseUniqueValidator =  require('mongoose-unique-validator');
@@ -5,7 +6,7 @@ var mongooseUniqueValidator =  require('mongoose-unique-validator');
 
 var schema = new Schema({
     title                   : {type : String, required : true},
-    description             : {type : String, required : true},
+    description             : {type : String},
     questionType             : {type : String, required : true},
     numberOfChoices         : {type : Number, required : true},
     numberOfTries           : {type : Number, required : true},
