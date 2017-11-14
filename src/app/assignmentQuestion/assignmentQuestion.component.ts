@@ -29,11 +29,11 @@ export class AssignmentQuestionComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('in component');
-    console.log(this.assignmentQuestionStudent);
+    console.log('in component after all');
     this.createAnswerObject();
     this.generateAnswer();
     if (this.isCompleted()) { this.disabled = true; }
+    console.log(this.assignmentQuestionStudent);
   }
 
   createAnswerObject() {
@@ -45,14 +45,39 @@ export class AssignmentQuestionComponent implements OnInit {
     // MULTIPLE CHOICE VERSION
 
     // Initiate the studentAnswerOBject to an empty array and populate with template
-    if (this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject == null) {
-      this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject = [];
-      this.assignmentQuestionStudent.assignmentQuestion.questionArray.forEach((choice: any) =>
-        this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject.push(new AssignmentQuestionBasicAnswerTemplate(false)));
+    if (this.assignmentQuestionStudent.assignmentQuestion.questionType != null) {
+      console.log(this.assignmentQuestionStudent.assignmentQuestion.questionType);
+      console.log(this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject);
+      if (this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject == null) {
+        switch (this.assignmentQuestionStudent.assignmentQuestion.questionType) {
+          case 'multipleChoice':
+            this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject = [];
+            this.assignmentQuestionStudent.assignmentQuestion.questionArray.forEach((choice: any) =>
+              this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject.push(
+                { studentAnswer: false }));
+            break;
+          case 'allThatApply':
+            this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject = [];
+            this.assignmentQuestionStudent.assignmentQuestion.questionArray.forEach((choice: any) =>
+              this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject.push(
+                { studentAnswer: false }));
+            break;
+          case 'fillInTheBlank':
+            this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject = [];
+            this.assignmentQuestionStudent.assignmentQuestion.questionArray.forEach((choice: any) =>
+              this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject.push(
+                { studentAnswer: '' }));
+            break;
+
+          default:
+            break;
+        }
+      }
     }
   }
 
   onRadioGroupChange(e) {
+
     // NOTE:
     // In future using switch cases
     // here I can extend type of answers
@@ -93,6 +118,38 @@ export class AssignmentQuestionComponent implements OnInit {
           }
         }
         break;
+      case 'allThatApply':
+        this.answerObject = [];
+        if (this.isCompleted()) {
+          for (var i = 0; i < this.assignmentQuestionStudent.assignmentQuestion.questionArray.length; i++) {
+            if (this.assignmentQuestionStudent.assignmentQuestion.questionArray[i].isAnswer) {
+              this.answerObject.push({ Answer: true })
+            } else {
+              this.answerObject.push({ Answer: false })
+            }
+          }
+        } else {
+          for (var i = 0; i < this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject.length; i++) {
+            this.answerObject.push({ Answer: this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject[i].studentAnswer })
+          }
+        }
+        break;
+      case 'fillInTheBlank':
+        this.answerObject = [];
+        if (this.isCompleted()) {
+          for (var i = 0; i < this.assignmentQuestionStudent.assignmentQuestion.questionArray.length; i++) {
+            this.answerObject.push({
+              Answer : this.assignmentQuestionStudent.assignmentQuestion.questionArray[i].answerText
+            });
+          }
+        } else {
+          for (var i = 0; i < this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject.length; i++) {
+            this.answerObject.push({
+              Answer : this.assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject[i].answerText
+            });
+          }
+        }
+        break;
 
       default:
         break;
@@ -105,6 +162,7 @@ export class AssignmentQuestionComponent implements OnInit {
         this.assignmentQuestionStudent.assignmentQuestionAnswer = data;
         if (this.isCompleted()) {
           this.disabled = true;
+          this.generateAnswer();
         }
         console.log(this.assignmentQuestionStudent);
       },

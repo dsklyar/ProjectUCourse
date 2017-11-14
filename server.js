@@ -20,6 +20,7 @@ const announcementRoutes = require('./server/routes/announcement');
 const assignmentRoutes = require('./server/routes/assignment');
 const assignmentQuestionRoutes = require('./server/routes/assignmentQuestion');
 const assignmentQuestionAnswerRoutes = require('./server/routes/assignmentQuestionAnswer');
+const assignmentChartistRoutes = require('./server/routes/assignmentChartist');
 
 const app = express();
 
@@ -39,7 +40,7 @@ app.use('/announcement',announcementRoutes);
 app.use('/assignment',assignmentRoutes);
 app.use('/assignmentQuestion',assignmentQuestionRoutes);
 app.use('/assignmentQuestionAnswer',assignmentQuestionAnswerRoutes);
-
+app.use('/assignmentChartist',assignmentChartistRoutes);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

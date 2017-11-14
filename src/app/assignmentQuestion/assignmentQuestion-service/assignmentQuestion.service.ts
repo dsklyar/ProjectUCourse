@@ -20,141 +20,133 @@ export class AssignmentQuestionService {
     console.log(toGrade)
     if (toGrade != null) {
       const headers = new Headers({ 'Content-Type': 'application/json' });
-      switch (toGrade.assignmentQuestion.questionType) {
-        case 'multipleChoice':
-          if (this.isAnswer(toGrade)) { // CORRECT
-            if (!toGrade.assignmentQuestionAnswer.completed) {
-              if (toGrade.assignmentQuestionAnswer.triesUsed == 0) {  // FIRST TIME CORRECT
-                
-                console.log('correct first time');
-
-                toGrade.assignmentQuestionAnswer.score = toGrade.assignmentQuestion.pointsAvailable;
-                toGrade.assignmentQuestionAnswer.completed = true;
-                toGrade.assignmentQuestionAnswer.dateSaved = new Date();
-                const body = JSON.stringify(toGrade.assignmentQuestionAnswer);
-                return this.http.post(environment.baseUrl + '/assignmentQuestionAnswer'
-                  + this.getToken(), body, { headers: headers })
-                  .map((response: Response) => {
-                    const result = response.json();
-                    const returnedAssignmentQuestionAnswer = new AssignmentQuestionAnswer(
-                      result.obj.userID,
-                      result.obj.assignmentQuestionID,
-                      result.obj.studentAnswerObject,
-                      result.obj.triesUsed,
-                      result.obj.score,
-                      result.obj.completed,
-                      result.obj.dateSaved,
-                      result.obj.assignmentID,
-                      result.obj._id,
-                    );
-                    this.assignmentQuestionAnswers.splice(this.assignmentQuestionAnswers.indexOf(toGrade.assignmentQuestionAnswer),1)
-                    this.assignmentQuestionAnswers.unshift(returnedAssignmentQuestionAnswer);
-                    return returnedAssignmentQuestionAnswer;
-                  })
-                  .catch((error: Response) => Observable.throw('Error in AssignmentQuestion Service gradeAssignmentQuestion()'));
-              } else {                                                // NOT THE FIRST TIME CORRECT
-
-                console.log('correct not first time');
-
-                toGrade.assignmentQuestionAnswer.score = toGrade.assignmentQuestion.pointsAvailable
-                  - (toGrade.assignmentQuestion.pointsLostPerTry * toGrade.assignmentQuestionAnswer.triesUsed);
-                toGrade.assignmentQuestionAnswer.completed = true;
-                toGrade.assignmentQuestionAnswer.dateSaved = new Date();
-                const body = JSON.stringify(toGrade.assignmentQuestionAnswer);
-                return this.http.patch(environment.baseUrl + '/assignmentQuestionAnswer/'
-                  + toGrade.assignmentQuestionAnswer.assignmentQuestionAnswerID
-                  + this.getToken(), body, { headers: headers })
-                  .map((response: Response) => {
-                    const result = response.json();
-                    const returnedAssignmentQuestionAnswer = new AssignmentQuestionAnswer(
-                      result.obj.userID,
-                      result.obj.assignmentQuestionID,
-                      result.obj.studentAnswerObject,
-                      result.obj.triesUsed,
-                      result.obj.score,
-                      result.obj.completed,
-                      result.obj.dateSaved,
-                      result.obj.assignmentID,
-                      result.obj._id,
-                    );
-                    this.assignmentQuestionAnswers.splice(this.assignmentQuestionAnswers.indexOf(toGrade.assignmentQuestionAnswer),1)
-                    this.assignmentQuestionAnswers.unshift(returnedAssignmentQuestionAnswer);
-                    return returnedAssignmentQuestionAnswer;
-                  })
-                  .catch((error: Response) => Observable.throw('Error in AssignmentQuestion Service gradeAssignmentQuestion()'));
-              }
-            }
-          } else {                    // WRONG
-            if (!toGrade.assignmentQuestionAnswer.completed) {
-              if (toGrade.assignmentQuestionAnswer.triesUsed == 0) {  // FIRST TIME WRONG
-
-                console.log('wrong first time');
-
-                toGrade.assignmentQuestionAnswer.triesUsed++;
-                toGrade.assignmentQuestionAnswer.score = toGrade.assignmentQuestion.pointsAvailable
-                  - (toGrade.assignmentQuestion.pointsLostPerTry * toGrade.assignmentQuestionAnswer.triesUsed);
-                toGrade.assignmentQuestionAnswer.completed = !(toGrade.assignmentQuestion.numberOfTries > toGrade.assignmentQuestionAnswer.triesUsed);
-                toGrade.assignmentQuestionAnswer.dateSaved = new Date();
-                const body = JSON.stringify(toGrade.assignmentQuestionAnswer);
-                return this.http.post(environment.baseUrl + '/assignmentQuestionAnswer'
-                  + this.getToken(), body, { headers: headers })
-                  .map((response: Response) => {
-                    const result = response.json();
-                    const returnedAssignmentQuestionAnswer = new AssignmentQuestionAnswer(
-                      result.obj.userID,
-                      result.obj.assignmentQuestionID,
-                      result.obj.studentAnswerObject,
-                      result.obj.triesUsed,
-                      result.obj.score,
-                      result.obj.completed,
-                      result.obj.dateSaved,
-                      result.obj.assignmentID,
-                      result.obj._id,
-                    );
-                    this.assignmentQuestionAnswers.splice(this.assignmentQuestionAnswers.indexOf(toGrade.assignmentQuestionAnswer),1)
-                    this.assignmentQuestionAnswers.unshift(returnedAssignmentQuestionAnswer);
-                    return returnedAssignmentQuestionAnswer;
-                  })
-                  .catch((error: Response) => Observable.throw('Error in AssignmentQuestion Service gradeAssignmentQuestion()'));
-              } else {                                              // NOT THE FIRST TIME WRONG
-
-                console.log('wrong not first time');
-
-                toGrade.assignmentQuestionAnswer.triesUsed++;
-                toGrade.assignmentQuestionAnswer.score = toGrade.assignmentQuestion.pointsAvailable
-                  - (toGrade.assignmentQuestion.pointsLostPerTry * toGrade.assignmentQuestionAnswer.triesUsed);
-                toGrade.assignmentQuestionAnswer.completed = !(toGrade.assignmentQuestion.numberOfTries > toGrade.assignmentQuestionAnswer.triesUsed);
-                toGrade.assignmentQuestionAnswer.dateSaved = new Date();
-                const body = JSON.stringify(toGrade.assignmentQuestionAnswer);
-                return this.http.patch(environment.baseUrl + '/assignmentQuestionAnswer/'
-                  + toGrade.assignmentQuestionAnswer.assignmentQuestionAnswerID
-                  + this.getToken(), body, { headers: headers })
-                  .map((response: Response) => {
-                    const result = response.json();
-                    const returnedAssignmentQuestionAnswer = new AssignmentQuestionAnswer(
-                      result.obj.userID,
-                      result.obj.assignmentQuestionID,
-                      result.obj.studentAnswerObject,
-                      result.obj.triesUsed,
-                      result.obj.score,
-                      result.obj.completed,
-                      result.obj.dateSaved,
-                      result.obj.assignmentID,
-                      result.obj._id,
-                    );
-                    this.assignmentQuestionAnswers.splice(this.assignmentQuestionAnswers.indexOf(toGrade.assignmentQuestionAnswer),1)
-                    this.assignmentQuestionAnswers.unshift(returnedAssignmentQuestionAnswer);
-                    return returnedAssignmentQuestionAnswer;
-                  })
-                  .catch((error: Response) => Observable.throw('Error in AssignmentQuestion Service gradeAssignmentQuestion()'));
-              }
-
-            }
+      if (this.isAnswer(toGrade)) { // CORRECT
+        if (!toGrade.assignmentQuestionAnswer.completed) {
+          if (toGrade.assignmentQuestionAnswer.triesUsed == 0) {
+            console.log('correct first time');
+            //#region Correct First Time
+            toGrade.assignmentQuestionAnswer.score = toGrade.assignmentQuestion.pointsAvailable;
+            toGrade.assignmentQuestionAnswer.completed = true;
+            toGrade.assignmentQuestionAnswer.dateSaved = new Date();
+            const body = JSON.stringify(toGrade.assignmentQuestionAnswer);
+            return this.http.post(environment.baseUrl + '/assignmentQuestionAnswer'
+              + this.getToken(), body, { headers: headers })
+              .map((response: Response) => {
+                const result = response.json();
+                const returnedAssignmentQuestionAnswer = new AssignmentQuestionAnswer(
+                  result.obj.userID,
+                  result.obj.assignmentQuestionID,
+                  result.obj.studentAnswerObject,
+                  result.obj.triesUsed,
+                  result.obj.score,
+                  result.obj.completed,
+                  result.obj.dateSaved,
+                  result.obj.assignmentID,
+                  result.obj._id,
+                );
+                this.assignmentQuestionAnswers.splice(this.assignmentQuestionAnswers.indexOf(toGrade.assignmentQuestionAnswer), 1)
+                this.assignmentQuestionAnswers.unshift(returnedAssignmentQuestionAnswer);
+                return returnedAssignmentQuestionAnswer;
+              })
+              .catch((error: Response) => Observable.throw('Error in AssignmentQuestion Service gradeAssignmentQuestion()'));
+            //#endregion 
+          } else {
+            console.log('correct not first time');
+            //#region Correct Not The First Time
+            toGrade.assignmentQuestionAnswer.score = toGrade.assignmentQuestion.pointsAvailable
+              - (toGrade.assignmentQuestion.pointsLostPerTry * toGrade.assignmentQuestionAnswer.triesUsed);
+            toGrade.assignmentQuestionAnswer.completed = true;
+            toGrade.assignmentQuestionAnswer.dateSaved = new Date();
+            const body = JSON.stringify(toGrade.assignmentQuestionAnswer);
+            return this.http.patch(environment.baseUrl + '/assignmentQuestionAnswer/'
+              + toGrade.assignmentQuestionAnswer.assignmentQuestionAnswerID
+              + this.getToken(), body, { headers: headers })
+              .map((response: Response) => {
+                const result = response.json();
+                const returnedAssignmentQuestionAnswer = new AssignmentQuestionAnswer(
+                  result.obj.userID,
+                  result.obj.assignmentQuestionID,
+                  result.obj.studentAnswerObject,
+                  result.obj.triesUsed,
+                  result.obj.score,
+                  result.obj.completed,
+                  result.obj.dateSaved,
+                  result.obj.assignmentID,
+                  result.obj._id,
+                );
+                this.assignmentQuestionAnswers.splice(this.assignmentQuestionAnswers.indexOf(toGrade.assignmentQuestionAnswer), 1)
+                this.assignmentQuestionAnswers.unshift(returnedAssignmentQuestionAnswer);
+                return returnedAssignmentQuestionAnswer;
+              })
+              .catch((error: Response) => Observable.throw('Error in AssignmentQuestion Service gradeAssignmentQuestion()'));
+            //#endregion 
           }
-          break;
-
-        default:
-          break;
+        }
+      } else {                    // WRONG
+        if (!toGrade.assignmentQuestionAnswer.completed) {
+          if (toGrade.assignmentQuestionAnswer.triesUsed == 0) {
+            console.log('wrong first time');
+            //#region Wrong The First Time
+            toGrade.assignmentQuestionAnswer.triesUsed++;
+            toGrade.assignmentQuestionAnswer.score = toGrade.assignmentQuestion.pointsAvailable
+              - (toGrade.assignmentQuestion.pointsLostPerTry * toGrade.assignmentQuestionAnswer.triesUsed);
+            toGrade.assignmentQuestionAnswer.completed = !(toGrade.assignmentQuestion.numberOfTries > toGrade.assignmentQuestionAnswer.triesUsed);
+            toGrade.assignmentQuestionAnswer.dateSaved = new Date();
+            const body = JSON.stringify(toGrade.assignmentQuestionAnswer);
+            return this.http.post(environment.baseUrl + '/assignmentQuestionAnswer'
+              + this.getToken(), body, { headers: headers })
+              .map((response: Response) => {
+                const result = response.json();
+                const returnedAssignmentQuestionAnswer = new AssignmentQuestionAnswer(
+                  result.obj.userID,
+                  result.obj.assignmentQuestionID,
+                  result.obj.studentAnswerObject,
+                  result.obj.triesUsed,
+                  result.obj.score,
+                  result.obj.completed,
+                  result.obj.dateSaved,
+                  result.obj.assignmentID,
+                  result.obj._id,
+                );
+                this.assignmentQuestionAnswers.splice(this.assignmentQuestionAnswers.indexOf(toGrade.assignmentQuestionAnswer), 1)
+                this.assignmentQuestionAnswers.unshift(returnedAssignmentQuestionAnswer);
+                return returnedAssignmentQuestionAnswer;
+              })
+              .catch((error: Response) => Observable.throw('Error in AssignmentQuestion Service gradeAssignmentQuestion()'));
+            //#endregion 
+          } else {
+            console.log('wrong not first time');
+            //#region Wrong Not The First Time
+            toGrade.assignmentQuestionAnswer.triesUsed++;
+            toGrade.assignmentQuestionAnswer.score = toGrade.assignmentQuestion.pointsAvailable
+              - (toGrade.assignmentQuestion.pointsLostPerTry * toGrade.assignmentQuestionAnswer.triesUsed);
+            toGrade.assignmentQuestionAnswer.completed = !(toGrade.assignmentQuestion.numberOfTries > toGrade.assignmentQuestionAnswer.triesUsed);
+            toGrade.assignmentQuestionAnswer.dateSaved = new Date();
+            const body = JSON.stringify(toGrade.assignmentQuestionAnswer);
+            return this.http.patch(environment.baseUrl + '/assignmentQuestionAnswer/'
+              + toGrade.assignmentQuestionAnswer.assignmentQuestionAnswerID
+              + this.getToken(), body, { headers: headers })
+              .map((response: Response) => {
+                const result = response.json();
+                const returnedAssignmentQuestionAnswer = new AssignmentQuestionAnswer(
+                  result.obj.userID,
+                  result.obj.assignmentQuestionID,
+                  result.obj.studentAnswerObject,
+                  result.obj.triesUsed,
+                  result.obj.score,
+                  result.obj.completed,
+                  result.obj.dateSaved,
+                  result.obj.assignmentID,
+                  result.obj._id,
+                );
+                this.assignmentQuestionAnswers.splice(this.assignmentQuestionAnswers.indexOf(toGrade.assignmentQuestionAnswer), 1)
+                this.assignmentQuestionAnswers.unshift(returnedAssignmentQuestionAnswer);
+                return returnedAssignmentQuestionAnswer;
+              })
+              .catch((error: Response) => Observable.throw('Error in AssignmentQuestion Service gradeAssignmentQuestion()'));
+            //#endregion 
+          }
+        }
       }
     }
   }
@@ -172,7 +164,22 @@ export class AssignmentQuestionService {
           }
         }
         return false;
-
+      case 'allThatApply':
+        for (var index = 0; index < toGrade.assignmentQuestion.numberOfChoices; index++) {
+          if (toGrade.assignmentQuestion.questionArray[index].isAnswer !=
+            toGrade.assignmentQuestionAnswer.studentAnswerObject[index].studentAnswer) {
+            return false;
+          }
+        }
+        return true;
+      case 'fillInTheBlank':
+        for (var index = 0; index < toGrade.assignmentQuestion.numberOfChoices; index++) {
+          if (toGrade.assignmentQuestion.questionArray[index].answerText !=
+            toGrade.assignmentQuestionAnswer.studentAnswerObject[index].studentAnswer) {
+            return false;
+          }
+        }
+        return true;
       default:
         break;
     }

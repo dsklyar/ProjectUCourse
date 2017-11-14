@@ -2,7 +2,7 @@
   <md-toolbar>
     <span>Score {{assignmentQuestionStudent.assignmentQuestionAnswer.score}}/{{assignmentQuestionStudent.assignmentQuestion.pointsAvailable}}</span>
     <span class="example-spacer"></span>
-    <span>Tries {{assignmentQuestionStudent.assignmentQuestion.numberOfTries - assignmentQuestionStudent.assignmentQuestionAnswer.triesUsed}} 
+    <span>Tries {{assignmentQuestionStudent.assignmentQuestion.numberOfTries - assignmentQuestionStudent.assignmentQuestionAnswer.triesUsed}}
       out of {{assignmentQuestionStudent.assignmentQuestion.numberOfTries}}</span>
   </md-toolbar>
   <md-card class="example-card" flex="40" flex-sm="80">
@@ -34,44 +34,54 @@
 
       <div [mathJax]="assignmentQuestionStudent.assignmentQuestion.questionBody"></div>
       <div [ngSwitch]="assignmentQuestionStudent.assignmentQuestion.questionType" class="choices-block">
-          <div *ngSwitchCase="'multipleChoice'">
-  
-            <md-radio-group class="example-radio-group" [(ngModel)]="answerObject" [disabled] = "disabled"
-             (change)="onRadioGroupChange($event)">
-              <md-radio-button class="example-radio-button" *ngFor="let choice of assignmentQuestionStudent.assignmentQuestion.questionArray" [value]="choice.choiceNumber">
-                <div [mathJax]="choice.choiceText"></div>
-              </md-radio-button>
-            </md-radio-group>
-  
-          </div>
-          <div *ngSwitchCase="'allThatApply'">
-  
-            <div class="newline-me" *ngFor="let choice of assignmentQuestionStudent.assignmentQuestion.questionArray">
-              <div class="inline-me">
-                <md-checkbox ></md-checkbox>
-                <label [mathJax]="choice.choiceText"></label>
+        <div *ngSwitchCase="'multipleChoice'">
+
+          <md-radio-group class="example-radio-group" [(ngModel)]="answerObject" [disabled]="disabled" (change)="onRadioGroupChange($event)">
+            <md-radio-button class="example-radio-button" *ngFor="let choice of assignmentQuestionStudent.assignmentQuestion.questionArray"
+              [value]="choice.choiceNumber">
+              <div [mathJax]="choice.choiceText"></div>
+            </md-radio-button>
+          </md-radio-group>
+
+        </div>
+        <div *ngSwitchCase="'allThatApply'">
+
+          <div class="newline-me" *ngFor="let choice of assignmentQuestionStudent.assignmentQuestion.questionArray; let i = index">
+            <div class="inline-me">
+              <div *ngIf="!disabled" class="inline-me">
+                <md-checkbox [disabled]="disabled" [(ngModel)]="assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject[i].studentAnswer"></md-checkbox>
               </div>
+              <div *ngIf="disabled" class="inline-me">
+                <md-checkbox [disabled]="disabled" [(ngModel)]="answerObject[i].Answer"></md-checkbox>
+              </div>
+              <label [mathJax]="choice.choiceText"></label>
             </div>
-  
           </div>
-          <div *ngSwitchCase="'fillInTheBlank'">
-  
-            <!-- <div class="newline-me">
-              <div *ngFor="let choice of questionArray.controls">
+
+        </div>
+        <div *ngSwitchCase="'fillInTheBlank'">
+
+          <div class="newline-me">
+              <div *ngFor="let choice of assignmentQuestionStudent.assignmentQuestion.questionArray; let i = index">
                 <div class="fill-in-blank">
-                  <label [mathJax]="choice.value.choiceText">:</label>
+                  <label [mathJax]="choice.choiceText">:</label>
                   <span></span>
                   <md-form-field>
-                    <input mdInput type="text" [(ngModel)]="choice.value.studentAnswer">
+                    <div *ngIf="!disabled">
+                        <input mdInput type="text" [disabled]="disabled"  [(ngModel)]="assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject[i].studentAnswer">
+                    </div>
+                    <div *ngIf="disabled">
+                        <input mdInput type="text" [disabled]="disabled"  [(ngModel)]="answerObject[i].Answer">
+                    </div>
                   </md-form-field>
                 </div>
               </div>
-            </div> -->
-  
-          </div>
-          <div *ngSwitchCase="'freeResponse'">
-  
-            <!-- <div *ngFor="let choice of questionArray.controls">
+            </div>
+
+        </div>
+        <div *ngSwitchCase="'freeResponse'">
+
+          <!-- <div *ngFor="let choice of questionArray.controls">
               <div class="free-response">
                 <label [mathJax]="choice.value.choiceText">:</label>
                 <span></span>
@@ -80,9 +90,9 @@
                 </md-form-field>
               </div>
             </div> -->
-  
-          </div>
+
         </div>
+      </div>
 
     </md-card-content>
     <md-card-actions>
