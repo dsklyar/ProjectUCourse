@@ -1,9 +1,5 @@
 var mongoose = require('mongoose'),
-Schema = mongoose.Schema,
-    User = require('./user.js'),
-    UserSchema = mongoose.model('User').schema;
-    Course = require('./course.js'),
-    CourseSchema = mongoose.model('Course').schema;
+Schema = mongoose.Schema;
 var mongooseUniqueValidator = require('mongoose-unique-validator');
 
 var schema = new Schema({
