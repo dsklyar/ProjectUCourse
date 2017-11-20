@@ -4,7 +4,7 @@
     <md-card-header>
       <button md-raised-button class="btn" (click)="isEditProfile = true">
         <md-icon class="edit-icon">edit</md-icon>Edit Profile</button>
-            <img class = "pic material-icons" src="" alt="account_circle" >
+            <img class = "pic material-icons" src="{{this.user?.profilePic}}" alt="account_circle" >
     </md-card-header>
     <md-card-content>
       <h1>
@@ -24,7 +24,7 @@
       <button md-raised-button class="btn" (click)="isEditProfile = false">
         <md-icon class="edit-icon">edit</md-icon>Cancel Edit</button>
         <div class="material-icons" (click)="openDialog()">
-          <img class = "pic" src="" alt="account_circle" >
+          <img class = "pic" src="{{this.user?.profilePic}}" alt="account_circle" >
           <md-icon class = "icon-edit">edit</md-icon>
         </div>
     </md-card-header>

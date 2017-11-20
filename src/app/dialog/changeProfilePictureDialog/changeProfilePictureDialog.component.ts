@@ -1,8 +1,8 @@
+import { User } from '../../models/user.model';
 import { NgModel } from '@angular/forms/src/directives';
 import * as console from 'console';
-import { MdDialogRef } from '@angular/material';
-import { Component } from '@angular/core';
-
+import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { Component,Inject, OnInit } from '@angular/core';
 @Component({
     selector: 'confirm-dialog',
     templateUrl: './changeProfilePictureDialog.component.html',
@@ -20,9 +20,9 @@ import { Component } from '@angular/core';
     }
     .picOption{
         margin: 1.66%;
-        max-height: 150px;
-        max-width: 150px;
         font-size: 150px;
+        max-height: 150px;
+        max-width: 150px; 
         font-family: 'Material Icons';           
     }
     #optionTable{
@@ -53,7 +53,7 @@ export class ChangeProfilePictureDialogComponent {
 
     public title: string;
     public message: string;
-    profPic = "";
+    public profPic: string;
     array = [
         {src : "./assets/profilePic/dropouts_dream.jpg"},
         {src : "./assets/profilePic/ecrypted_dreams.jpg"},
@@ -62,10 +62,15 @@ export class ChangeProfilePictureDialogComponent {
         {src : "./assets/profilePic/wake_me_up.jpg"},
         {src : " "}
     ];
-    constructor(public dialogRef: MdDialogRef<ChangeProfilePictureDialogComponent>) {}
-    
+    constructor(@Inject(MD_DIALOG_DATA) private data: { user: User },
+    public dialogRef: MdDialogRef<ChangeProfilePictureDialogComponent>) {
+        this.profPic = this.data.user.profilePic;
+    }
+    OnInit(){}
     switch(x){
         this.profPic = x;
     }
-    
+    onSubmit(){
+        this.dialogRef.close(this.profPic);
+    }
 }

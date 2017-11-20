@@ -7,5 +7,6 @@ export class User {
                 public schoolName?: string,
                 public userType?: string,
                 public courses?: Course[],
-                public biography?: string){}
+                public biography?: string,
+                public profilePic?: string){}
 }
