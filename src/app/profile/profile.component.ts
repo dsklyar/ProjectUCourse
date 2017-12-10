@@ -1,3 +1,6 @@
+import {
+    ChangeProfilePictureDialogComponent,
+} from '../dialog/changeProfilePictureDialog/changeProfilePictureDialog.component';
 import { ChangeProfilePictureDialogService } from '../dialog/changeProfilePictureDialog/changeProfilePictureDialog.service';
 import { NgForm } from '@angular/forms/src/directives';
 import { AuthenticationService } from '../auth/authService/authentication.service';
@@ -6,6 +9,7 @@ import { NgIf } from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {MdDialog} from '@angular/material';
 
 @Component ({
     selector : 'app-profile',
@@ -19,8 +23,8 @@ import { Router } from '@angular/router';
         text-align: center;
       }
     .material-icons{
-        height: 150px;
-        width: 150px;
+        max-height: 150px;
+        max-width: 150px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -29,12 +33,10 @@ import { Router } from '@angular/router';
         height: 24px;
         width:24px;
     }
-    .icon-edit{
-        padding-top: 7px;	
-        padding-right: 7px;
+    .icon-edit{	
         position: absolute;
-        right: 167px;
-        top: 142px;
+        top: 153px;
+        left: 59.5%;
         display: none;
     }
     .material-icons:hover .icon-edit{
@@ -73,15 +75,15 @@ import { Router } from '@angular/router';
         margin-right: auto;     
     }
     #textarea{
-        width: 64%;
+        width: 100%;
+        text-align: center;
     }
-    
-    #table{
-        margin: 0 auto 0 auto;
+    #textAreaFormField{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-
-    
     `]
 })
 export class ProfileComponent implements OnInit {
@@ -89,8 +91,8 @@ export class ProfileComponent implements OnInit {
     user : User;
     isEditProfile = false;
     isChangeEmail = false;
-    one = "21979385_10208583556301210_1472323086_n.jpg";
-    constructor(private authService : AuthenticationService,
+    constructor(public dialog: MdDialog,
+        private authService : AuthenticationService,
                 private changeProfilePictureDialogService : ChangeProfilePictureDialogService) {
                     // NOTE:
                     // For Dylan with love from Daniel
@@ -141,8 +143,22 @@ export class ProfileComponent implements OnInit {
     }
     dialogResult : any;
     openDialog(){
-        this.changeProfilePictureDialogService
-        .confirm('Confirm Dialog', 'Are you sure you want to do this?')
-        .subscribe(res => this.dialogResult = res);
-    } 
+        let dialogRef = this.dialog.open(ChangeProfilePictureDialogComponent,{
+            data:{user: this.user}
+        });
+        
+        dialogRef.afterClosed().subscribe((result:string) => {
+            console.log(`Dialog closed: ${result}`);
+            this.dialogResult = result;
+            if(this.dialogResult === undefined){
+                this.user.profilePic = this.user.profilePic;
+            }
+            else{
+                this.user.profilePic = this.dialogResult;
+            }
+        });
+
+    }
+    
+    
 }
