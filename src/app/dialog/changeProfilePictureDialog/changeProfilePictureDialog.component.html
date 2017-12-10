@@ -1,4 +1,4 @@
-<h1>Select A Photo</h1>
+<h1 id ="dialogH1">Select A Photo</h1>
 <div>
   <img id="chosenPic" src="{{profPic}}" alt="account_circle">
 </div>
@@ -32,11 +32,12 @@
   <div *ngFor="let img of array">
     <label>
       <input type="radio" name="op" (click)="switch(img.src)" />
-      <img class="picOption" src="{{img.src}}">
+      <img class="picOption" src="{{img.src}}" alt="account_circle">
     </label>
   </div>
 </div>
 
-
-<button type="button" md-raised-button (click)="dialogRef.close(true)">OK</button>
+<md-dialog-actions>
+<button type="button" md-raised-button (click)="onSubmit(); ">OK</button>
 <button type="button" md-button (click)="dialogRef.close()">Cancel</button>
+</md-dialog-actions>
