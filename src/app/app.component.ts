@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import { CurrentActivatedRouteService } from './sharedServices/currentActivatedRoute.service';
-=======
 import { FlashCardService } from './flashCards/FlashCardService/flashCards.service';
->>>>>>> origin/KONO_DIO_DA
 import { ChangeProfilePictureDialogService } from './dialog/changeProfilePictureDialog/changeProfilePictureDialog.service';
 import { ConfirmDialogService } from './dialog/confirmDialog.service';
 import { AssignmentQuestionService } from './assignmentQuestion/assignmentQuestion-service/assignmentQuestion.service';
@@ -30,11 +27,8 @@ import { SidenavService } from '././sidenav/sidenav.service';
     SyllabusService,
     ConfirmDialogService,
     ChangeProfilePictureDialogService,
-<<<<<<< HEAD
-    CurrentActivatedRouteService
-=======
+    CurrentActivatedRouteService,
     FlashCardService
->>>>>>> origin/KONO_DIO_DA
   ]
 })
 export class AppComponent {
