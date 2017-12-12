@@ -1,3 +1,5 @@
+import { FlashCardInputComponent } from './flashCards/flashCard-input/flashCard-input.component';
+import { FlashCardListComponent } from './flashCards/flashCards-list/flashCards.list.component';
 import { flashCardsComponent } from './flashCards/flashCards.component';
 import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
 import {
@@ -111,6 +113,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SyllabusComponent,
 
     flashCardsComponent,
+    FlashCardListComponent,
+    FlashCardInputComponent,
     MathJaxDirective,
 
     ConfirmDialog,

@@ -1,3 +1,4 @@
+import { FlashCardService } from './flashCards/FlashCardService/flashCards.service';
 import { ChangeProfilePictureDialogService } from './dialog/changeProfilePictureDialog/changeProfilePictureDialog.service';
 import { ConfirmDialogService } from './dialog/confirmDialog.service';
 import { AssignmentQuestionService } from './assignmentQuestion/assignmentQuestion-service/assignmentQuestion.service';
@@ -24,7 +25,8 @@ import { SidenavService } from '././sidenav/sidenav.service';
     AssignmentQuestionService,
     SyllabusService,
     ConfirmDialogService,
-    ChangeProfilePictureDialogService
+    ChangeProfilePictureDialogService,
+    FlashCardService
   ]
 })
 export class AppComponent {
