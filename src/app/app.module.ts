@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import { AssignmentChartistComponent } from './assignmentChartist/assignmentChartist.component';
 
+=======
+import { FlashCardInputComponent } from './flashCards/flashCard-input/flashCard-input.component';
+import { FlashCardListComponent } from './flashCards/flashCards-list/flashCards.list.component';
+import { flashCardsComponent } from './flashCards/flashCards.component';
+>>>>>>> origin/KONO_DIO_DA
 import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
 import {
     ChangeProfilePictureDialogComponent,
@@ -114,6 +120,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AssignmentMenuComponent,
 
     AutoGrowDirective,
+    
+    SyllabusComponent,
+
+    flashCardsComponent,
+    FlashCardListComponent,
+    FlashCardInputComponent,
     MathJaxDirective,
 
     ConfirmDialog,

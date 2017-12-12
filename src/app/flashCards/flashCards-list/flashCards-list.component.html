@@ -1,0 +1,11 @@
+<div class="example-grid">
+    <div class="card-container">
+      <md-card class="example-card" flex="40" flex-sm="80" routerLink="/newFlashCard">
+        <md-card-content>
+          <md-icon class="icon">add_circle_outline</md-icon>
+        </md-card-content>
+      </md-card>
+    </div>
+    <app-flashCard *ngFor="let flashCard of flashCards" 
+      [flashCard]="flashCard"></app-flashCard>
+  </div>
