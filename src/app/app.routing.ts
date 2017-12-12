@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 import { AssignmentChartistComponent } from './assignmentChartist/assignmentChartist.component';
 
-=======
 import { FlashCardInputComponent } from './flashCards/flashCard-input/flashCard-input.component';
 import { FlashCardListComponent } from './flashCards/flashCards-list/flashCards.list.component';
->>>>>>> origin/KONO_DIO_DA
 import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
 import {
   AssignmentQuestionInputComponent,
