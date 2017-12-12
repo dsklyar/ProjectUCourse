@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 // goddamn database connection
 // local: mongoose.connect('mongodb://localhost/ucourse');
 // remote mongodb://daniel:ucourse@ds044709.mlab.com:44709/ucourse
-mongoose.connect('mongodb://daniel:ucourse@ds044709.mlab.com:44709/ucourse', function(err) {
+mongoose.connect('mongodb://localhost/ucourse', function(err) {
   if(err) {
     console.log(err);
   } else console.log('Successful connection to db.');
@@ -17,6 +17,7 @@ mongoose.connect('mongodb://daniel:ucourse@ds044709.mlab.com:44709/ucourse', fun
 const courseRoutes = require('./server/routes/course');
 const userRoutes = require('./server/routes/user');
 const announcementRoutes = require('./server/routes/announcement');
+const discussionRoutes = require('./server/routes/discussion');
 const assignmentRoutes = require('./server/routes/assignment');
 
 const app = express();
@@ -35,7 +36,7 @@ app.use('/course',courseRoutes);
 app.use('/user',userRoutes);
 app.use('/announcement',announcementRoutes);
 app.use('/assignment',assignmentRoutes);
-
+app.use('/discussion',discussionRoutes);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

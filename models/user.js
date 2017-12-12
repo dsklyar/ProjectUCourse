@@ -11,7 +11,7 @@ var schema = new Schema({
     lastName    : {type : String, required : true},
     schoolName  : {type : String, required : true},
     userType    : {type : String, enum : userType, required : true},
-    biography : {type : String},
+    biography   : {type : String},
     courseList  : [{type : Schema.Types.ObjectId, ref : 'Course'}]
 });
 schema.plugin(mongooseUniqueValidator);

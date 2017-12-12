@@ -1,0 +1,19 @@
+<div class="card-container">
+  <md-card class="example-card">
+    <form class="example-form" [formGroup]="newDiscussionForm" (ngSubmit)="onSubmit()">
+      <p>
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Title" formControlName="title">
+        </md-form-field>
+      </p>
+      <p>
+        <md-form-field class="example-full-width">
+          <textarea mdInput appAutoGrow placeholder="Message" formControlName="discussion"></textarea>
+        </md-form-field>
+      </p>
+      <button md-raised-button type="Submit" [disabled]="!newDiscussionForm.valid">Create Message</button>
+      <!-- USE type="button"  to make button not of submit type -->
+      <button md-raised-button type="button" (click)="onGoBack()">Go Back</button>
+    </form>
+  </md-card>
+</div>

@@ -1,3 +1,4 @@
+import { DiscussionService } from '../Discussion/DiscussionService/discussion.service';
 import { AssignmentService } from '../assignment/assignmentService/assignment.service';
 import { switchMapTo } from 'rxjs/operator/switchMapTo';
 import { AnnouncementService } from '../Announcement/AnnouncementService/announcemenet.service';
@@ -16,6 +17,7 @@ export class CourseMenuComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     private announcementService: AnnouncementService,
+    private discussionService: DiscussionService,
     private assignmentService: AssignmentService,
     private router: Router,
     private thisRoute: ActivatedRoute) { }
@@ -28,6 +30,7 @@ export class CourseMenuComponent implements OnInit {
     // MUST DO IT SO ANNOUNCEMENT LIST KNEW HAT COURSE IT WAS ON
     this.announcementService.setCourseID(this.courseID);
     this.assignmentService.setCourseID(this.courseID);
+    this.discussionService.setCourseID(this.courseID);
   }
   onLinkClick(e : any) {
     console.log(e);
@@ -37,6 +40,9 @@ export class CourseMenuComponent implements OnInit {
         break;
       case 1:
         this.router.navigate(['assignments'], { relativeTo: this.thisRoute });
+        break;
+      case 2:
+        this.router.navigate(['discussions'], { relativeTo: this.thisRoute });
         break;
       default:
         break;
