@@ -1,13 +1,14 @@
 <div class="card-container">
-    <md-card flex="40" flex-sm="80" routerLink="/newFlashCard">
+    <md-card flex="40" flex-sm="80" (click)="clicked()">
+
         <md-card-header>
             <md-card-title>{{flashCard.title}}</md-card-title>
             
         </md-card-header>
-        <md-card-content>
+        <!-- <md-card-content>
             <p>
               {{flashCard.flashCard}}
             </p>
-          </md-card-content>
+          </md-card-content> -->
     </md-card>
 </div>

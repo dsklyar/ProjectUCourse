@@ -1,6 +1,8 @@
 import { AssignmentChartistComponent } from './assignmentChartist/assignmentChartist.component';
 
 import { FlashCardInputComponent } from './flashCards/flashCard-input/flashCard-input.component';
+import { flashCardViewComponent } from './flashCards/flashCard-view/flashCard-view.component';
+
 import { FlashCardListComponent } from './flashCards/flashCards-list/flashCards.list.component';
 import { flashCardsComponent } from './flashCards/flashCards.component';
 import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
@@ -123,6 +125,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     flashCardsComponent,
     FlashCardListComponent,
     FlashCardInputComponent,
+    flashCardViewComponent,
+    
     MathJaxDirective,
 
     ConfirmDialog,
