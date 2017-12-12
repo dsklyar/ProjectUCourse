@@ -1,0 +1,103 @@
+<div class="card-container">
+  <md-toolbar>
+    <span>Score {{assignmentQuestionStudent.assignmentQuestionAnswer.score}}/{{assignmentQuestionStudent.assignmentQuestion.pointsAvailable}}</span>
+    <span class="example-spacer"></span>
+    <span>Tries {{assignmentQuestionStudent.assignmentQuestion.numberOfTries - assignmentQuestionStudent.assignmentQuestionAnswer.triesUsed}}
+      out of {{assignmentQuestionStudent.assignmentQuestion.numberOfTries}}</span>
+  </md-toolbar>
+  <md-card class="example-card" flex="40" flex-sm="80">
+    <md-card-header>
+
+      <div *ngIf="isInstructor(); then instructor"></div>
+      <ng-template #instructor>
+        <div class="menu">
+          <button md-icon-button [mdMenuTriggerFor]="menu">
+            <md-icon>more_vert</md-icon>
+          </button>
+          <md-menu #menu="mdMenu">
+            <button md-menu-item (click)="onEdit()">
+              <md-icon>mode_edit</md-icon>
+              <span>Edit</span>
+            </button>
+            <button md-menu-item (click)="onDelete()">
+              <md-icon>delete_forever</md-icon>
+              <span>Delete</span>
+            </button>
+          </md-menu>
+        </div>
+      </ng-template>
+
+      <md-card-title>{{assignmentQuestionStudent.assignmentQuestion.title}}</md-card-title>
+      <md-card-subtitle>{{assignmentQuestionStudent.assignmentQuestion.description}}</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+
+      <div [mathJax]="assignmentQuestionStudent.assignmentQuestion.questionBody"></div>
+      <div [ngSwitch]="assignmentQuestionStudent.assignmentQuestion.questionType" class="choices-block">
+        <div *ngSwitchCase="'multipleChoice'">
+
+          <md-radio-group class="example-radio-group" [(ngModel)]="answerObject" [disabled]="disabled" (change)="onRadioGroupChange($event)">
+            <md-radio-button class="example-radio-button" *ngFor="let choice of assignmentQuestionStudent.assignmentQuestion.questionArray"
+              [value]="choice.choiceNumber">
+              <div [mathJax]="choice.choiceText"></div>
+            </md-radio-button>
+          </md-radio-group>
+
+        </div>
+        <div *ngSwitchCase="'allThatApply'">
+
+          <div class="newline-me" *ngFor="let choice of assignmentQuestionStudent.assignmentQuestion.questionArray; let i = index">
+            <div class="inline-me">
+              <div *ngIf="!disabled" class="inline-me">
+                <md-checkbox [disabled]="disabled" [(ngModel)]="assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject[i].studentAnswer"></md-checkbox>
+              </div>
+              <div *ngIf="disabled" class="inline-me">
+                <md-checkbox [disabled]="disabled" [(ngModel)]="answerObject[i].Answer"></md-checkbox>
+              </div>
+              <label [mathJax]="choice.choiceText"></label>
+            </div>
+          </div>
+
+        </div>
+        <div *ngSwitchCase="'fillInTheBlank'">
+
+          <div class="newline-me">
+              <div *ngFor="let choice of assignmentQuestionStudent.assignmentQuestion.questionArray; let i = index">
+                <div class="fill-in-blank">
+                  <label [mathJax]="choice.choiceText">:</label>
+                  <span></span>
+                  <md-form-field>
+                    <div *ngIf="!disabled">
+                        <input mdInput type="text" [disabled]="disabled"  [(ngModel)]="assignmentQuestionStudent.assignmentQuestionAnswer.studentAnswerObject[i].studentAnswer">
+                    </div>
+                    <div *ngIf="disabled">
+                        <input mdInput type="text" [disabled]="disabled"  [(ngModel)]="answerObject[i].Answer">
+                    </div>
+                  </md-form-field>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div *ngSwitchCase="'freeResponse'">
+
+          <!-- <div *ngFor="let choice of questionArray.controls">
+              <div class="free-response">
+                <label [mathJax]="choice.value.choiceText">:</label>
+                <span></span>
+                <md-form-field>
+                  <textarea mdInput appAutoGrow [(ngModel)]="choice.value.studentAnswer"></textarea>
+                </md-form-field>
+              </div>
+            </div> -->
+
+        </div>
+      </div>
+
+    </md-card-content>
+    <md-card-actions>
+      <button md-button (click)="onTry()" [disabled]="isCompleted()">Try</button>
+      <button md-button>Save</button>
+    </md-card-actions>
+  </md-card>
+</div>

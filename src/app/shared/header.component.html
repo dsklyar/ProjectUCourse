@@ -1,7 +1,7 @@
 <md-toolbar class="menu-toolbar">
     <!--button md-icon-button (click)="sidenav.toggle()"-->
     <button md-icon-button (click)="navToggle()">
-        <md-icon class="material-icons">account_circle</md-icon>
+        <img class="material-icons" src ="{{this.user?.profilePic}}" alt="account_circle">
     </button>
     <span class="fill-space"></span>
     <a routerLink="/signin" *ngIf="!isLoggedIn()">Login</a>

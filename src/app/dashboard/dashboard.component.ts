@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../auth/authService/authentication.service';
 import { Course } from '../models/course.model';
 import { DashboardService } from './dashboard.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,15 +17,20 @@ import { Component, OnInit } from '@angular/core';
         align-content: center;
     }
     .example-card {
-        width: 300px;
+        min-width: 275px;
+        width: 1vw;
+        max-width: 300px;
         padding: 25px;
         margin: 10px;
-    }
+      }
     `]
 })
 export class DashboardComponent implements OnInit {
     courses: Course[];
-    constructor(private dashboardService: DashboardService) { }
+    constructor(private dashboardService: DashboardService,
+        private authService: AuthenticationService,
+        private router: Router) { 
+            this.authService.checkIfPreviouslyLoggedIn(); }
 
     ngOnInit() {
         this.dashboardService.getMessages()
@@ -31,7 +38,15 @@ export class DashboardComponent implements OnInit {
                 (courses: Course[]) => {
                     this.courses = courses;
                 },
-                error => console.log(error)
+                error => {
+                    // Maybe token has expired?
+                    // TODO:
+                    // Go to landing page
+                    this.router.navigate(['/signin']);
+                }
             );
+    }
+    isInstructor() {
+        return this.authService.userType == 'instructor'
     }
 }

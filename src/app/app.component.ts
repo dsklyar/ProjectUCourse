@@ -1,3 +1,9 @@
+import { CurrentActivatedRouteService } from './sharedServices/currentActivatedRoute.service';
+import { FlashCardService } from './flashCards/FlashCardService/flashCards.service';
+import { ChangeProfilePictureDialogService } from './dialog/changeProfilePictureDialog/changeProfilePictureDialog.service';
+import { ConfirmDialogService } from './dialog/confirmDialog.service';
+import { AssignmentQuestionService } from './assignmentQuestion/assignmentQuestion-service/assignmentQuestion.service';
+import { AssignmentService } from './assignment/assignmentService/assignment.service';
 import { SyllabusService } from './syllabus/syllabus-service/syllabus.service';
 import { AnnouncementService } from './Announcement/AnnouncementService/announcemenet.service';
 import { AuthenticationService } from './auth/authService/authentication.service';
@@ -16,7 +22,13 @@ import { SidenavService } from '././sidenav/sidenav.service';
     DashboardService,
     AuthenticationService,
     AnnouncementService,
-    SyllabusService
+    AssignmentService,
+    AssignmentQuestionService,
+    SyllabusService,
+    ConfirmDialogService,
+    ChangeProfilePictureDialogService,
+    CurrentActivatedRouteService,
+    FlashCardService
   ]
 })
 export class AppComponent {

@@ -1,13 +1,14 @@
-import { Question } from './question.model';
+import { AssignmentQuestion } from './assignmentQuestion.model';
+
 
 export class Assignment {
   constructor(public title: string,
               public description: string,
-              public minutes?: number,
+              public timeAvailable?: number,
               public dateDue?: Date,
               public dateCreated?: Date,
               public dateUpdated?: Date,
+              public assignmentQuestions? : AssignmentQuestion[],
               public assignmentID?: string,
-              public questions? : Question[]
             ){}
 }

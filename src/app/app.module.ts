@@ -1,5 +1,29 @@
 import { courseQuestionListComponent } from './courseQuestion/courseQuestion-list/courseQuestion-list.component';
 import { CourseQuestionComponent } from './courseQuestion/courseQuestion.component';
+import { AssignmentChartistComponent } from './assignmentChartist/assignmentChartist.component';
+
+import { FlashCardInputComponent } from './flashCards/flashCard-input/flashCard-input.component';
+import { FlashCardListComponent } from './flashCards/flashCards-list/flashCards.list.component';
+import { flashCardsComponent } from './flashCards/flashCards.component';
+import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
+import {
+    ChangeProfilePictureDialogComponent,
+} from './dialog/changeProfilePictureDialog/changeProfilePictureDialog.component';
+import {
+  AssignmentQuestionTestComponent,
+} from './assignmentQuestion/assignmentQuestion-test/assignmentQuestion-test.component';
+import { ConfirmDialog } from './dialog/confirmDialog.component';
+
+import {
+  AssignmentQuestionInputComponent,
+} from './assignmentQuestion/assignmentQuestion-input/assignmentQuestion-input.component';
+import { MathJaxDirective } from './directives/mathJax/mathjax.directive';
+import { AssignmentQuestionComponent } from './assignmentQuestion/assignmentQuestion.component';
+import {
+  AssignmentQuestionListComponent,
+} from './assignmentQuestion/assignmentQuestion-list.component/assignmentQuestion-list.component';
+import { AssignmentMenuComponent } from './assignmentMenu/assignmentMenu.component';
+import { AssignmentInputComponent } from './assignment/assignment-input/assignment-input.component';
 import { AssignmentListComponent } from './assignment/assignment-list/assignment-list.component';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { SyllabusComponent } from './syllabus/syllabus.component';
@@ -14,17 +38,27 @@ import { DashboardCourseComponent } from './dashboard/dashboardCourse.component'
 import {  HttpModule } from '@angular/http';
 import { DashboardCourseInputComponent } from './dashboard/dashboardCourse-input.component';
 
+import { ChartistModule } from 'ng-chartist';
+
+
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTabsModule, 
-         MatSidenavModule, 
+import { MatTabsModule,
+         MatSidenavModule,
          MatToolbarModule,
          MatButtonModule,
          MatIconModule,
          MatInputModule,
          MatCardModule,
          MatMenuModule,
-         MatSelectModule } from '@angular/material';
+         MatSelectModule,
+         MatDatepickerModule,
+         MdNativeDateModule,
+         MatCheckboxModule,
+         MatExpansionModule,
+         MatRadioModule,
+         MatDialogModule } from '@angular/material';
 import { routing } from './app.routing';
 
 import { NgModule } from '@angular/core';
@@ -46,7 +80,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
-    
+
     AuthenticationComponent,
 
     HeaderComponent,
@@ -60,6 +94,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DashboardComponent,
     DashboardCourseInputComponent,
     DashboardCourseComponent,
+    DashboardCourseAddComponent,
 
     ProfileComponent,
 
@@ -72,13 +107,35 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
     AssignmentComponent,
     AssignmentListComponent,
+    AssignmentInputComponent,
+
+    AssignmentQuestionComponent,
+    AssignmentQuestionListComponent,
+    AssignmentQuestionInputComponent,
+    AssignmentQuestionTestComponent,
+
+    AssignmentChartistComponent,
+
+    AssignmentMenuComponent,
 
     AutoGrowDirective,
     SyllabusComponent,
 
     CourseQuestionComponent,
-    courseQuestionListComponent
+    courseQuestionListComponent,
     
+    
+    SyllabusComponent,
+
+    flashCardsComponent,
+    FlashCardListComponent,
+    FlashCardInputComponent,
+    MathJaxDirective,
+
+    ConfirmDialog,
+    ChangeProfilePictureDialogComponent,
+
+    SyllabusComponent
   ],
   imports: [
     BrowserModule,
@@ -96,9 +153,20 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatCardModule,
     MatMenuModule,
     MatSelectModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDatepickerModule,
+    MdNativeDateModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatDialogModule,
+    ChartistModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ConfirmDialog,
+    ChangeProfilePictureDialogComponent
+],
 })
 export class AppModule { }

@@ -2,10 +2,14 @@
   <md-card class="example-card" flex="40" flex-sm="80">
     <md-card-header>
       <div class="menu">
-      <button md-icon-button [mdMenuTriggerFor]="menu">
+        <button md-icon-button [mdMenuTriggerFor]="menu">
           <md-icon>more_vert</md-icon>
         </button>
         <md-menu #menu="mdMenu">
+          <button md-menu-item (click)="openStats()">
+            <md-icon>multiline_chart</md-icon>
+            <span>Stats</span>
+          </button>
           <button md-menu-item (click)="onEdit()">
             <md-icon>mode_edit</md-icon>
             <span>Edit</span>
@@ -17,8 +21,8 @@
         </md-menu>
       </div>
       <!--div md-card-avatar class="example-header-image"></di-->
-      <md-card-title>{{assignment.title}}</md-card-title>
-      <md-card-subtitle>{{assignment.dateUpdated | date:'medium'}}</md-card-subtitle>
+      <md-card-title (click)="openAssignment()">{{assignment.title}}</md-card-title>
+      <md-card-subtitle>{{assignment.dateDue | date:'medium'}}</md-card-subtitle>
     </md-card-header>
     <md-card-content>
       <p>

@@ -1,5 +1,6 @@
 
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs';
@@ -21,24 +22,25 @@ export class AnnouncementService {
   getAnnouncementToEdit(){
     return this.announcementToEdit;
   }
-
-  addAnnouncement(announcement: Announcement) {
+  addAnnouncement(newAnnouncement: Announcement) {
     if (this.courseID != null) {
-      const body = JSON.stringify(announcement);
+      const body = JSON.stringify(newAnnouncement);
       const headers = new Headers({ 'Content-Type': 'application/json' });
-      return this.http.post('http://localhost:3000/announcement/' 
+      return this.http.post(environment.baseUrl + '/announcement/' 
       + this.courseID
       + this.getToken(), body, { headers: headers })
         .map((response: Response) => {
           const result = response.json();
-          const course = new Announcement(
+          const returnedAnnouncement = new Announcement(
             result.obj.title,
             result.obj.announcement,
             result.obj.dateCreated,
-            result.obj.dateUpdated
+            result.obj.dateUpdated,
+            result.obj._id
           );
-          this.announcements.unshift(announcement);
-          return course;
+          console.log(returnedAnnouncement);
+          this.announcements.unshift(returnedAnnouncement);
+          return returnedAnnouncement;
         })
         .catch((error: Response) => Observable.throw(error.json()));
     }
@@ -46,7 +48,7 @@ export class AnnouncementService {
   updateAnnouncement(announcement: Announcement){
     const body = JSON.stringify(announcement);
     const headers = new Headers({ 'Content-Type': 'application/json' });
-    return this.http.patch('http://localhost:3000/announcement/' 
+    return this.http.patch(environment.baseUrl + '/announcement/' 
     + announcement.announcementID
     + this.getToken()
     , body, { headers: headers })
@@ -70,7 +72,7 @@ export class AnnouncementService {
   // YOU MUST REFRESH FIRST BEFORE ADDING CNEW ANNOUNCEMENTS
   // OTHERWISE COURSEID IS UNDEFINED
   refreshAnnouncements() {
-    return this.http.get('http://localhost:3000/announcement/' 
+    return this.http.get(environment.baseUrl + '/announcement/' 
     + this.courseID
     + this.getToken())
     .map((response: Response) => {
@@ -100,7 +102,7 @@ export class AnnouncementService {
     .catch((error: Response) => Observable.throw('Error in Announcement Service'));
   }
   removeAnnouncement(announcement: Announcement) {
-    return this.http.delete('http://localhost:3000/announcement/' 
+    return this.http.delete(environment.baseUrl + '/announcement/' 
     + announcement.announcementID 
     + "/"
     + this.courseID

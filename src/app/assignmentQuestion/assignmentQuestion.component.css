@@ -1,0 +1,45 @@
+.card-container {
+  margin-top: 30px;
+  max-width : 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.menu {
+  margin-left: auto;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.example-selected-value {
+  margin: 15px 0;
+}
+.newline-me {
+  display: grid;
+  margin-top: 5px;
+}
+.fill-in-blank span {
+  margin-right: 5%;
+}
+.fill-in-blank {
+  display: flex;
+}
+.example-full-width {
+  width : 100%;
+}
+.choices-block {
+  margin-top: 10px;
+}
+.inline-me {
+  display: inline;
+}

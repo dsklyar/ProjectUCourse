@@ -10,11 +10,14 @@ import {SidenavService} from '.././sidenav/sidenav.service';
         `.fill-space {
             flex: 1 1 auto;
           }
+          .menu-toolbar {
+            background-size:100% 100%;
+          }
           .menu-toolbar a {
             padding: 1%;
             display: inline-block;
             text-decoration: none;
-            color: #282828;
+            color: #232323;
           }
           .material-icons{
               font-size: 48px;
