@@ -2,6 +2,7 @@
 import { CourseQuestion } from '../../models/courseQuestion.model';
 
 import { Component, Input, OnInit } from '@angular/core';
+import { CourseQuestionService } from '../courseQuestion-service/courseQuestion.service';
 
 
 @Component({
@@ -12,31 +13,11 @@ import { Component, Input, OnInit } from '@angular/core';
 
 
 export class courseQuestionListComponent implements OnInit {
-  private courseQuestions: CourseQuestion[] = [new CourseQuestion(
-    "Title",
-    "",
-    new Date(),
-    new Date(),
-    ""
-  ),
-  new CourseQuestion(
-    "Title",
-    "",
-    new Date(),
-    new Date(),
-    ""
-  ),
-  new CourseQuestion(
-    "Title",
-    "",
-    new Date(),
-    new Date(),
-    ""
-  ),
+  private courseQuestions: CourseQuestion[] = [];
 
-  ]
-
-  constructor() { }
+  constructor(private courseQuestonService: CourseQuestionService) {
+    this.courseQuestions = this.courseQuestonService.courseQuestions;
+   }
 
   ngOnInit() {
 

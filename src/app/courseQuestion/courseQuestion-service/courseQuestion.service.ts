@@ -7,6 +7,12 @@ import { CourseQuestion } from '../../models/courseQuestion.model';
 
 @Injectable()
 export class CourseQuestionService{
-    private courseQuestion:CourseQuestion[] = []
+     courseQuestions:CourseQuestion[] = []
+    addcourseQuestion(courseQuestion: CourseQuestion){
+        this.courseQuestions.push(courseQuestion);
+    }
+    deletecourseQuestion(courseQuestion: CourseQuestion){
+        this.courseQuestions.splice(this.courseQuestions.indexOf(courseQuestion), 1);
+    }
     constructor(private http: Http) { }
 }

@@ -76,6 +76,7 @@ import { HeaderComponent } from './shared/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { courseQuestionInputComponent } from './courseQuestion/courseQuestion-input/courseQuestion-input.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +124,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
     CourseQuestionComponent,
     courseQuestionListComponent,
+    courseQuestionInputComponent,
     
     
     SyllabusComponent,
