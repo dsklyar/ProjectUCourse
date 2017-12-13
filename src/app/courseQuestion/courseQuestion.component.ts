@@ -17,7 +17,9 @@ export class CourseQuestionComponent {
 
   constructor(private courseQuestionService: CourseQuestionService,
    private router: Router) { }
-
+  clicked(){    
+    this.courseQuestionService.displaycourseQuestion(this.courseQuestion)
+  }
   onDelete() {
     this.courseQuestionService.deletecourseQuestion(this.courseQuestion)
     //this.courseQuestionService.removecourseQuestion(this.courseQuestion)

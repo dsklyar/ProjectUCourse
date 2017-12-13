@@ -77,6 +77,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { courseQuestionInputComponent } from './courseQuestion/courseQuestion-input/courseQuestion-input.component';
+import { courseQuestionViewComponent } from './courseQuestion/courseQuestion-view/courseQuestion-view.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { courseQuestionInputComponent } from './courseQuestion/courseQuestion-in
     CourseQuestionComponent,
     courseQuestionListComponent,
     courseQuestionInputComponent,
+    courseQuestionViewComponent,
     
     
     SyllabusComponent,

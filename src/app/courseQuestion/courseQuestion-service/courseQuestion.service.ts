@@ -8,15 +8,21 @@ import { CourseQuestion } from '../../models/courseQuestion.model';
 @Injectable()
 export class CourseQuestionService{
     private courseQuestionToEdit : CourseQuestion;
+    public courseQuestionToDisplay : CourseQuestion;
      courseQuestions:CourseQuestion[] = []
+
+    displaycourseQuestion(courseQuestion){
+        console.log(courseQuestion);
+        this.courseQuestionToDisplay = courseQuestion;
+    }
     addcourseQuestion(courseQuestion: CourseQuestion){
         this.courseQuestions.push(courseQuestion);
     }
-    deletecourseQuestion(courseQuestion: CourseQuestion){
+    deletecourseQuestion(courseQuestion: CourseQuestion){          
         this.courseQuestions.splice(this.courseQuestions.indexOf(courseQuestion), 1);
     }
-    addcourseQuestionToEdit(courseQuestionToEdit : CourseQuestion){
-        this.courseQuestionToEdit = courseQuestionToEdit;
+    addcourseQuestionToEdit(courseQuestionToEdit : CourseQuestion){          
+        this.courseQuestionToEdit = courseQuestionToEdit; 
     }
     getcourseQuestionToEdit(){
         return this.courseQuestionToEdit;

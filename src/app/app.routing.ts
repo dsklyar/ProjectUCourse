@@ -22,6 +22,7 @@ import { SignupComponent } from './auth/signup.component';
 import { LogoutComponent } from './auth/logout.component';
 import { ProfileComponent} from './profile/profile.component';
 import { courseQuestionInputComponent } from './courseQuestion/courseQuestion-input/courseQuestion-input.component';
+import { courseQuestionViewComponent } from './courseQuestion/courseQuestion-view/courseQuestion-view.component';
 const APP_ROUTES: Routes = [
     // path full only react to this path if it is default path
     { path: '', redirectTo: '/signin', pathMatch: 'full'},
@@ -43,7 +44,8 @@ const APP_ROUTES: Routes = [
     { path: 'assignmentMenu/:assignmentID', component: AssignmentMenuComponent},
     { path : 'newassignmentQuestion', component: AssignmentQuestionInputComponent},
     { path : 'chartist/:assignmentID', component: AssignmentChartistComponent},
-    { path : 'newcourseQuestion', component: courseQuestionInputComponent}
+    { path : 'newcourseQuestion', component: courseQuestionInputComponent},
+    { path : 'courseQuestion-view', component: courseQuestionViewComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);
