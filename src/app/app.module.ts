@@ -1,3 +1,9 @@
+import { AssignmentChartistComponent } from './assignmentChartist/assignmentChartist.component';
+
+import { FlashCardInputComponent } from './flashCards/flashCard-input/flashCard-input.component';
+import { FlashCardListComponent } from './flashCards/flashCards-list/flashCards.list.component';
+import { flashCardsComponent } from './flashCards/flashCards.component';
+import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
 import {
     ChangeProfilePictureDialogComponent,
 } from './dialog/changeProfilePictureDialog/changeProfilePictureDialog.component';
@@ -33,6 +39,10 @@ import { CourseMenuComponent } from './courseMenu/courseMenu.component';
 import { DashboardCourseComponent } from './dashboard/dashboardCourse.component';
 import {  HttpModule } from '@angular/http';
 import { DashboardCourseInputComponent } from './dashboard/dashboardCourse-input.component';
+
+import { ChartistModule } from 'ng-chartist';
+
+
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -86,6 +96,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DashboardComponent,
     DashboardCourseInputComponent,
     DashboardCourseComponent,
+    DashboardCourseAddComponent,
 
     ProfileComponent,
 
@@ -110,9 +121,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AssignmentQuestionInputComponent,
     AssignmentQuestionTestComponent,
 
+    AssignmentChartistComponent,
+
     AssignmentMenuComponent,
 
     AutoGrowDirective,
+    
+    SyllabusComponent,
+
+    flashCardsComponent,
+    FlashCardListComponent,
+    FlashCardInputComponent,
     MathJaxDirective,
 
     ConfirmDialog,
@@ -142,7 +161,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatCheckboxModule,
     MatExpansionModule,
     MatRadioModule,
-    MatDialogModule
+    MatDialogModule,
+    ChartistModule
   ],
   providers: [],
   bootstrap: [AppComponent],

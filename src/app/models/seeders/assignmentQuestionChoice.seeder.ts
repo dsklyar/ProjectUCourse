@@ -1,4 +1,4 @@
-export class AssignmentQuestionSeeder {
+export class AssignmentQuestionChoiceSeeder {
   public constructor(public choiceText : string,
                      public isAnswer : boolean,
                      public answerText : string,

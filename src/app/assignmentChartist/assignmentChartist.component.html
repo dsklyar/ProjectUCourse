@@ -1,0 +1,14 @@
+<div class="card-container">
+    <md-card>
+        <div *ngIf="chart">
+            <x-chartist
+              class="col-md-6"
+              [data]="chart.data"
+              [type]="chart.type"
+              [options]="chart.options"
+              [responsiveOptions]="chart.responsiveOptions"
+              [events]="chart.events">
+            </x-chartist>
+        </div>
+      </md-card>
+</div>

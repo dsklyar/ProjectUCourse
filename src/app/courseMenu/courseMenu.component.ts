@@ -1,8 +1,9 @@
 import { DiscussionService } from '../Discussion/DiscussionService/discussion.service';
+import { CurrentActivatedRouteService } from '../sharedServices/currentActivatedRoute.service';
 import { AssignmentService } from '../assignment/assignmentService/assignment.service';
 import { switchMapTo } from 'rxjs/operator/switchMapTo';
 import { AnnouncementService } from '../Announcement/AnnouncementService/announcemenet.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Course } from '../models/course.model';
 import { Component, OnInit } from '@angular/core';
 
@@ -20,7 +21,8 @@ export class CourseMenuComponent implements OnInit {
     private discussionService: DiscussionService,
     private assignmentService: AssignmentService,
     private router: Router,
-    private thisRoute: ActivatedRoute) { }
+    private thisRoute: ActivatedRoute,
+    private currentActivatedRouteService: CurrentActivatedRouteService) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap
@@ -31,9 +33,42 @@ export class CourseMenuComponent implements OnInit {
     this.announcementService.setCourseID(this.courseID);
     this.assignmentService.setCourseID(this.courseID);
     this.discussionService.setCourseID(this.courseID);
+    this.router.events.forEach((event) => {
+
+      //Before Navigation
+      if (event instanceof NavigationStart) {
+        switch (event.url) {
+          case "/app/home":
+            {
+              //Do Work
+              break;
+            }
+          case "/app/About":
+            {
+              //Do Work
+              break;
+            }
+        }
+      }
+
+      //After Navigation
+      if (event instanceof NavigationEnd) {
+        switch (event.url) {
+          case "/app/home":
+            {
+              //Do Work
+              break;
+            }
+          case "/app/About":
+            {
+              //Do Work
+              break;
+            }
+        }
+      }
+    });
   }
-  onLinkClick(e : any) {
-    console.log(e);
+  onLinkClick(e: any) {
     switch (e.index) {
       case 0:
         this.router.navigate(['announcements'], { relativeTo: this.thisRoute });

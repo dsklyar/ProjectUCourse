@@ -14,17 +14,42 @@ export class DashboardService {
     // forthis u need at injectable so it will have 
     // a meta data for angular to recognise
     constructor(private http: Http,
-                private authService : AuthenticationService) { }
+        private authService: AuthenticationService) { }
+
+    registerCourse(registrationNum: string) {
+        // Specify that the object is type of Json
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.patch(environment.baseUrl + '/user/'
+            + this.getUserId() + '/'
+            + registrationNum
+            + this.getToken(), { headers: headers })
+            .map((response: Response) => {
+                const result = response.json();
+                const course = new Course(
+                    result.obj.title,
+                    result.obj.registrationNumber,
+                    result.obj.dateCreated,
+                    result.obj.dateUpdated,
+                    result.obj.description,
+                    result.obj.schoolName,
+                    result.obj._id,
+                    result.obj.announcements
+                );
+                this.courses.push(course);
+                return course;
+            })
+            .catch((error: Response) => Observable.throw(error.json()));
+    }
 
     addCourse(course: Course) {
-        
+
         // Stringify our course object
         const body = JSON.stringify(course);
         // Specify that the object is type of Json
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post(environment.baseUrl + '/course/' 
-        + this.getUserId()
-        + this.getToken(), body, { headers: headers })
+        return this.http.post(environment.baseUrl + '/course/'
+            + this.getUserId()
+            + this.getToken(), body, { headers: headers })
             .map((response: Response) => {
                 const result = response.json();
                 const course = new Course(
@@ -43,9 +68,9 @@ export class DashboardService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
     getMessages() {
-        return this.http.get(environment.baseUrl + '/course/' 
-        + this.getUserId()
-        + this.getToken())
+        return this.http.get(environment.baseUrl + '/course/'
+            + this.getUserId()
+            + this.getToken())
             .map((response: Response) => {
                 const courses = response.json().obj;    // obj is where courses stored in /courses routes
                 let transformedCourses: Course[] = [];
@@ -67,7 +92,7 @@ export class DashboardService {
             })
             .catch((error: Response) => Observable.throw('Error in Dashboard Service'));
     }
-    updateCourse(course: Course){
+    updateCourse(course: Course) {
         const body = JSON.stringify(course);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.patch(environment.baseUrl + '/course/' + course.courseID, body, { headers: headers })
@@ -88,11 +113,11 @@ export class DashboardService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
     removeCourse(course: Course) {
-        return this.http.delete(environment.baseUrl + '/course/' 
-        + course.courseID 
-        + "/"
-        + this.getUserId()
-        + this.getToken())
+        return this.http.delete(environment.baseUrl + '/course/'
+            + course.courseID
+            + "/"
+            + this.getUserId()
+            + this.getToken())
             .map((response: Response) => {
                 response.json();
                 this.courses.splice(this.courses.indexOf(course), 1);
@@ -100,16 +125,16 @@ export class DashboardService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
 
-    getToken(){
+    getToken() {
         const token = (localStorage.getItem('token'))
-        ? '?token=' + localStorage.getItem('token')
-        : '';
+            ? '?token=' + localStorage.getItem('token')
+            : '';
         return token;
     }
-    getUserId(){
+    getUserId() {
         const userId = (localStorage.getItem('userId'))
-        ? '' + localStorage.getItem('userId')
-        : '';
+            ? '' + localStorage.getItem('userId')
+            : '';
         return userId;
     }
 } 

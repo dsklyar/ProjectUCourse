@@ -27,6 +27,11 @@ export class AssignmentComponent {
     //this.announcementService.addAnnouncementToEdit(this.announcement);
   }
   openAssignment() {
+    // pass meta data to the assignmentQuestion list?
+    this.assignmentService.setSelectedAssignment(this.assignment);
     this.router.navigate(['assignmentMenu', this.assignment.assignmentID]);
+  }
+  openStats(){
+    this.router.navigate(['chartist', this.assignment.assignmentID]);
   }
 }

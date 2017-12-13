@@ -1,5 +1,10 @@
 import { DiscussionEditComponent } from './Discussion/Discussion-edit/discussion-edit.component';
 import { DiscussionInputComponent } from './Discussion/Discussion-input/discussion-input.component';
+import { AssignmentChartistComponent } from './assignmentChartist/assignmentChartist.component';
+
+import { FlashCardInputComponent } from './flashCards/flashCard-input/flashCard-input.component';
+import { FlashCardListComponent } from './flashCards/flashCards-list/flashCards.list.component';
+import { DashboardCourseAddComponent } from './dashboard/dashboardCourse-add/dashboardCourse-add.component';
 import {
   AssignmentQuestionInputComponent,
 } from './assignmentQuestion/assignmentQuestion-input/assignmentQuestion-input.component';
@@ -28,9 +33,13 @@ const APP_ROUTES: Routes = [
     { path: 'logout', component: LogoutComponent},
     { path: 'dashboard', component: DashboardComponent},
     { path: 'newcourse', component: DashboardCourseInputComponent},
+    { path: 'addcourse', component: DashboardCourseAddComponent},
     { path: 'profile', component: ProfileComponent},
     { path: 'newannouncement', component: AnnouncementInputComponent},
     { path: 'editannouncement', component: AnnouncementEditComponent},
+    { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES},
+    { path: 'flashCards', component: FlashCardListComponent},
+    { path: 'newFlashCard', component: FlashCardInputComponent},
     { path: 'newassignment', component: AssignmentInputComponent},
     { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES},
     { path: 'assignmentMenu/:assignmentID', component: AssignmentMenuComponent},
@@ -38,6 +47,8 @@ const APP_ROUTES: Routes = [
     { path: 'newdiscussion', component: DiscussionInputComponent},
     { path: 'editdiscussion', component: DiscussionEditComponent},
     
+    { path : 'newassignmentQuestion', component: AssignmentQuestionInputComponent},
+    { path : 'chartist/:assignmentID', component: AssignmentChartistComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);
