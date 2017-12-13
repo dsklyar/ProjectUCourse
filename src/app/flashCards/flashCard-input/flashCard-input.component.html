@@ -8,9 +8,14 @@
         </p>
         <p>
           <md-form-field class="example-full-width">
-            <textarea mdInput appAutoGrow placeholder="Definition" formControlName="flashCard"></textarea>
+            <textarea mdInput appAutoGrow placeholder="Information/Question" formControlName="flashCard"></textarea>
           </md-form-field>
         </p>
+        <p>
+            <md-form-field class="example-full-width">
+              <textarea mdInput appAutoGrow placeholder="Definition/Answer" formControlName="answer"></textarea>
+            </md-form-field>
+          </p>
         <button md-raised-button type="Submit" [disabled]="!newFlashCardForm.valid">Create Flash Card</button>
         <!-- USE type="button"  to make button not of submit type -->
         <button md-raised-button type="button" (click)="onGoBack()">Go Back</button>

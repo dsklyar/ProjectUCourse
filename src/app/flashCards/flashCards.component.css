@@ -9,12 +9,16 @@
   font-size: 24px;
 } */
 
-.card-container {
-  margin-top: 30px;
-  max-width : 1000px;
-  margin-left: auto;
-  margin-right: auto;
+.cardtitle{
+  font-size: 20px;
+  font-weight: 600;
+  word-break: break-word;
 }
 .menu {
   margin-left: auto;
+}
+
+.sideflash{
+  word-wrap: break-word;
+  margin-top: 10px;
 }

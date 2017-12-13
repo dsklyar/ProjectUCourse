@@ -16,6 +16,7 @@ export class FlashCardListComponent implements OnInit {
         this.flashCards = this.flashCardService.flashCards;
     }
 
+    
 
     ngOnInit() {
         // this.flashCardService.refreshFlashCards()

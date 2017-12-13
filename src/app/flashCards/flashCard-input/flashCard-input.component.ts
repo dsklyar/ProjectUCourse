@@ -20,14 +20,16 @@ export class FlashCardInputComponent implements OnInit {
     ngOnInit(){
         this.newFlashCardForm = new FormGroup({
             title: new FormControl(null, Validators.required),
-            flashCard: new FormControl(null, Validators.required)
+            flashCard: new FormControl(null, Validators.required),
+            answer: new FormControl(null, Validators.required)
         });
     }
     onSubmit(){
         this.flashCardService.addFlashCard(
             new FlashCard(
                 this.newFlashCardForm.controls['title'].value,
-                this.newFlashCardForm.controls['flashCard'].value
+                this.newFlashCardForm.controls['flashCard'].value,
+                this.newFlashCardForm.controls['answer'].value
             )
 
         );

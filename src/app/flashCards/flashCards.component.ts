@@ -17,6 +17,13 @@ export class flashCardsComponent {
     constructor(private flashCardsService: FlashCardService, //need to add service
         private router: Router){} 
 
+        clicked(){
+            console.log(this.flashCard);
+            this.flashCard.side = true;
+            this.flashCardsService.setCardToDisplay(this.flashCard);
+            
+        }
+
         onDelete(){
             //this.flashCardsService.removeflashCard(this.flashCards) //need to define these
         }

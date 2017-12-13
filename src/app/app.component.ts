@@ -32,7 +32,8 @@ import { CourseQuestionService } from './courseQuestion/courseQuestion-service/c
     ChangeProfilePictureDialogService,
     CurrentActivatedRouteService,
     FlashCardService,
-    CourseQuestionService
+    CourseQuestionService,
+    FlashCardService
   ]
 })
 export class AppComponent {

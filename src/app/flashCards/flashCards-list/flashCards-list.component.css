@@ -8,3 +8,38 @@
 .example-full-width {
     width : 100%;
 }
+/* .card-container {
+    margin-top: 10px;
+    max-width : 150px;
+    margin-right: auto; 
+    word-wrap: break-word;
+  } */
+  .buttontitle{ 
+      font-size: 11pt;
+  }
+  
+
+  .buttoncard{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgba(255,255,255,.87);
+    background-color: #3f51b5;
+    width: 103px;
+  }
+  
+  .toolbar {
+    margin-top: 30px;
+    max-width : 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .view{
+    margin-left: 145px;
+    margin-right: 165px;
+  }
+
+  .sidelist{
+    width: 150px;
+    float: left;
+  }
