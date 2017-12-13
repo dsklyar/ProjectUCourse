@@ -13,7 +13,7 @@ import { CourseQuestionService } from './courseQuestion-service/courseQuestion.s
 
 export class CourseQuestionComponent {
   @Input() courseQuestion: CourseQuestion = 
-  new CourseQuestion('title','question');
+  new CourseQuestion('title',[],'question');
 
   constructor(private courseQuestionService: CourseQuestionService,
    private router: Router) { }
@@ -25,8 +25,5 @@ export class CourseQuestionComponent {
       //result => console.log(result)
       //);
   }
-  onEdit() {
-    //this.router.navigateByUrl('/editcourseQuestion');
-   // this.courseQuestionService.addcourseQuestionToEdit(this.courseQuestion);
-  }
+
 }

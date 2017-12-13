@@ -26,7 +26,9 @@ export class courseQuestionInputComponent implements OnInit {
         this.courseQuestionService.addcourseQuestion(
             new CourseQuestion(
                 this.newcourseQuestionForm.controls['title'].value,
+                [],
                 this.newcourseQuestionForm.controls['description'].value
+
             )
         );
         this.newcourseQuestionForm.reset();

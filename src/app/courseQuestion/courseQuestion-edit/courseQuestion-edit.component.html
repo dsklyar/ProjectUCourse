@@ -1,0 +1,27 @@
+<div class="card-container">
+    <md-card class="example-card">
+      <form class="example-form" (ngSubmit)="onSubmit(f)" #f = "ngForm">
+        <p>
+          <md-form-field class="example-full-width">
+            <input mdInput 
+            placeholder="Title"
+            [ngModel] = "courseQuestionToEdit.title"
+            required
+            name="title">
+          </md-form-field>
+        </p>
+        <p>
+          <md-form-field class="example-full-width">
+            <textarea mdInput appAutoGrow 
+            placeholder="courseQuestion"
+            [ngModel] = "courseQuestionToEdit.courseQuestion"
+            required
+            name="courseQuestion"></textarea>
+          </md-form-field>
+        </p>
+        <button md-raised-button type="Submit" 
+        [disabled]="!f.valid">Edit Announcement</button>
+        <button md-raised-button (click)="onGoBack()">Go Back</button>
+      </form>
+    </md-card>
+  </div>
