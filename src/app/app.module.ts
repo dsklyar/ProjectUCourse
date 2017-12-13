@@ -1,3 +1,5 @@
+import { courseQuestionListComponent } from './courseQuestion/courseQuestion-list/courseQuestion-list.component';
+import { CourseQuestionComponent } from './courseQuestion/courseQuestion.component';
 import { AssignmentChartistComponent } from './assignmentChartist/assignmentChartist.component';
 
 import { FlashCardInputComponent } from './flashCards/flashCard-input/flashCard-input.component';
@@ -74,6 +76,9 @@ import { HeaderComponent } from './shared/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { courseQuestionInputComponent } from './courseQuestion/courseQuestion-input/courseQuestion-input.component';
+import { courseQuestionViewComponent } from './courseQuestion/courseQuestion-view/courseQuestion-view.component';
+import { questionResponseComponent } from './questionResponse/questionResposne.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +122,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AssignmentMenuComponent,
 
     AutoGrowDirective,
+    SyllabusComponent,
+
+    CourseQuestionComponent,
+    courseQuestionListComponent,
+    courseQuestionInputComponent,
+    courseQuestionViewComponent,
+    questionResponseComponent,
+    
     
     SyllabusComponent,
 

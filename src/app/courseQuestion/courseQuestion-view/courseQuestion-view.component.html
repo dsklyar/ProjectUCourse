@@ -1,0 +1,12 @@
+    <div class="card-container">
+            <h1>{{courseID}}</h1>
+            <md-card class="example-card">
+                <md-card-header>
+                    {{this.courseQuestion.title}}
+                </md-card-header>
+                <md-card-content>
+                    {{this.courseQuestion.courseQuestion}}
+                </md-card-content>
+                <button md-raised-button type="button" (click)="onGoBack()">Go Back</button>
+            </md-card>
+          </div>

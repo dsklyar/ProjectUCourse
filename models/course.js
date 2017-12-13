@@ -1,7 +1,9 @@
 var mongoose = require('mongoose'),
 Schema = mongoose.Schema,
     Announcement = require('./announcement.js'),
-    AnnouncementSchema = mongoose.model('Announcement').schema;
+    AnnouncementSchema = mongoose.model('Announcement').schema,
+    CourseQuestion = require('./courseQuestion.js'),
+    CourseQuestionSchema = mongoose.model('CourseQuestion')
 var mongooseUniqueValidator =  require('mongoose-unique-validator');
 
 
@@ -14,6 +16,7 @@ var schema = new Schema({
     description             : {type : String, required : true},
     assignments             : [{type : Schema.Types.ObjectId, ref : 'Assignment'}],
     announcements           : [{type : Schema.Types.ObjectId, ref : 'Announcement'}],
+    courseQuestions         : [{type : Schema.Types.ObjectId, ref : 'CourseQuestion'}]
     //courseQuestions               : [{type : Schema.Types.ObjectId, ref : 'CourseQuestion'}]
 });
 schema.pre('remove', function(callback) {
