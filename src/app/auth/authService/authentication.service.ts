@@ -66,7 +66,8 @@ export class AuthenticationService {
                     data.obj.schoolName,
                     data.obj.userType,
                     data.obj.courses,
-                    data.obj.biography
+                    data.obj.biography,
+                    data.obj.profilePic
                 );
                 this.user = o;
                 this.userType = this.user.userType;

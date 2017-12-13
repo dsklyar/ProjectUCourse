@@ -11,6 +11,7 @@ export const COURSEMENU_ROUTES : Routes = [
   { path: 'announcements', component: AnnouncementListComponent},
   { path: 'assignments', component: AssignmentListComponent },
   { path: 'syllabus', component: SyllabusComponent},
+  { path: '', redirectTo: 'discussions', pathMatch: 'full'},  
   { path: 'discussions', component: DiscussionListComponent}
   //{ path: 'assignments', component: SigninComponent},
   //{ path: 'messages', component: SignupComponent},

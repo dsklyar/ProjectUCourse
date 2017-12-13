@@ -18,18 +18,19 @@ export class DiscussionInputComponent implements OnInit {
   ngOnInit() {
     this.newDiscussionForm = new FormGroup({
       title: new FormControl(null, Validators.required),
-      announcement: new FormControl(null, Validators.required)
+      discussion: new FormControl(null, Validators.required)
     });
   }
   onSubmit() {
+    console.log(this.newDiscussionForm);
     this.discussionService.addDiscussion(
       new Discussion(
         this.newDiscussionForm.controls['title'].value,
         this.newDiscussionForm.controls['discussion'].value))
-      .subscribe(
-      //data => console.log(data),
-      error => console.log(error)
-      );
+      // .subscribe(
+      // //data => console.log(data),
+      // error => console.log(error)
+      // );
     this.newDiscussionForm.reset();
     this.location.back()
   }

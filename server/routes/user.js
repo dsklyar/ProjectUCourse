@@ -49,6 +49,7 @@ router.patch('/:id', function (req, res, next) {
     }
     user.email = req.body.email;
     user.biography = req.body.biography;
+    user.profilePic = req.body.profilePic;
     user.save(function (err, result) {
       if (err) {
         return res.status(500).json({

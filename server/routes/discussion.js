@@ -92,7 +92,7 @@ router.post('/:courseID', function (req, res, next) {
           error: err
         });
       }
-      course.discussion.push(discussion._id);
+      course.discussions.push(discussion._id);
       course.save(function (err, result) {
         if (err) {
           return res.status(500).json({
@@ -145,7 +145,7 @@ router.patch('/:id', function (req, res, next) {
     }
     discussion.title = req.body.title;
     discussion.dateUpdated = new Date();
-    discussion.discussion = req.body.discussion;
+    discussion.announcement = req.body.discussion;
     discussion.save(function (err, result) {
       if (err) {
         return res.status(500).json({

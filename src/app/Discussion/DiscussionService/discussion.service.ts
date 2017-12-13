@@ -22,27 +22,30 @@ export class DiscussionService {
     return this.discussionToEdit;
   }
   addDiscussion(newDiscussion: Discussion) {
-    if (this.courseID != null) {
-      const body = JSON.stringify(newDiscussion);
-      const headers = new Headers({ 'Content-Type': 'application/json' });
-      return this.http.post(environment.baseUrl + '/discussion/' 
-      + this.courseID
-      + this.getToken(), body, { headers: headers })
-        .map((response: Response) => {
-          const result = response.json();
-          const returnedDiscussion = new Discussion(
-            result.obj.title,
-            result.obj.discussion,
-            result.obj.dateCreated,
-            result.obj.dateUpdated,
-            result.obj._id
-          );
-          console.log(returnedDiscussion);
-          this.discussions.unshift(returnedDiscussion);
-          return returnedDiscussion;
-        })
-        .catch((error: Response) => Observable.throw(error.json()));
-    }
+    console.log("we did it");
+    this.discussions.push(newDiscussion);
+    // if (this.courseID != null) {
+    //   const body = JSON.stringify(newDiscussion);
+    //   const headers = new Headers({ 'Content-Type': 'application/json' });
+    //   return this.http.post(environment.baseUrl + '/discussion/' 
+    //   + this.courseID
+    //   + this.getToken(), body, { headers: headers })
+    //     .map((response: Response) => {
+    //       const result = response.json();
+    //       const returnedDiscussion = new Discussion(
+    //         result.obj.title,
+    //         result.obj.discussion,
+    //         result.obj.dateCreated,
+    //         result.obj.dateUpdated,
+    //         result.obj._id
+    //       );
+    //       console.log(returnedDiscussion);
+    //       this.discussions.unshift(returnedDiscussion);
+    //       return returnedDiscussion;
+    //     })
+    //     .catch((error: Response) => Observable.throw(error.json()));
+    // }
+    
   }
   updateDiscussion(discussion: Discussion){
     const body = JSON.stringify(discussion);
@@ -81,7 +84,7 @@ export class DiscussionService {
             transformedDiscussions.push(
                 new Discussion(
                   discussion.title,
-                  discussion.announcement,
+                  discussion.discussion,
                   discussion.dateCreated,
                   discussion.dateUpdated,
                   discussion._id
