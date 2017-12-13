@@ -17,5 +17,5 @@ export const COURSEMENU_ROUTES : Routes = [
   { path: 'discussions', component: DiscussionListComponent}
   //{ path: 'assignments', component: SigninComponent},
   //{ path: 'messages', component: SignupComponent},
-  //{ path: 'calendar', component: LogoutComponent}
+  //{ path: 'calendar', component: LogoutComponent
 ];
