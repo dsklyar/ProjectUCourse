@@ -21,4 +21,5 @@ export class FlashCardService{
         this.displayedCard = flashCard;
         console.log(this.displayedCard);
     }
+    
 }

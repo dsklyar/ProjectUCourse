@@ -18,8 +18,10 @@ export class flashCardsComponent {
         private router: Router){} 
 
         clicked(){
-            // console.log(this.flashCard);
+            console.log(this.flashCard);
+            this.flashCard.side = true;
             this.flashCardsService.setCardToDisplay(this.flashCard);
+            
         }
 
         onDelete(){

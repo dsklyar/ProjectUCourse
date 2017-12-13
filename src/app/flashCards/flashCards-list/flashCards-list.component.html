@@ -6,18 +6,21 @@
     <md-icon class="example-icon">delete</md-icon> -->
   </md-toolbar>
 </div>
-<div class="example-grid">
-    <div class="card-container">
-      <md-card class="example-card" flex="40" flex-sm="80" routerLink="/newFlashCard">
+<div class="grid-container">
+    <div class="addbutton">
+      <md-card class="buttoncard" flex="40" flex-sm="80" routerLink="/newFlashCard">
         <md-card-content>
           <md-card-title class="buttontitle">Create New<br></md-card-title>
           <md-icon class="icon">add_circle_outline</md-icon>
         </md-card-content>
-        
       </md-card>
     </div>
-    <app-flashCard *ngFor="let flashCard of flashCards" 
-    [flashCard]="flashCard"></app-flashCard>
+    <div class="sidelist">
+        <app-flashCard *ngFor="let flashCard of flashCards" 
+        [flashCard]="flashCard"></app-flashCard>
+    </div>
+    <div class="view">
     <app-flashCard-view class="view"></app-flashCard-view>
+    </div>
   </div>
   
