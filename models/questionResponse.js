@@ -9,7 +9,7 @@ var schema = new Schema({
     courseQuestionID         : {type : Schema.Types.ObjectId, ref : 'CourseQuestion', required : true},
     dateCreated              : {type : Date, required: true},
     dateUpdated              : {type : Date, required: true},
-    courseQuestionResponse   : {type : String, required: true}
+    questionResponse         : {type : String, required: true}
 });
 schema.plugin(mongooseUniqueValidator);
-module.exports = mongoose.model('CourseQuestionResponse',schema);
+module.exports = mongoose.model('questionResponse',schema);

@@ -1,13 +1,12 @@
-<div class="view" >
-        <md-card class="box" flex="40" flex-sm="80">
-            <md-card-header>
+    <div class="card-container">
+            <h1>{{courseID}}</h1>
+            <md-card class="example-card">
+                <md-card-header>
                     {{this.courseQuestion.title}}
-                <!-- <md-card-title>{{flashCard.title}}</md-card-title> -->
-                
-            </md-card-header>
-            <md-card-content>
+                </md-card-header>
+                <md-card-content>
                     {{this.courseQuestion.courseQuestion}}
-            </md-card-content>
-            <button md-raised-button type="button" (click)="onGoBack()">Go Back</button>
-        </md-card>
-    </div>
+                </md-card-content>
+                <button md-raised-button type="button" (click)="onGoBack()">Go Back</button>
+            </md-card>
+          </div>

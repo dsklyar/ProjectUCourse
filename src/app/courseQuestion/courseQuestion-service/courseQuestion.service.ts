@@ -12,7 +12,6 @@ export class CourseQuestionService{
      courseQuestions:CourseQuestion[] = []
 
     displaycourseQuestion(courseQuestion){
-        console.log(courseQuestion);
         this.courseQuestionToDisplay = courseQuestion;
     }
     addcourseQuestion(courseQuestion: CourseQuestion){
