@@ -1,17 +1,13 @@
-.card-container {
+/* .card-container {
     margin-top: 10px;
     max-width : 150px;
     margin-right: auto; 
-  }
+    word-wrap: break-word;
+  } */
   .buttontitle{ 
       font-size: 11pt;
   }
-  .grid-container{
-      /* width: 150px;
-      height: auto;
-      margin-left: 0px;
-      float: left; */
-    }
+  
 
   .buttoncard{
     padding-top: 10px;
