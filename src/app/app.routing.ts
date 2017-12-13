@@ -1,3 +1,5 @@
+import { DiscussionEditComponent } from './Discussion/Discussion-edit/discussion-edit.component';
+import { DiscussionInputComponent } from './Discussion/Discussion-input/discussion-input.component';
 import { AssignmentChartistComponent } from './assignmentChartist/assignmentChartist.component';
 
 import { FlashCardInputComponent } from './flashCards/flashCard-input/flashCard-input.component';
@@ -15,6 +17,7 @@ import { CourseMenuComponent } from './courseMenu/courseMenu.component';
 import { DashboardCourseInputComponent } from './dashboard/dashboardCourse-input.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
+
 
 import { AuthenticationComponent } from './auth/authentication.component';
 import { SigninComponent } from './auth/signin.component';
@@ -42,6 +45,10 @@ const APP_ROUTES: Routes = [
     { path: 'newassignment', component: AssignmentInputComponent},
     { path: 'courseMenu/:courseID', component: CourseMenuComponent, children: COURSEMENU_ROUTES},
     { path: 'assignmentMenu/:assignmentID', component: AssignmentMenuComponent},
+    { path: 'newassignmentQuestion', component: AssignmentQuestionInputComponent},
+    { path: 'newdiscussion', component: DiscussionInputComponent},
+    { path: 'editdiscussion', component: DiscussionEditComponent},
+    
     { path : 'newassignmentQuestion', component: AssignmentQuestionInputComponent},
     { path : 'chartist/:assignmentID', component: AssignmentChartistComponent},
     { path : 'newcourseQuestion', component: courseQuestionInputComponent},

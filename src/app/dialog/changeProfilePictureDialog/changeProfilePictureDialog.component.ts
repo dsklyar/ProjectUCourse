@@ -57,7 +57,7 @@ export class ChangeProfilePictureDialogComponent {
     array = [
         {src : "./assets/profilePic/dropouts_dream.jpg"},
         {src : "./assets/profilePic/ecrypted_dreams.jpg"},
-        {src : "./assets/profilePic/nothing_personal_kid.jpg"},
+        {src : "./assets/profilePic/nUTT.jpg"},
         {src : "./assets/profilePic/software_dreams.jpg"},
         {src : "./assets/profilePic/wake_me_up.jpg"},
         {src : " "}

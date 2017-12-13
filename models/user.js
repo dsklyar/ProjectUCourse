@@ -11,8 +11,9 @@ var schema = new Schema({
     lastName    : {type : String, required : true},
     schoolName  : {type : String, required : true},
     userType    : {type : String, enum : userType, required : true},
-    biography : {type : String},
-    courseList  : [{type : Schema.Types.ObjectId, ref : 'Course'}]
+    biography   : {type : String},
+    courseList  : [{type : Schema.Types.ObjectId, ref : 'Course'}],
+    profilePic  : {type  : String}
 });
 schema.plugin(mongooseUniqueValidator);
 module.exports = mongoose.model('User',schema);

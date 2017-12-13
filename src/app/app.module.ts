@@ -33,6 +33,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { AnnouncementComponent } from './Announcement/announcement.component';
 import { AnnouncementInputComponent } from './Announcement/Announcement-input/announcement-input.component';
 import { AnnouncementListComponent } from './Announcement/Announcement-list/announcement-list.component';
+import { DiscussionEditComponent } from './Discussion/Discussion-edit/discussion-edit.component';
+import { DiscussionComponent } from './Discussion/discussion.component';
+import { DiscussionInputComponent } from './Discussion/Discussion-input/discussion-input.component';
+import { DiscussionListComponent } from './Discussion/Discussion-list/discussion-list.component';
 import { CourseMenuComponent } from './courseMenu/courseMenu.component';
 import { DashboardCourseComponent } from './dashboard/dashboardCourse.component';
 import {  HttpModule } from '@angular/http';
@@ -107,6 +111,11 @@ import { questionResponseComponent } from './questionResponse/questionResposne.c
     AnnouncementComponent,
     AnnouncementInputComponent,
     AnnouncementEditComponent,
+
+    DiscussionListComponent,
+    DiscussionComponent,
+    DiscussionInputComponent,
+    DiscussionEditComponent,
 
     AssignmentComponent,
     AssignmentListComponent,

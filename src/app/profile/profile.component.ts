@@ -93,35 +93,61 @@ export class ProfileComponent implements OnInit {
     isChangeEmail = false;
     constructor(public dialog: MdDialog,
         private authService : AuthenticationService,
+                private router : Router,
                 private changeProfilePictureDialogService : ChangeProfilePictureDialogService) {
                     // NOTE:
                     // For Dylan with love from Daniel
                     // this should fix refrshing issue with user being lost
                     this.authService.checkIfPreviouslyLoggedIn();
+                    
                 }
 
     ngOnInit() {
         // this is crap, pointers in js are trash or i just dont get how they work in js
         // i like the trash idea tho, makes me feel smart 
         //this.user = this.authService.user;
-        this.user = new User('','','','','','',[],'');
+        //console.log(this.user);
+        //this.user = new User('','','','','','',[],'');
+        if(this.authService.user != null){
+            this.user = this.authService.user;
+        }
+        else{
+            var userId = localStorage.getItem('userId');
+            if (userId != null) {
+                return this.authService.getUser(userId)
+                    .subscribe(
+                    result => {
+                        console.log(this.authService.user.userType + ' got from service again');
+                        this.user = this.authService.user;
+                    },
+                    error => {
+                        this.router.navigate(['/signin']);
+                    }
+                    );
+            } else {
+                console.log('User does not exist in web app mem');
+                this.router.navigate(['/signin']);
+            }
+        }
     }
 
 
     onSubmit(form : NgForm){
         // get it again from the service
-        this.user = this.authService.user;
+        //this.user = this.authService.user;
         // or just directly use the one from service
         // i.e. this.authService.user.firstName
         const updatedUser = new User(
             form.value.email,
-            this.user.password,
-            this.user.firstName,
-            this.user.lastName,
-            this.user.schoolName,
-            this.user.userType,
-            this.user.courses,
-            form.value.biography
+            this.authService.user.password,
+            this.authService.user.firstName,
+            this.authService.user.lastName,
+            this.authService.user.schoolName,
+            this.authService.user.userType,
+            this.authService.user.courses,
+            form.value.biography,
+            this.user.profilePic
+            
         );
         this.authService.updateUser(updatedUser)
         .subscribe (
@@ -129,6 +155,7 @@ export class ProfileComponent implements OnInit {
             console.log(data);
             this.user.biography = data.obj.biography;
             this.user.email = data.obj.email;
+            this.user.profilePic = data.obj.profilePic;
         },
         error => console.log(error)
         );

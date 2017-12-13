@@ -17,6 +17,7 @@ mongoose.connect('mongodb://daniel:ucourse@ds044709.mlab.com:44709/ucourse', fun
 const courseRoutes = require('./server/routes/course');
 const userRoutes = require('./server/routes/user');
 const announcementRoutes = require('./server/routes/announcement');
+const discussionRoutes = require('./server/routes/discussion');
 const assignmentRoutes = require('./server/routes/assignment');
 const assignmentQuestionRoutes = require('./server/routes/assignmentQuestion');
 const assignmentQuestionAnswerRoutes = require('./server/routes/assignmentQuestionAnswer');
@@ -38,6 +39,7 @@ app.use('/course',courseRoutes);
 app.use('/user',userRoutes);
 app.use('/announcement',announcementRoutes);
 app.use('/assignment',assignmentRoutes);
+app.use('/discussion',discussionRoutes);
 app.use('/assignmentQuestion',assignmentQuestionRoutes);
 app.use('/assignmentQuestionAnswer',assignmentQuestionAnswerRoutes);
 app.use('/assignmentChartist',assignmentChartistRoutes);
