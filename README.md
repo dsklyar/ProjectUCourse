@@ -1,6 +1,6 @@
 # UCourse
 
-![Question Examples] (/images/Questions_Example.JPG)
+![Question Examples] (https://github.com/dsklyar/ProjectUCourse/blob/master/images/Questions_Example.JPG)
 
 
 
