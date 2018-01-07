@@ -2,10 +2,10 @@
 UCourse is a prototype of course managing system developed over a span of 3 months for the software engineering project in UC Merced.
 
 Demo : http://ucourse-project.herokuapp.com
->Example Login :   instructor@gmail
->Example Password: password
->Note: Users can create their own course, announcements, etc.
->Credentials above were used for demo presentation.
+Example Login :   instructor@gmail
+Example Password: password
+> Note: Users can create their own course, announcements, etc.
+> Credentials above were used for demo presentation.
 
 ## Specifications
 
