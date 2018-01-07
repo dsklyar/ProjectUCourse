@@ -1,24 +1,33 @@
 # UCourse
+UCourse is a prototype of course managing system developed over a span of 3 months for the software engineering project in UC Merced. 
 
-![Question Examples](https://github.com/dsklyar/ProjectUCourse/blob/master/images/Questions_Example.JPG?raw=true)
+## Specifications
 
+- [x] Authentication using JSON Web Tokens
+- [x] Course Dashboard
+- [x] User Profile
+- [x] Assignments & Assignment Questions 
+- [x] Question Creation Tool with LaTeX text input support
+- [x] Announcements
+- [x] Chart component representing average score per question using Chartist.js
+- [ ] Timed Assignments
+- [ ] Clicker Questions
 
+## Screenshots
 
+### Question Example
 
+![Question Examples](https://github.com/dsklyar/ProjectUCourse/blob/master/images/Questions_Example.PNG?raw=true)
 
+### Dashboard Course Example
 
+![Dashboard Course Examples](https://github.com/dsklyar/ProjectUCourse/blob/master/images/Dashboard_Example.PNG?raw=true)
 
+### Course Menu Example
 
+![Course Menu  Examples](https://github.com/dsklyar/ProjectUCourse/blob/master/images/CourseMenu_Example.PNG?raw=true)
 
-
-
-
-
-
-
-
-
-
+## Other Information
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.3.
 
