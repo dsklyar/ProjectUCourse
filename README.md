@@ -1,14 +1,20 @@
 # UCourse
-UCourse is a prototype of course managing system developed over a span of 3 months for the software engineering project in UC Merced. 
+UCourse is a prototype of course managing system developed over a span of 3 months for the software engineering project in UC Merced.
+
+Demo : http://ucourse-project.herokuapp.com
+>Example Login :   instructor@gmail
+>Example Password: password
+>Note: Users can create their own course, announcements, etc.
+>Credentials above were used for demo presentation.
 
 ## Specifications
 
 - [x] Authentication using JSON Web Tokens
-- [x] Course Dashboard
+- [x] Course Dashboard & Course Creation Tool
 - [x] User Profile
 - [x] Assignments & Assignment Questions 
 - [x] Question Creation Tool with LaTeX text input support
-- [x] Announcements
+- [x] Announcements & Announcement Creation Tool
 - [x] Chart component representing average score per question using Chartist.js
 - [ ] Timed Assignments
 - [ ] Clicker Questions
